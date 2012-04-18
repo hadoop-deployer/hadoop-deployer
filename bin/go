@@ -1,0 +1,13 @@
+#!/bin/bash
+# Author: zhenghh@ucweb.com
+
+. PUB.sh;
+[ -f install_env.sh ] && . install_env.sh
+
+if [ $# != 1 ]; then
+  echo "USAGE: $0 SERVER_NAME";
+  echo "eg: $0 kpi11";
+  exit 1;
+fi
+
+ssh $1

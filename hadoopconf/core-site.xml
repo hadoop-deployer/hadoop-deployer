@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>hadoop.tmp.dir</value>
+    </property>
+
+    <property>
+        <name>fs.default.name</name>
+        <value>fs.default.name</value>
+    </property>
+
+    <property>
+        <name>webinterface.private.actions</name>
+        <value>true</value>
+    </property>
+
+	<property>
+        <name>hadoop.proxyuser.oozie.hosts</name>
+        <value>*</value>
+    </property>
+    
+    <property>
+        <name>hadoop.proxyuser.oozie.groups</name>
+        <value>*</value>
+    </property>
+
+    <property>
+        <name>io.compression.codecs</name>
+        <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,com.hadoop.compression.lzo.LzopCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
+    </property>
+    
+    <property>
+        <name>io.compression.codec.lzo.class</name>
+        <value>com.hadoop.compression.lzo.LzoCodec</value>
+    </property>
+    
+    <property>
+        <name>fs.trash.interval</name>
+        <value>30</value>
+    </property>
+    
+</configuration>
