@@ -1,7 +1,8 @@
 #!/bin/bash
 # Author: zhenghh@ucweb.com
-
-. PUB.sh;
+DIR=`cd $(dirname $0);pwd`
+. $DIR/../PUB.sh;
+. $DIR/../install_env.sh;
 [ -f install_env.sh ] && . install_env.sh
 
 if [ $# != 1 ]; then

@@ -31,8 +31,10 @@ undeploy()
     rm -rf $HOME/.hbase_profile;
   fi
   ' >> tmp.sh;
-  scp -q -P $SSH_PORT tmp.sh $USER@$1:/$DIR/
-  rm -f tmp.sh
+  if [ "`hostname`" != "$1" ]; then
+    scp -q -P $SSH_PORT tmp.sh $USER@$1:/$DIR/
+    rm -f tmp.sh
+  fi
   ssh -p $SSH_PORT $USER@$1 "sh $DIR/tmp.sh;rm -f $DIR/tmp.sh"
 }
 

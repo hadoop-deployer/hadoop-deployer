@@ -23,6 +23,7 @@ undeploy()
   if [ "$HUE_HOME" != "" ]; then
     echo "delete $HUE_HOME"
     rm -rf $HUE_HOME
+    rm -f logs/hue_make_ok
   fi
 
   if [ "$HOME" != "" -a -e $HOME/.hue_profile ]; then
@@ -33,5 +34,6 @@ undeploy()
 
 . deploy_env.sh
 undeploy;
+rm -f logs/hue_make_ok
 rm -f logs/hue_ok
 

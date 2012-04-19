@@ -1,6 +1,6 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=$(cd "$(dirname "$0")"; pwd)
+DIR=$(cd $(dirname $0); pwd)
 cd $DIR 
 . PUB.sh
 show_head;
