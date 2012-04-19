@@ -42,14 +42,25 @@ HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
 HIVE_TAR=`find_tar hive*cdh`
 HIVE_VERSION=${HIVE_TAR%.tar.gz}
 
-#HIVE_MYSQL=mysql-connector-java-5.1.16-bin.jar
 MYSQL_JAR=`find_it "mysql-*.jar"`
+if [ "$MYSQL_JAR" == "" ]; then
+  MYSQL_TAR=`find_tar "mysql-connector-java-"`
+  if [ "$MYSQL_TAR" != "" ]; then
+    mkdir tmp
+    tar -xzf tar/$MYSQL_TAR -C tmp
+    MYSQL_JAR=`find ./tmp -name mysql-connector-java-*-bin.jar`
+    if [ "$MYSQL_JAR" != "" ]; then
+      cp $MYSQL_JAR tar/
+      MYSQL_JAR=`basename $MYSQL_JAR`
+    fi
+    rm -rf ./tmp
+  fi
+fi
 
 HUE_TAR=`find_tar hue*cdh`
 HUE_VERSION=${HUE_TAR%.tar.gz}
 
 HBASE_TAR=`find_tar hbase*cdh`
-#HBASE_VERSION=hbase-0.90.3-cdh3u1
 HBASE_VERSION=${HBASE_TAR%.tar.gz}
 
 # core-site
