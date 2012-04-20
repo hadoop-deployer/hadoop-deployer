@@ -1,0 +1,16 @@
+#!/bin/bash
+# Author: zhenghh@ucweb.com
+DIR=`cd $(dirname $0);pwd`
+. $DIR/../install_env.sh
+
+if [ $# != 1 ]; then
+  echo "USAGE: $0 filename";
+  echo "eg.: $0 main.cpp";
+  exit 1;
+fi
+
+MYHOST=`hostname`
+for i in $NODE_HOSTS; do
+  [ "$MYHOST" == "$i" ] && continue
+  myscp $1 $i;
+done

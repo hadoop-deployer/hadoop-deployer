@@ -1,0 +1,26 @@
+#!/bin/bash
+# Author: zhenghh@ucweb.com
+DIR=`cd $(dirname $0);pwd`
+. $DIR/../PUB.sh;
+. $DIR/../install_env.sh;
+
+if [ $# != 2 ]; then
+  echo "USAGE: $0 filename SERVER_NAME";
+  echo "eg.: $0 main.cpp kpi11";
+  exit 1;
+fi
+
+if [ `hostname` == "$2" ]; then
+  exit 2;
+fi
+
+TAG=`pwd`
+
+ssh $USER@$2 "mkdir -p $TAG";
+if [ -d $1 ]; then
+  echo "scp -r ./$1 $USER@$2:$TAG";
+  scp -r ./$1 $USER@$2:$TAG;
+else 
+  echo "scp -P $PORT ./$1 $USER@$2:$TAG/$1";
+  scp ./$1 $USER@$2:$TAG/$1;
+fi
