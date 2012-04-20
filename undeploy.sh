@@ -3,10 +3,6 @@ set -e
 DIR=`cd $(dirname $0);pwd`
 cd $DIR
 . PUB.sh
-. deploy_env.sh
-[ -f ~/.hadoop_profile ] && . ~/.hadoop_profile
-
-cd $DIR
 
 undeploy()
 {

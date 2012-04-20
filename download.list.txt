@@ -1,8 +1,9 @@
-http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-x64.tar.gz
-http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jdk-7u3-linux-i586.tar.gz
-http://archive.cloudera.com/cdh/3/hadoop-0.20.2-cdh3u3.tar.gz
-http://archive.cloudera.com/cdh/3/hbase-0.90.4-cdh3u3.tar.gz
-http://archive.cloudera.com/cdh/3/hive-0.7.1-cdh3u3.tar.gz
-http://archive.cloudera.com/cdh/3/hue-1.2.0.0-cdh3u3.tar.gz
-http://mysql.cdpa.nsysu.edu.tw/Downloads/Connector-J/mysql-connector-java-5.1.19.tar.gz
-#http://platform30/c/mysql-connector-java-5.1.16-bin.jar
+http://platform30/c/jdk1.6.0_26-64.tar.gz
+http://platform30/c/jdk1.6.0_26-32.tar.gz
+http://platform30/c/hadoop-0.20.2-cdh3u3.tar.gz
+http://platform30/c/hbase-0.90.4-cdh3u3.tar.gz
+http://platform30/c/hive-0.7.1-cdh3u3.tar.gz
+http://platform30/c/hue-1.2.0.0-cdh3u3.tar.gz
+http://platform30/c/apache-ant-1.8.2-bin.tar.gz
+http://platform30/c/apache-maven-3.0.3-bin.tar.gz
+http://platform30/c/mysql-connector-java-5.1.16-bin.jar

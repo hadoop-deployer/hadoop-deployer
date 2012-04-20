@@ -1,8 +1,5 @@
 #!/bin/env bash
 DIR=`cd $(dirname $0);pwd`
-cd $DIR
-. PUB.sh
-. deploy_env.sh
 
 deploy_java()
 {
@@ -23,11 +20,12 @@ deploy_hadoop()
   echo ">> deploy hadoop"
   tar -xzf tar/$HADOOP_TAR -C $HOME
   ln -sf ./$HADOOP_VERSION $HADOOP_HOME
-  tar -xzf tar/$HADOOP_LZO_TAR -C $HADOOP_HOME;
+  
+  [ "$HADOOP_LZO_TAR" != "" ] && tar -xzf tar/$HADOOP_LZO_TAR -C $HADOOP_HOME ||:;
+  
   mkdir -p $PKG_PATH;
-
-  tar -xzf tar/$LZO_TAR -C $PKG_PATH; 
-  tar -xzf tar/$FUSE_DFS_TAR -C $PKG_PATH;
+  [ "$LZO_TAR" != "" ] && tar -xzf tar/$LZO_TAR -C $PKG_PATH ||:; 
+  [ "$FUSE_DFS_TAR" != "" ] && tar -xzf tar/$FUSE_DFS_TAR -C $PKG_PATH ||:;
 }
 
 F1="s/<value"
@@ -137,42 +135,17 @@ conf_setup()
   myrsyncall "$HADOOP_CONF_DIR $HADOOP_BIN" $HADOOP_HOME/;
 }
 
-deploy_hive()
+main()
 {
-  . hive/myenv;
-  tar -xzf hive/$HIVE_TAR -C $HOME;
-  cd $HOME;
-  ln -sf ./$HIVE_VERSION $HIVE_HOME;
-  cp hive/$HIVE_MYSQL $HIVE_HOME/lib;
-
-  HIVE="$HIVE_CONF_DIR/hive-site.xml";
-  cp hive/hive-site.xml $HIVE;
-
-  sed -r "s#<value>fs.default.name<\/value>#<value>$FS_DEFAULT_NAME<\/value>#" -i $HIVE;
-  sed -r "$F1>mapred.job.tracker<$F2>$MAPRED_JOB_TRACKER<$F3" -i $HIVE;
-  sed -r "$F1>hive.metastore.local<$F2>$HIVE_METASTORE_LOCAL<$F3" -i $HIVE;
-  sed -r "s#<value>javax.jdo.option.ConnectionURL<\/value>#<value>$JAVAX_JDO_OPTION_CONNECTIONURL<\/value>#" -i $HIVE;
-  sed -r "s#<value>hive.metastore.warehouse.dir<\/value>#<value>$HIVE_METASTORE_WAREHOUSE_DIR<\/value>#" -i $HIVE;
-  sed -r "$F1>javax.jdo.option.ConnectionUserName<$F2>$MYSQL_USERNAME<$F3" -i $HIVE;
-  sed -r "$F1>javax.jdo.option.ConnectionPassword<$F2>$MYSQL_PASSWORD<$F3" -i $HIVE;
-  sed -r "$F1>hive.exec.compress.intermediate<$F2>$HIVE_EXEC_COMPRESS_INTERMEDIATE<$F3" -i $HIVE;
-  sed -r "$F1>mapred.compress.map.output<$F2>$MAPRED_COMPRESS_MAP_OUTPUT<$F3" -i $HIVE;
-  sed -r "$F1>mapred.output.compression.type<$F2>$MAPRED_OUTPUT_COMPRESSION_TYPE<$F3" -i $HIVE;
-  sed -r "$F1>hive.input.format<$F2>$HIVE_INPUT_FORMAT<$F3" -i $HIVE;
-
-  chmod +x hive/database-init;
-  hive/database-init $MYSQL_USERNAME $MYSQL_PASSWORD $METASTORE;
-}
-
-deploy()
-{
-  ./profile.sh
+  cd $DIR
+  . profile.sh
+  . PUB.sh
+  . deploy_env.sh
   deploy_java;
   deploy_hadoop;
-  deploy_hive;
+  cd $OLDDIR
 }
 
-deploy;
-
-cd $OLDDIR
+#====
+main;
 

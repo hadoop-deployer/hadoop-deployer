@@ -1,12 +1,10 @@
 #!/bin/bash
-DIR=`cd $(dirname $0);pwd`
-cd $DIR
 
 #need:
 #SSH_PORT
 #NODE_HOSTS
 . PUB.sh
-. install_env.sh
+cd $DIR
 
 save_keys()
 {

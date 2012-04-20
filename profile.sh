@@ -1,6 +1,4 @@
 #!/bin/bash
-. PUB.sh
-
 BAPF="$HOME/.bash_profile"
 HDPF="$HOME/.hadoop_profile"
 
@@ -14,7 +12,9 @@ fi
 
 echo "# Hadoop profile - uc.cn
 
+export DEPLOYER_HOME=/home/zgy/hadoop-deployer
 export SSH_PORT=9922
+
 export PKG_PATH=\$HOME/pkg
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$PKG_PATH/lzo/lib
 
@@ -29,16 +29,17 @@ export HADOOP_HOME=\$HOME/hadoop
 export HADOOP_BIN=\$HADOOP_HOME/bin
 export HADOOP_CONF_DIR=\$HADOOP_HOME/conf
 
-export PATH=$DIR/bin:\$PATH
+export PATH=\$DEPLOYER_HOME/bin:\$PATH
 export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$ANT_HOME/bin:\$MAVEN_HOME/bin:\$PATH
 export PATH=.:\$PKG_PATH/lzop/bin:\$PKG_PATH/fuse-dfs:\$PATH
 export PATH=.:\$HADOOP_BIN:\$PATH
 
-alias ssh='ssh -p $SSH_PORT'
+alias ssh='ssh -p \$SSH_PORT'
+alias scp='scp -P \$SSH_PORT'
 alias ccd='cd \$HADOOP_HOME'
 alias ccb='cd \$HADOOP_BIN'
 alias ccf='cd \$HADOOP_CONF_DIR'
-alias cdh='cd $DIR'
+alias cdh='cd \$DEPLOYER_HOME'
 
 " > $HDPF
 

@@ -1,31 +1,25 @@
 #!/bin/env bash
 # -- utf-8 --
 DIR=$(cd $(dirname $0); pwd)
-cd $DIR 
+cd $DIR
+
+DEPLOYER_HOME=$DIR
 . PUB.sh
 show_head;
 
-# hadoop hive hbase lzo fuse
-
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
-
 check_tools()
 {
   #yum -y install lrzsz gcc gcc-c++ libstdc++-devel
+  check_tool bash 
   check_tool ssh 
+  check_tool scp 
   check_tool expect
-  check_tool gcc 
-  check_tool g++ 
-  :
 }
 
 chmod_for_run()
 {
-  chmod +x bin/autossh;
-  chmod +x bin/go;
-  #chmod +x $DEPLOY_HOME/my*;
-  #chmod +x $DEPLOY_HOME/lzop*;
-  :
+  chmod +x bin/*;
 }
 
 params()
@@ -51,21 +45,34 @@ params()
     if [ "$tmp" == 'y' ]; then 
       echo "please input second namenode's hostname:"
       read SNN;
-      echo "second namenode's host is $SNN_HOST"
+      echo "second namenode's host is $SNN"
     fi
-    
-    echo ""
+   
+    local d="y"
+    echo "please input datanode's hostname(1+):"
+    DN=()
+    i=0
+    while true; do
+      read d
+      [ -n $d ] && break 
+      DN[i]=$d
+      i=i+1
+      echo "set DN[$i]=$d ok, next"
+    done
 
-    export PASS
-    export SSH_PORT
-    export SNN
-
-    echo "export PASS=$PASS" > ./install_env.sh
-    echo "export SSH_PORT=$SSH_PORT" >> ./install_env.sh
-    NODE_HOSTS=`cat ./hosts.list.txt|sed "s/#.*$//;/^$/d"`
-    export NODE_HOSTS;
-    #未完成的操作
+    touch install_env.sh
+    echo "PASS=$PASS" >> install_env.sh
+    echo "SSH_PORT=$SSH_PORT" >> install_env.sh
+    echo "NN=\"$NN\"" >> install_env.sh
+    echo "SNN=\"$SNN\"" >> install_env.sh
+    echo "DN=\"" >> install_env.sh
+    for d in $DN; do
+      echo $d >> install_env.sh
+    done
+    echo "\"" >> install_env.sh
+    . ./install_env.sh
   fi
+  sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" ./profile.sh
   sed -i "s:SSH_PORT=[0-9]\+:SSH_PORT=$SSH_PORT:" ./profile.sh
   nodes;
 }
@@ -74,7 +81,7 @@ params()
 deploy()
 {
   echo ">> deploy $1";
-  ssh -p $SSH_PORT "$USER@$1" sh $DIR/deploy.sh
+  ssh "$USER@$1" sh $DIR/deploy.sh
 }
 
 F1="s/<value"

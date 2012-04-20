@@ -1,8 +1,6 @@
 #!/bin/env echo "Warning: this file should be sourced"
 cd $DIR
 . PUB.sh
-. install_env.sh
-cd $DIR
 ##### Public #####
 
 HADOOP_PORT_PREFIX=38
@@ -25,22 +23,26 @@ JAVA_VERSION=`find_version jdk`
 IS_32 && JAVA_TAR=${JAVA_VERSION}-32.tar.gz || JAVA_TAR=${JAVA_VERSION}-64.tar.gz
 
 ANT_VERSION=`find_version apache-ant`
-ANT_TAR=${ANT_VERSION}-bin.tar.gz
+[ "$ANT_VERSION" != "" ] && ANT_TAR=${ANT_VERSION}-bin.tar.gz ||:;
 
 MAVEN_VERSION=`find_version apache-maven`
-MAVEN_TAR=${MAVEN_VERSION}-bin.tar.gz
+[ "$MAVEN_VERSION" != "" ] && MAVEN_TAR=${MAVEN_VERSION}-bin.tar.gz ||:;
 
-IS_32 && LZO_TAR=lzo-32.tar.gz || LZO_TAR=lzo-64.tar.gz
+if IS_32; then
+  LZO_TAR=`find_tar lzo-32` 
+else
+  LZO_TAR=`find_tar lzo-64`
+fi
 
-HADOOP_LZO_TAR=hadoop-lzo.tar.gz
+HADOOP_LZO_TAR=`find_tar hadoop-lzo`
 
-IS_32 && FUSE_DFS_TAR=fuse-dfs-32.tar.gz || FUSE_DFS_TAR=fuse-dfs-64.tar.gz
+IS_32 && FUSE_DFS_TAR=`find_tar fuse-dfs-32` || FUSE_DFS_TAR=`find_tar fuse-dfs-64`
 
 HADOOP_TAR=`find_tar hadoop*cdh`
-HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
+[ "$HADOOP_TAR" != "" ] && HADOOP_VERSION=${HADOOP_TAR%.tar.gz} ||:;
 
 HIVE_TAR=`find_tar hive*cdh`
-HIVE_VERSION=${HIVE_TAR%.tar.gz}
+[ "$HIVE_TAR" != "" ] && HIVE_VERSION=${HIVE_TAR%.tar.gz} ||:;
 
 MYSQL_JAR=`find_it "mysql-*.jar"`
 if [ "$MYSQL_JAR" == "" ]; then
@@ -58,10 +60,10 @@ if [ "$MYSQL_JAR" == "" ]; then
 fi
 
 HUE_TAR=`find_tar hue*cdh`
-HUE_VERSION=${HUE_TAR%.tar.gz}
+[ "$HUE_TAR" != "" ] && HUE_VERSION=${HUE_TAR%.tar.gz} ||:;
 
 HBASE_TAR=`find_tar hbase*cdh`
-HBASE_VERSION=${HBASE_TAR%.tar.gz}
+[ "$HBASE_TAR" != "" ] && HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
 
 # core-site
 HADOOP_TMP_DIR="$HOME/hadoop_data"
