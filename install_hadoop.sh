@@ -158,6 +158,7 @@ main()
   . ./deploy_env.sh
   conf_hadoop; 
   touch logs/hadoop_ok
+  echo ">> OK"
 }
 
 main $*;

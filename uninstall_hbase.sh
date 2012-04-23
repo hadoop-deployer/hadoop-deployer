@@ -1,13 +1,5 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=`cd $(dirname $0);pwd`
-cd $DIR
-. PUB.sh
-. install_env.sh
-
-[ -f ~/.hbase_profile ] && . ~/.hbase_profile
-
-show_head;
 
 undeploy()
 {
@@ -38,9 +30,21 @@ undeploy()
   ssh -p $SSH_PORT $USER@$1 "sh $DIR/tmp.sh;rm -f $DIR/tmp.sh"
 }
 
-for s in $NODE_HOSTS; do
-  undeploy $s; 
-  rm -f logs/deploy_hbase_${s}_ok
-done
-rm -f logs/hbase_ok
+main()
+{
+  DIR=`cd $(dirname $0);pwd`
+  cd $DIR
+  . PUB.sh
+  . install_env.sh
+  [ -f ~/.hbase_profile ] && . ~/.hbase_profile
+  
+  nodes;
+  for s in $NODE_HOSTS; do
+    undeploy $s; 
+    rm -f logs/deploy_hbase_${s}_ok
+  done
+  rm -f logs/hbase_ok
+}
 
+#====
+main

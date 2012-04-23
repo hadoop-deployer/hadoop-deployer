@@ -7,26 +7,29 @@ HADOOP_PORT_PREFIX=38
 
 ##### tar package
 # $0 prefix
-find_version()
-{
-  echo `ls -l tar/${1}* | sed "s:^.*tar/::;s:-[^-]*$::;q"`
-}
 find_tar()
 {
-  echo `ls tar/${1}*.tar.gz | sed "s:^.*tar/::;q"`
+  echo `ls tar/${1}*.tar.gz 2>/dev/null | sed "s:^.*tar/::;q"`
 }
 find_it()
 {
-  echo `ls tar/${1} | sed "s:^.*tar/::;q"`
+  echo `ls tar/${1} 2>/dev/null | sed "s:^.*tar/::;q"`
 }
-JAVA_VERSION=`find_version jdk`
-IS_32 && JAVA_TAR=${JAVA_VERSION}-32.tar.gz || JAVA_TAR=${JAVA_VERSION}-64.tar.gz
 
-ANT_VERSION=`find_version apache-ant`
-[ "$ANT_VERSION" != "" ] && ANT_TAR=${ANT_VERSION}-bin.tar.gz ||:;
+if IS_32; then
+  JAVA_TAR=`find_tar "jdk*i586"`
+  [ "$JAVA_TAR" == "" ] && JAVA_TAR=`find_tar "jdk*32"` ||:;
+else
+  JAVA_TAR=`find_tar "jdk*64"`
+fi
+JAVA_VERSION=${JAVA_TAR%.tar.gz}
+[ "$JAVA_VERSION" == "" ] && die "not find jdk tar file" ||:;
 
-MAVEN_VERSION=`find_version apache-maven`
-[ "$MAVEN_VERSION" != "" ] && MAVEN_TAR=${MAVEN_VERSION}-bin.tar.gz ||:;
+ANT_TAR=`find_tar apache-ant`
+ANT_VERSION=${ANT_TAR%.tar.gz}
+
+MAVEN_TAR=`find_tar apache-maven`
+MAVEN_VERSION=${MAVEN_TAR%.tar.gz}
 
 if IS_32; then
   LZO_TAR=`find_tar lzo-32` 

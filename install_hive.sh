@@ -1,10 +1,5 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=`cd $(dirname $0);pwd`
-
-cd $DIR
-. PUB.sh
-show_head;
 
 params()
 {
@@ -18,6 +13,7 @@ params()
 
 deploy_hive()
 {
+  echo ">> deploy hive"
   tar -xzf tar/$HIVE_TAR -C $HOME;
   cd $HOME;
   ln -sf ./$HIVE_VERSION $HIVE_HOME;
@@ -30,6 +26,8 @@ deploy_hive()
 
 conf_hive()
 {
+  echo ">> conf hive"
+
   F1="s/<value"
   F2="\/value>/<value"
   F3="\/value>/"
@@ -52,14 +50,21 @@ conf_hive()
 
 main() 
 {
+  DIR=`cd $(dirname $0);pwd`
+  cd $DIR
+  [ -f logs/hadoop_ok ] || die "must install hadoop first"
   [ -f logs/hive_ok ] && die "hive is installed"
+  . PUB.sh
+  show_head;
   params;
-  download download.list.txt
+  download
+  rsync_all $DIR $HOME
   . profile_hive.sh;
   . deploy_env.sh
   deploy_hive;
   conf_hive;
   touch logs/hive_ok
+  echo ">> OK"
 }
 
 #====

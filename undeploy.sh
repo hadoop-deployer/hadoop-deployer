@@ -1,8 +1,4 @@
 #!/bin/env bash
-set -e
-DIR=`cd $(dirname $0);pwd`
-cd $DIR
-. PUB.sh
 
 undeploy()
 {
@@ -36,7 +32,14 @@ undeploy()
   fi
 }
 
-undeploy;
+main()
+{
+  DIR=`cd $(dirname $0);pwd`
+  cd $DIR
+  . PUB.sh
+  undeploy;
+  cd $OLDDIR
+}
 
-cd $OLDDIR
-
+#====
+main

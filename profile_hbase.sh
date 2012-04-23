@@ -28,5 +28,5 @@ export PATH=\$HBASE_BIN:\$PATH
 
 " > $HBPF
 
-. $BAPF
-#. $HBPF
+#. $BAPF
+. $HBPF

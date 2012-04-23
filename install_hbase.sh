@@ -1,9 +1,4 @@
 #!/bin/env bash
-DIR=$(cd $(dirname $0);pwd)
-cd $DIR
-
-. PUB.sh
-show_head;
 
 params()
 {
@@ -38,6 +33,8 @@ deploy()
 
 conf_hbase()
 {
+  echo ">> conf hbase"
+
   F1="s/<value"
   F2="\/value>/<value"
   F3="\/value>/"
@@ -61,10 +58,14 @@ conf_hbase()
 
 main() 
 {
+  DIR=$(cd $(dirname $0);pwd)
+  cd $DIR
   [ -f logs/hadoop_ok ] || die "must install hadoop first"
   [ -f logs/hbase_ok ] && die "hbase is installed"
+  . PUB.sh
+  show_head;
   params;
-  download ./download.list.txt
+  download
   rsync_all $DIR $HOME
   for s in $NODE_HOSTS; do
     [ -f "logs/deploy_hbase_${s}_ok" ] && echo " $s already install hbase" && continue 
@@ -74,6 +75,7 @@ main()
   . profile_hbase.sh;
   conf_hbase;
   touch logs/hbase_ok
+  echo ">> OK"
 }
 
 #====

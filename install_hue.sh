@@ -18,18 +18,10 @@
 #    before you start your Hue.
 #########################################################
 
-. PUB.sh;
 
 check_tools()
 {
   check_tool ssh 
-#  check_tool libxml2-devel
-#  check_tool libxslt-devel
-#  check_tool cyrus-sasl-devel
-#  check_tool mysql-devel
-#  check_tool python-devel
-#  check_tool python-setuptools
-#  check_tool python-simplejson
   check_tool easy_install
   check_tool gcc 
   check_tool g++ 
@@ -38,7 +30,6 @@ check_tools()
 
 hue_deploy()
 {
-  . $DIR/profile_hue.sh;
   tar -xzf tar/$HUE_TAR -C $HOME;
 
   HUE="$HOME/$HUE_VERSION/desktop/conf/hue.ini";
@@ -95,11 +86,14 @@ hue_deploy()
 main()
 {
   [ -f logs/hue_ok ] && die "hue is already installed"
+  . PUB.sh;
+  show_head;
   . deploy_env.sh
   check_tools;
+  . $DIR/profile_hue.sh;
   hue_deploy;
   touch logs/hue_ok
-  echo "Hue deploy is OK!"
+  echo ">> OK"
 }
 
 #====
