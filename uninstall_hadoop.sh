@@ -16,9 +16,6 @@ main()
 
   rm -f logs/hadoop_ok
 
-  ./bin/autossh clean
-  rm -f logs/autossh_ok
-
   echo ">> OK"
 }
 
