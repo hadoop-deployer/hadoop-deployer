@@ -33,7 +33,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
   
-  var_die DEPLOYER_HOME;
+  [ "$DEPLOYER_HOME" == "" ] && DEPLOYER_HOME="$HOME/hadoop-deployer" ||:;
+  #var_die DEPLOYER_HOME;
   D=$DEPLOYER_HOME
   
   # $0 url.list.file
@@ -42,7 +43,11 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     local dls=`cat $D/download.list.txt`
     mkdir -p $D/tar
     cd $D/tar
-    for dl in $dls; do wget -nv -c $dl; done
+    for dl in $dls; do
+      dl=`echo $dl|sed "s:\\s\\+::"`
+      [ "${dl::1}" == "#" ] && continue ||:;
+      wget -nv -c $dl; 
+    done
     cd $OLDDIR 
   }
 

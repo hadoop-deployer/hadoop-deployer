@@ -1,4 +1,4 @@
-PASS=zgy
+PASS=$USER #user's login password
 SSH_PORT=9922
 
 NN="platform30"

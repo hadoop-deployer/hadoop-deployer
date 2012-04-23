@@ -11,15 +11,15 @@ undeploy()
   . deploy_env.sh;
   [ -f ~/.bash_profile ] && . ~/.bash_profile;
   if [ "$HOME" != "" -a "$HBASE_VERSION" != "" ]; then
-    echo "delete $HBASE_VERSION";
+    echo ">> delete $HBASE_VERSION";
     rm -rf $HOME/$HBASE_VERSION;
   fi;
   if [ "$HBASE_HOME" != "" ]; then
-    echo "delete $HBASE_HOME";
+    echo ">> delete $HBASE_HOME";
     rm -rf $HBASE_HOME;
   fi;
   if [ "$HOME" != "" -a -f $HOME/.hbase_profile ]; then
-    echo "delete $HOME/.hbase_profile";
+    echo ">> delete $HOME/.hbase_profile";
     rm -rf $HOME/.hbase_profile;
   fi
   ' >> tmp.sh;

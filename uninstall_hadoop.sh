@@ -14,7 +14,11 @@ main()
     ssh -p $SSH_PORT $USER@$s sh $DIR/undeploy.sh 
   done
 
-  rm  -rf logs/hadoop_ok
+  rm -f logs/hadoop_ok
+
+  ./bin/autossh clean
+  rm -f logs/autossh_ok
+
   echo ">> OK"
 }
 

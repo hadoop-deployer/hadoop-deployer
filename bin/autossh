@@ -1,10 +1,6 @@
 #!/bin/bash
 
-#need:
-#SSH_PORT
-#NODE_HOSTS
-. PUB.sh
-cd $DIR
+. $DEPLOYER_HOME/PUB.sh
 
 save_keys()
 {
@@ -61,7 +57,7 @@ clean_keys()
   for i in $NODE_HOSTS; do
     expect -c ";
     set timeout 1;
-    spawn ssh -p $PORT $USER@$i;
+    spawn ssh -p $SSH_PORT $USER@$i;
     expect \"(yes/no)?\" {send \"yes\n\"};
     expect \"password:\" {send \"$PASS\n\"} \"$\" {};
     set timeout 3;
@@ -86,8 +82,10 @@ main()
   flag=$1 
 
   if [ "$flag" == "setup" ]; then
+    nodes
     setup_keys;
   elif [ "$flag" == "clean" ]; then
+    nodes
     clean_keys;
   else
     usage;

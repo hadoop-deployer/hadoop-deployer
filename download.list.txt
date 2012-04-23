@@ -7,5 +7,5 @@ http://platform30/c/hue-1.2.0.0-cdh3u3.tar.gz
 http://platform30/c/apache-ant-1.8.2-bin.tar.gz
 http://platform30/c/apache-maven-3.0.3-bin.tar.gz
 http://platform30/c/mysql-connector-java-5.1.16-bin.jar
-http://platform30/c/fuse-dfs-32.tar.gz
-http://platform30/c/fuse-dfs-64.tar.gz
+#http://platform30/c/fuse-dfs-32.tar.gz
+#http://platform30/c/fuse-dfs-64.tar.gz

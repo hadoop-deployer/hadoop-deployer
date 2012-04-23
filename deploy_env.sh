@@ -1,11 +1,15 @@
 #!/bin/env echo "Warning: this file should be sourced"
 cd $DIR
 . PUB.sh
+##############################################################################
+
 ##### Public #####
 
 HADOOP_PORT_PREFIX=38
 
-##### tar package
+##############################################################################
+
+##### tar package #####
 # $0 prefix
 find_tar()
 {
@@ -68,16 +72,21 @@ HUE_TAR=`find_tar hue*cdh`
 HBASE_TAR=`find_tar hbase*cdh`
 [ "$HBASE_TAR" != "" ] && HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
 
+##############################################################################
+##### conf file #####
+
 # core-site
 HADOOP_TMP_DIR="$HOME/hadoop_data"
 FS_DEFAULT_NAME="hdfs://$NN:${HADOOP_PORT_PREFIX}900"
 
 # hdfs-site
 DFS_SECONDARY_HTTP_ADDRESS="0.0.0.0:${HADOOP_PORT_PREFIX}090"
-DFS_DATANODE_HANDLER_COUNT="3"
+#DFS_DATANODE_HANDLER_COUNT="3"
+DFS_DATANODE_HANDLER_COUNT=`[ ${#NN} -gt 10 ] && echo 10 || echo ${#NN}`
 DFS_HTTP_ADDRESS="$NN:${HADOOP_PORT_PREFIX}070"
-DFS_REPLICATION="2"
-DFS_NAMENODE_HANDLER_COUNT="5"
+#DFS_REPLICATION="2"
+DFS_REPLICATION=`[ ${#NN} -gt 8 ] && echo 3 || echo 2`
+DFS_NAMENODE_HANDLER_COUNT="10"
 DFS_DATANODE_ADDRESS="0.0.0.0:${HADOOP_PORT_PREFIX}010"
 DFS_DATANODE_IPC_ADDRESS="0.0.0.0:${HADOOP_PORT_PREFIX}020"
 DFS_DATANODE_HTTP_ADDRESS="0.0.0.0:${HADOOP_PORT_PREFIX}075"
@@ -91,7 +100,7 @@ DFS_BALANCE_BANDWIDTHpERsEC="20000000"
 # mapred-site
 HADOOP_JOB_HISTORY_LOCATION=""
 HADOOP_JOB_HISTORY_USER_LOCATION=""
-MAPRED_JOB_TRACKER="$JT:${HADOOP_PORT_PREFIX}901"
+MAPRED_JOB_TRACKER="$NN:${HADOOP_PORT_PREFIX}901"
 MAPRED_MAP_TASKS="2"
 MAPRED_REDUCE_TASKS="1"
 MAPRED_TASKTRACKER_MAP_TASKS_MAXIMUM="6"
@@ -104,7 +113,7 @@ JOBTRACKER_THRIFT_ADDRESS="0.0.0.0:$JOBTRACKER_THRIFT_PORT"
 # hive-site
 HIVE_METASTORE_LOCAL="true"
 METASTORE="hive_metastore"
-JAVAX_JDO_OPTION_CONNECTIONURL="jdbc:mysql://192.168.22.30:3306/$METASTORE?createDatabaseIfNotExist=true"
+JAVAX_JDO_OPTION_CONNECTIONURL="jdbc:mysql://localhost:3306/$METASTORE?createDatabaseIfNotExist=true"
 HIVE_METASTORE_WAREHOUSE_DIR="/warehouse"
 MYSQL_USERNAME="root"
 MYSQL_PASSWORD="root"
@@ -132,5 +141,13 @@ BEESWAX_SERVER_PORT="${HADOOP_PORT_PREFIX}082"
 
 HBASE_ROOTDIR="$FS_DEFAULT_NAME/hbase"
 HBASE_TMP_DIR="$HOME/hbase_data"
-HBASE_ZOOKEEPER_QUORUM="platform30,platform31,platform32,platform33,platform34"
+#HBASE_ZOOKEEPER_QUORUM="platform30,platform31,platform32,platform33,platform34"
+quorum()
+{
+  local tmp=${NODE_HOSTS[@]::5}
+  tmp=`echo $tmp`
+  tmp=${tmp// /,}
+  HBASE_ZOOKEEPER_QUORUM=$tmp
+}
+quorum
 
