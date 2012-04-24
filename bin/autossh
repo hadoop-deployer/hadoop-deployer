@@ -1,6 +1,11 @@
 #!/bin/bash
 
-. $DEPLOYER_HOME/PUB.sh
+if [ "$DEPLOYER_HOME" != "" ]; then
+  . $DEPLOYER_HOME/PUB.sh
+else
+  DIR=`cd $(dirname $0);pwd`
+  . $DIR/../PUB.sh
+fi
 
 save_keys()
 {
