@@ -46,7 +46,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     for dl in $dls; do
       dl=`echo $dl|sed "s:\\s\\+::"`
       [ "${dl::1}" == "#" ] && continue ||:;
-      wget -nv -c $dl; 
+      wget -nv --no-check-certificate -c $dl; 
     done
     cd $OLDDIR 
   }
