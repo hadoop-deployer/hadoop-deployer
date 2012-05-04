@@ -1,3 +1,6 @@
+本程序全部是shell脚本，可以快速安装部署Hadoop服务。
+zhaigy@ucweb.com
+
 说明:
 1. 本程序可以安装Hadoop，Hive，HBase，HUE，并可安装配置
    LZO和Fuse-Dfs
