@@ -24,12 +24,27 @@
 
 
 安装hadoop:
-sh install_hadoop.sh
+1. 修改install_env.sh中配置，如果此文件不存在，会出提示要求
+   逐个的输入，所以，你也可以把此文件删除，直接进行下一步
+2. sh install_hadoop.sh
 
-为了快速安装，可以先修改 install_env.sh ，然后运行上面的
-命令；如果没有 install_env.sh 文件，你可以
-cp install_env_bk.sh install_env.sh；
-install_env.sh中变量都是要指定的，SNN可以为空；
+
+为了快速安装，最好先修改 install_env.sh ，然后运行上面的命令。
+install_env.sh中内容是:
+----------------------------------------------------
+PASS=$USER #用户登录其它机器的密码
+SSH_PORT=9922 #ssh服务端口
+
+NN="platform30" #在哪台机器上安装NN，最好就是安装机
+SNN=            #在哪台机器上安装SNN，空表示不安装
+                #DN:在哪些机器上安装DN
+DN="
+platform31
+platform32
+platform33
+platform34
+"
+----------------------------------------------------
 默认启动后的端口是50***，你可以打开 deployer_env.sh 修改
 HADOOP_PORT_PREFIX，也可以在安装后对个别的端口进行调整。
 
@@ -56,8 +71,9 @@ sh install_all.sh
 
 非常重要
 关于下载
-download.test.list.txt文件中列举了全部要下载的tar文件，你可以修改成最快速的网址，对于你不需要用的包也可以删除
+download.test.list.txt文件中列举了全部要下载的tar文件，你可以修改成最快速的网址，
+对于你不需要用的包也可以删除。
 对于有一些不能直接下载的包，你需要手动下载并放到tar目录中，例如jdk包就是不能直接下载的
 你可以从这里下载jdk：http://www.oracle.com/technetwork/java/javase/downloads/index.html
-请主要和操作系统匹配，如果你要安装的机器既有32位的，又有64位的，你需要两个版本都下载
+请注意要和操作系统匹配，如果你要安装的机器既有32位的，又有64位的，你需要两个版本都下载
 
