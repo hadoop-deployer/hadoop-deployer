@@ -1,11 +1,11 @@
 PASS=$USER #user's login password
-SSH_PORT=9922
+SSH_PORT=22
 
-NN="platform30"
-SNN=
+NN="host1"  #namenode's host,just one
+SNN="host2" #second namenode's host,can be blank
 DN="
-platform31
-platform32
-platform33
-platform34
+host3
+host4
+host5
+host6
 "
