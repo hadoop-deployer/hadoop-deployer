@@ -1,5 +1,12 @@
-本程序全部是shell脚本，可以快速安装部署Hadoop服务。
-zhaigy@ucweb.com
+   Hadoop有点繁琐，都是力气活，测试和演示时常常要部署它，
+zhenghh@ucweb.com 同学开发了一键安装的脚本，简单快捷，用
+起来很舒心。这个项目是把一键安装的脚本修改一下，发布成开
+源版本，希望能帮到大家。
+
+   本程序全部是shell脚本。部署后的hadoop可以直接格式化启
+动，但是如果要良好运行，还需要你直接配置Hadoop的各个参数。
+
+   本项目现在由 zhaigy@ucweb.com 维护。
 
 说明:
 1. 本程序可以安装Hadoop，Hive，HBase，HUE，并可安装配置
