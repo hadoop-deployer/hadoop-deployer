@@ -27,6 +27,7 @@ else
   JAVA_TAR=`find_tar "jdk*64"`
 fi
 JAVA_VERSION=${JAVA_TAR%.tar.gz}
+
 [ "$JAVA_VERSION" == "" ] && die "not find jdk tar file" ||:;
 
 ANT_TAR=`find_tar apache-ant`

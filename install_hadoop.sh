@@ -97,6 +97,8 @@ conf_hadoop()
   MAPRED="$HADOOP_CONF_DIR/mapred-site.xml"
 
   cp hadoopconf/* $HADOOP_CONF_DIR;
+  
+  sed -r "s#^export HADOOP_SSH_OPTS.*#export HADOOP_SSH_OPTS=\"-p $SSH_PORT\"#" -i $ENVSH;
 
   # core-site.xml
   sed -r "s#<value>hadoop.tmp.dir<\/value>#<value>$HADOOP_TMP_DIR<\/value>#" -i $CORE;
@@ -147,7 +149,7 @@ main()
   chmod_for_run;
   [ -e logs ] || mkdir logs
   [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
-  download ./download.list.txt
+  download
   rsync_all $DIR $HOME
   for s in $NODE_HOSTS; do
     [ -f "logs/deploy_${s}_ok" ] && continue 

@@ -5,13 +5,20 @@ deploy_java()
   echo ">> deploy java"
   mkdir -p $HOME/java
   tar -xzf tar/$JAVA_TAR -C $HOME/java
-  [ "$ANT_TAR" != "" ] && tar -xzf tar/$ANT_TAR -C $HOME/java ||:;
-  [ "$MAVEN_TAR" != "" ] && tar -xzf tar/$MAVEN_TAR -C $HOME/java ||:;
-  cd $HOME/java; 
-  ln -sf ./$JAVA_VERSION jdk;
-  [ "$ANT_TAR" != "" ] && ln -sf ./$ANT_VERSION ant ||:;
-  [ "$MAVEN_TAR" != "" ] && ln -sf ./$MAVEN_VERSION maven ||:;
-  cd $DIR;
+  JAVA_VERSION=`find $HOME/java -maxdepth 1 -name "jdk*"|sed "s:.*/::;1q"`
+  ln -sf $JAVA_VERSION $HOME/java/jdk;
+
+  if [ "$ANT_TAR" != "" ]; then
+    tar -xzf tar/$ANT_TAR -C $HOME/java
+    ANT_VERSION=`find $HOME/java -maxdepth 1 -name "apache-ant*"|sed "s:.*/::;1q"`
+    ln -sf $ANT_VERSION $HOME/java/ant;
+  fi
+
+  if [ "$MAVEN_TAR" != "" ]; then
+    tar -xzf tar/$MAVEN_TAR -C $HOME/java ||:;
+    MAVEN_VERSION=`find $HOME/java -maxdepth 1 -name "apache-maven*"|sed "s:.*/::;1q"`
+    ln -sf $MAVEN_VERSION $HOME/java/maven;
+  fi
 }
 
 deploy_hadoop()

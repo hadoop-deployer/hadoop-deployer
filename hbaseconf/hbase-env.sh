@@ -35,7 +35,7 @@ export HBASE_HEAPSIZE=2000
 # For more on why as well as other possible settings,
 # see http://wiki.apache.org/hadoop/PerformanceTuning
 export HBASE_OPTS="-ea -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode"
-export HBASE_OPTS="$HBASE_OPTS -Xms4g -Xmx4g -Xmn2g"
+export HBASE_OPTS="$HBASE_OPTS -Xms2g -Xmx2g -Xmn1g"
 
 # Uncomment below to enable java garbage collection logging.
 # export HBASE_OPTS="$HBASE_OPTS -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$HBASE_HOME/logs/gc-hbase.log" 
@@ -55,6 +55,7 @@ export HBASE_OPTS="$HBASE_OPTS -Xms4g -Xmx4g -Xmn2g"
 
 # Extra ssh options.  Empty by default.
 # export HBASE_SSH_OPTS="-o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR"
+export HBASE_SSH_OPTS="-p 22"
 
 # Where log files are stored.  $HBASE_HOME/logs by default.
 # export HBASE_LOG_DIR=${HBASE_HOME}/logs

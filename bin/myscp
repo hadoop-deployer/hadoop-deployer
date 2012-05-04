@@ -1,8 +1,7 @@
 #!/bin/bash
 # Author: zhenghh@ucweb.com
-DIR=`cd $(dirname $0);pwd`
-. $DIR/../PUB.sh;
-. $DIR/../install_env.sh;
+. $DEPLOYER_HOME/PUB.sh;
+. $DEPLOYER_HOME/install_env.sh;
 
 if [ $# != 2 ]; then
   echo "USAGE: $0 filename SERVER_NAME";

@@ -24,6 +24,7 @@ export HADOOP_JOBTRACKER_OPTS="$UC_HADOOP_SERVER $UC_HADOOP_MEM_JT -Dcom.sun.man
 export HADOOP_TASKTRACKER_OPTS="$UC_HADOOP_SERVER $UC_HADOOP_MEM_TT -Dcom.sun.management.jmxremote $HADOOP_TASKTRACKER_OPTS"
 
 # export HADOOP_SSH_OPTS="-o ConnectTimeout=1 -o SendEnv=HADOOP_CONF_DIR"
+export HADOOP_SSH_OPTS="-p 22"
 
 # host:path where hadoop code should be rsync'd from.  Unset by default.
 # export HADOOP_MASTER=master:/home/$USER/src/hadoop

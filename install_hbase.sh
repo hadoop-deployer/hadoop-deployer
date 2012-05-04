@@ -46,6 +46,8 @@ conf_hbase()
   HBASE="$HBASE_CONF_DIR/hbase-site.xml"
   REGIONSERVERS="$HBASE_CONF_DIR/regionservers"
 
+  sed -r "s#^export HBASE_SSH_OPTS.*#export HBASE_SSH_OPTS=\"-p $SSH_PORT\"#" -i $HBASE_ENV;
+  
   sed -r "$F1>hbase.zookeeper.quorum<$F2>$HBASE_ZOOKEEPER_QUORUM<$F3" -i $HBASE;
   sed -r "s#<value>hbase.rootdir<\/value>#<value>$HBASE_ROOTDIR<\/value>#" -i $HBASE;
   sed -r "s#<value>hbase.tmp.dir<\/value>#<value>$HBASE_TMP_DIR<\/value>#" -i $HBASE;
