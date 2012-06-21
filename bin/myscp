@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: zhenghh@ucweb.com
 . $DEPLOYER_HOME/PUB.sh;
-. $DEPLOYER_HOME/install_env.sh;
+#. $DEPLOYER_HOME/install_env.sh;
 
 if [ $# != 2 ]; then
   echo "USAGE: $0 filename SERVER_NAME";
@@ -15,11 +15,11 @@ fi
 
 TAG=`pwd`
 
-ssh $USER@$2 "mkdir -p $TAG";
+ssh -p $SSH_PORT $USER@$2 "mkdir -p $TAG";
 if [ -d $1 ]; then
   echo "scp -r ./$1 $USER@$2:$TAG";
-  scp -r ./$1 $USER@$2:$TAG;
+  scp -P $SSH_PORT -r ./$1 $USER@$2:$TAG;
 else 
   echo "scp -P $PORT ./$1 $USER@$2:$TAG/$1";
-  scp ./$1 $USER@$2:$TAG/$1;
+  scp -P $SSH_PORT ./$1 $USER@$2:$TAG/$1;
 fi
