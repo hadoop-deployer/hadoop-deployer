@@ -61,7 +61,11 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 cmd
   check_tool()
   {
-    [ alias $1 -o -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
+    if alias $1 || [ -f "`which $1`" ]; then
+      echo "$1 is exists";
+    else 
+      die "$1 is not exists"
+    fi
     #[ -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
   }
 
