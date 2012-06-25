@@ -1,7 +1,7 @@
 #!/bin/env echo "Warning: this file should be sourced"
 # zhaigy@ucweb.com
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
-  #set -e
+  set -e
   shopt -s expand_aliases
   #[ -f $HOME/.hadoop_profile ] && . $HOME/.hadoop_profile
   [ -f $HOME/.bash_profile ] && . $HOME/.bash_profile
