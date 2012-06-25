@@ -24,7 +24,7 @@ export ZK_HOME=\$HOME/zookeeper
 export ZK_BIN=\$ZK_HOME/bin
 export ZK_CONF_DIR=\$ZK_HOME/conf
 
-export PATH=\$HBASE_BIN:\$PATH
+export PATH=\$ZK_BIN:\$PATH
 
 " > $ZKPF
 
