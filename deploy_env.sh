@@ -73,6 +73,10 @@ HUE_TAR=`find_tar hue*cdh`
 HBASE_TAR=`find_tar hbase*cdh`
 [ "$HBASE_TAR" != "" ] && HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
 
+# zookeeper
+ZK_TAR=`find_tar zookeeper*cdh`
+[ "$ZK_TAR" != "" ] && ZK_VERSION=${ZK_TAR%.tar.gz} ||:;
+
 ##############################################################################
 ##### conf file #####
 
