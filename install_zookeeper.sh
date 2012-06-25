@@ -48,7 +48,7 @@ config_it()
   local THIS=`hostname`
   if [ ! -z "$ZK_NODES" ]; then
     local i=0;
-    for $node in $ZK_NODES; do
+    for node in $ZK_NODES; do
       i=$[i+1]
       if [ "$THIS" == "$node" ]; then alias "have_this=true";else alias "have_this=false"; fi
       echo "server.${i}=$node:41288:41388" >> $ZOO_CFG_TMP;
