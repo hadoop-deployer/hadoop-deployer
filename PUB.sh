@@ -61,7 +61,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 cmd
   check_tool()
   {
-    [ -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
+    [ alias $1 || -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
+    #[ -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
   }
 
   [ -f $D/install_env.sh ] && . $D/install_env.sh 
