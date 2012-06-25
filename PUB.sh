@@ -106,6 +106,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   [ -e logs ] || mkdir logs
   [ -e tars ] || mkdir tars
   
+  chmod +x $D/bin/*;
+
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi
 

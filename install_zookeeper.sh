@@ -68,7 +68,6 @@ main()
   [ -f logs/zookeeper_ok ] && die "zookeeper is installed"
   show_head;
   check_tools;
-  chmod_for_run;
   [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
   download
   rsync_all $DIR $HOME
