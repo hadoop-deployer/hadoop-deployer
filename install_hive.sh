@@ -14,11 +14,11 @@ params()
 deploy_hive()
 {
   echo ">> deploy hive"
-  tar -xzf tar/$HIVE_TAR -C $HOME;
+  tar -xzf tars/$HIVE_TAR -C $HOME;
   cd $HOME;
   ln -sf ./$HIVE_VERSION $HIVE_HOME;
   cd $DIR
-  cp tar/$MYSQL_JAR $HIVE_HOME/lib;
+  cp tars/$MYSQL_JAR $HIVE_HOME/lib;
 
   HIVE="$HIVE_CONF_DIR/hive-site.xml";
   cp hiveconf/hive-site.xml $HIVE;

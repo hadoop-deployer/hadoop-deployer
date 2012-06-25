@@ -30,7 +30,7 @@ check_tools()
 
 hue_deploy()
 {
-  tar -xzf tar/$HUE_TAR -C $HOME;
+  tar -xzf tars/$HUE_TAR -C $HOME;
 
   HUE="$HOME/$HUE_VERSION/desktop/conf/hue.ini";
   cp hueconf/hue.ini $HUE;

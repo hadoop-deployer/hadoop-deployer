@@ -30,7 +30,7 @@ zhenghh@ucweb.com 同学开发了一键安装的脚本，简单快捷，用
 5. 必须有ssh，本程序会自动配置免密码登录
 6. 安装的那台机器必须是集群中的一台，并且最好就是主节点
 7. 安装时需要连接网络下载安装包，或者你手动下载好放到
-   tar目录
+   tars目录
 
 
 安装hadoop:
@@ -83,13 +83,13 @@ sh install_all.sh
 关于下载
 download.list.txt文件中列举了全部要下载的tar文件，你可以修改
 成最快速的网址，对于你不需要用的包也可以删除。
-对于有一些不能直接下载的包，你需要手动下载并放到tar目录中，
+对于有一些不能直接下载的包，你需要手动下载并放到tars目录中，
 例如jdk包就是不能直接下载的，你可以从这里下载jdk：
 http://www.oracle.com/technetwork/java/javase/downloads/index.html
 请注意要和操作系统匹配，如果你要安装的机器既有32位的，又有64位的，
 你需要两个版本都下载
 
 由于自带的默认下载软件地址在github上，测试时下载有时会中断，所以，
-建议大家先手动下载需要的包，放到hadoop-deployer中的tar子目录下，
+建议大家先手动下载需要的包，放到hadoop-deployer中的tars子目录下，
 然后把download.list.txt置空。
 

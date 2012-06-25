@@ -21,7 +21,7 @@ deploy()
     . PUB.sh;
     . profile_hbase.sh;
     . deploy_env.sh;
-    tar -xzf tar/$HBASE_TAR -C $HOME;
+    tar -xzf tars/$HBASE_TAR -C $HOME;
     cd ..;
     ln -s ./$HBASE_VERSION $HBASE_HOME;
     cd $DIR;

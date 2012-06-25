@@ -48,8 +48,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   download()
   {
     local dls=`cat $D/download.list.txt`
-    mkdir -p $D/tar
-    cd $D/tar
+    mkdir -p $D/tars
+    cd $D/tars
     for dl in $dls; do
       dl=`echo $dl|sed "s:\\s\\+::"`
       [ "${dl::1}" == "#" ] && continue ||:;
@@ -100,7 +100,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   alias scp="scp -P $SSH_PORT"
   
   [ -e logs ] || mkdir logs
-  [ -e tar ] || mkdir tar
+  [ -e tars ] || mkdir tars
   
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

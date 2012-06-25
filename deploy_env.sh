@@ -13,11 +13,11 @@ HADOOP_PORT_PREFIX=50
 # $0 prefix
 find_tar()
 {
-  echo `ls tar/${1}*.tar.gz 2>/dev/null | sed "s:^.*tar/::;q"`
+  echo `ls tars/${1}*.tar.gz 2>/dev/null | sed "s:^.*tars/::;q"`
 }
 find_it()
 {
-  echo `ls tar/${1} 2>/dev/null | sed "s:^.*tar/::;q"`
+  echo `ls tars/${1} 2>/dev/null | sed "s:^.*tars/::;q"`
 }
 
 if IS_32; then
@@ -60,7 +60,7 @@ if [ "$MYSQL_JAR" == "" ]; then
     tar -xzf tar/$MYSQL_TAR -C tmp
     MYSQL_JAR=`find ./tmp -name mysql-connector-java-*-bin.jar`
     if [ "$MYSQL_JAR" != "" ]; then
-      cp $MYSQL_JAR tar/
+      cp $MYSQL_JAR tars/
       MYSQL_JAR=`basename $MYSQL_JAR`
     fi
     rm -rf ./tmp
