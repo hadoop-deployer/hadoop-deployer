@@ -1,5 +1,5 @@
 #!/bin/env echo "Warning: this file should be sourced"
-cd $DIR
+#cd $DIR
 . PUB.sh
 ##############################################################################
 
