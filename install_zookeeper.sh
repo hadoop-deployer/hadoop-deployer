@@ -17,6 +17,7 @@ deploy()
 {
   echo ">> deploy $1";
   . deploy_env.sh
+  var_die ZK_HOME; 
   ssh "$USER@$1" cd $HOME \; tar -xzf $DEPLOYER_HOME/tars/$ZK_TAR -C $HOME \; ln -sf ./$ZK_VERSION $ZK_HOME ;
 }
 
