@@ -1,17 +1,19 @@
 #!/bin/env echo "Warning: this file should be sourced"
-#set -e
-shopt -s expand_aliases
+# zhaigy@ucweb.com
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
+  #set -e
+  shopt -s expand_aliases
+  /bin/env
   [ -f $HOME/.hadoop_profile ] && . $HOME/.hadoop_profile
-
-  OLDDIR=`pwd`
-  DIR=`cd $(dirname $0);pwd`
+  
+  [ "$OLDDIR" == "" ] && OLDDIR=`pwd` ||:;
+  [ "$DIR" == "" ] && DIR=`cd $(dirname $0);pwd` ||:;
+  
   if [ `uname -m | sed -e 's/i.86/32/'` == '32' ]; then
     alias IS_32='true';
   else
     alias IS_32='false'
   fi
-  PUB_HEAD_DEF="PUB_HEAD_DEF"
 
   show_head()
   {
@@ -25,7 +27,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     echo "@   @ @   @ @   @ @   @ @   @ @           @   @ @     @     @     @   @   @   @     @  @"
     echo "@   @ @   @ @@@@   @@@   @@@  @           @@@@  @@@@@ @     @@@@@  @@@    @   @@@@@ @   @"
     echo ""
-    echo "V0.1 by uc.cn 2012-04"
+    echo "V0.2 by uc.cn 2012-06"
     echo ""
     echo "========================================================================================="
   }
@@ -34,7 +36,10 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
   
-  [ "$DEPLOYER_HOME" == "" ] && DEPLOYER_HOME="$HOME/hadoop-deployer" ||:;
+  if [ "$DEPLOYER_HOME" == "" ]; then
+    #DEPLOYER_HOME="$HOME/hadoop-deployer";
+    DEPLOYER_HOME=`sh anchor.sh`;
+  fi
   #var_die DEPLOYER_HOME;
   D=$DEPLOYER_HOME
   
@@ -62,16 +67,19 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   
   nodes()
   {
-    local TMP_F="tmp_uniq_nodes.txt.tmp";
-    :>$TMP_F
-    for s in $DN; do
-      echo $s >> $TMP_F;
-    done
-    echo $NN >> $TMP_F; 
-    [ "$SNN" != "" ] && echo $SNN >> $TMP_F
-    export NODE_HOSTS=`sort $TMP_F | uniq`
-    rm -f $TMP_F
+    if [ -z "NODE_HOSTS" ]; then
+      local TMP_F="tmp_uniq_nodes.txt.tmp";
+      :>$TMP_F
+      for s in $DN; do
+        echo $s >> $TMP_F;
+      done
+      echo $NN >> $TMP_F; 
+      [ "$SNN" != "" ] && echo $SNN >> $TMP_F
+      export NODE_HOSTS=`sort $TMP_F | uniq`
+      rm -f $TMP_F
+    fi
   }
+  nodes;
 
   # $0 source target 
   rsync_all()
@@ -85,5 +93,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 
   alias ssh="ssh -p $SSH_PORT"
   alias scp="scp -P $SSH_PORT"
+  
+  PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi
 
