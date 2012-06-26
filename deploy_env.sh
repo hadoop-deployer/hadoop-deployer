@@ -1,6 +1,6 @@
 #!/bin/env echo "Warning: this file should be sourced"
 #cd $DIR
-. PUB.sh
+#. PUB.sh
 ##############################################################################
 
 ##### Public #####
@@ -15,9 +15,17 @@ find_tar()
 {
   echo `ls tars/${1}*.tar.gz 2>/dev/null | sed "s:^.*tars/::;q"`
 }
+find_tar2()
+{
+  find ./tars -regex ".*/$1-.*\.tar\.gz" -printf "%P\n" 
+}
 find_it()
 {
   echo `ls tars/${1} 2>/dev/null | sed "s:^.*tars/::;q"`
+}
+find_it2()
+{
+  find ./tars -regex ${1} -printf "%P\n"
 }
 
 if IS_32; then
@@ -71,7 +79,8 @@ HUE_TAR=`find_tar hue*cdh`
 [ "$HUE_TAR" != "" ] && HUE_VERSION=${HUE_TAR%.tar.gz} ||:;
 
 HBASE_TAR=`find_tar hbase*cdh`
-[ "$HBASE_TAR" != "" ] && HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
+[ -z "$HBASE_TAR" ] && HBASE_TAR=`find_tar2 hbase` ||:;
+[ ! -z "$HBASE_TAR" ] && HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
 
 # zookeeper
 ZK_TAR=`find_tar zookeeper*cdh`

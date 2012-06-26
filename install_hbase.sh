@@ -30,7 +30,7 @@ deploy()
     cd $DIR;
   ' >> tmp.sh
   scp -q -P $SSH_PORT tmp.sh $USER@$1:/$DIR/
-  ssh -p $SSH_PORT $USER@$1 "sh $DIR/tmp.sh;rm -f $DIR/tmp.sh"
+  ssh -p $SSH_PORT $USER@$1 sh $DIR/tmp.sh\; rm -f $DIR/tmp.sh
   rm -f tmp.sh
 }
 
