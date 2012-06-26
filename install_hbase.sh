@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+DIR=$(cd $(dirname $0);pwd)
+. $DIR/PUB.sh
+
 params()
 {
   if [ -e ./install_env.sh ]; then
@@ -60,11 +63,9 @@ conf_hbase()
 
 main() 
 {
-  DIR=$(cd $(dirname $0);pwd)
   cd $DIR
   [ -f logs/hadoop_ok ] || die "must install hadoop first"
-  [ -f logs/hbase_ok ] && die "hbase is installed"
-  . PUB.sh
+  [ -f logs/hbase_ok ] && die "hbase is installed" ||:;
   show_head;
   params;
   download
@@ -80,6 +81,6 @@ main()
   echo ">> OK"
 }
 
-#====
+#==========
 main $*;
 
