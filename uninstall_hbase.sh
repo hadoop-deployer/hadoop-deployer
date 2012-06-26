@@ -1,5 +1,7 @@
 #!/bin/env bash
 # -- utf-8 --
+DIR=`cd $(dirname $0);pwd`
+. $DIR/PUB.sh
 
 undeploy()
 {
@@ -32,13 +34,10 @@ undeploy()
 
 main()
 {
-  DIR=`cd $(dirname $0);pwd`
   cd $DIR
-  . PUB.sh
   . install_env.sh
   [ -f ~/.hbase_profile ] && . ~/.hbase_profile
   
-  nodes;
   for s in $NODE_HOSTS; do
     undeploy $s; 
     rm -f logs/deploy_hbase_${s}_ok
@@ -46,5 +45,5 @@ main()
   rm -f logs/hbase_ok
 }
 
-#====
+#==========
 main
