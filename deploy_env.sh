@@ -157,7 +157,8 @@ HBASE_ROOTDIR="$FS_DEFAULT_NAME/hbase"
 HBASE_TMP_DIR="$HOME/hbase_data"
 quorum()
 {
-  local tmp=${NODE_HOSTS[@]::5}
+  #local tmp=${NODE_HOSTS[@]::5}
+  local tmp=$DN
   tmp=`echo $tmp`
   tmp=${tmp// /,}
   HBASE_ZOOKEEPER_QUORUM=$tmp
