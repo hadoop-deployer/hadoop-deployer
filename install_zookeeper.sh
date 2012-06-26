@@ -27,10 +27,6 @@ profile()
   ssh "$USER@$1" cd $DEPLOYER_HOME\; sh ./profile_zookeeper.sh;
 }
 
-F1="s/<value"
-F2="\/value>/<value"
-F3="\/value>/"
-
 config_it()
 {
   echo ">> config it ..."
@@ -52,12 +48,16 @@ config_it()
       i=$[i+1]
       if [ "$THIS" == "$node" ]; then alias "have_this=true";else alias "have_this=false"; fi
       echo "server.${i}=$node:41288:41388" >> $ZOO_CFG_TMP;
+      #for myid file
+      ssh "$USER@$node" mkdir -p $HOME/zookeeper/data\; cd $HOME/zookeeper/data\; echo $i \> myid;
     done
   fi
 
   echo ">> rsync configuration";
   if [ have_this ]; then cp $ZOO_CFG_TMP $ZK_CONF_DIR/; fi
   rsync_all "$ZOO_CFG_TMP" $ZK_CONF_DIR/;
+
+  
 
   [ -e $ZOO_CFG_TMP ] && rm -f $ZOO_CFG_TMP ||:;
   unalias have_this;
