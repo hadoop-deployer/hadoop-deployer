@@ -26,6 +26,8 @@ export ZK_CONF_DIR=\$ZK_HOME/conf
 
 export PATH=\$ZK_BIN:\$PATH
 
+alias \"ccz=cd \$ZK_HOME\"
+
 " > $ZKPF
 
 . $BAPF
