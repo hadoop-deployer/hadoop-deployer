@@ -39,11 +39,11 @@ config_it()
   ZOO_CFG_TMP="$CONF_TMP/zoo.cfg"
 
   :> $ZOO_CFG_TMP;
-  echo "itickTime=2000" >> $ZOO_CFG_TMP;
-  echo "dataDir=$ZK_HOME/data" >> $ZOO_CFG_TMP;
-  echo "clientPort=41181" >> $ZOO_CFG_TMP;
-  echo "initLimit=5" >> $ZOO_CFG_TMP;
+  echo "tickTime=2000" >> $ZOO_CFG_TMP;
+  echo "initLimit=10" >> $ZOO_CFG_TMP;
   echo "syncLimit=2" >> $ZOO_CFG_TMP;
+  echo "clientPort=41181" >> $ZOO_CFG_TMP;
+  echo "dataDir=$ZK_HOME/data" >> $ZOO_CFG_TMP;
  
   local THIS=`hostname`
   if [ ! -z "$ZK_NODES" ]; then
