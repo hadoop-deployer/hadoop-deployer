@@ -3,7 +3,7 @@
 [ -z $DEPLOYER_HOME ] && echo "hadoop hasn't install or install fail" && exit
 . $DEPLOYER_HOME/PUB.sh;
 
-if [ $# -eq 1 ]; then
+if [ $# -ne 1 ]; then
   echo "USAGE: $0 filename";
   echo "eg.: $0 main.cpp";
   exit 1;
