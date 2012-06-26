@@ -40,6 +40,7 @@ config_it()
   echo "syncLimit=2" >> $ZOO_CFG_TMP;
   echo "clientPort=41181" >> $ZOO_CFG_TMP;
   echo "dataDir=$ZK_HOME/data" >> $ZOO_CFG_TMP;
+  echo "dataLogDir=$ZK_HOME/logs" >> $ZOO_CFG_TMP;
  
   local THIS=`hostname`
   if [ ! -z "$ZK_NODES" ]; then
@@ -50,6 +51,7 @@ config_it()
       echo "server.${i}=$node:41288:41388" >> $ZOO_CFG_TMP;
       #for myid file
       ssh "$USER@$node" mkdir -p $HOME/zookeeper/data\; cd $HOME/zookeeper/data\; echo $i \> myid;
+      ssh "$USER@$node" mkdir -p $HOME/zookeeper/logs;
     done
   fi
 
