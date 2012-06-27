@@ -48,6 +48,7 @@ conf_hbase()
   HBASE_ENV="$HBASE_CONF_DIR/hbase-env.sh"
   HBASE="$HBASE_CONF_DIR/hbase-site.xml"
   REGIONSERVERS="$HBASE_CONF_DIR/regionservers"
+  BACKUP_MASTERS="$HBASE_CONF_DIR/backup-masters"
 
   sed -r "s#^export HBASE_SSH_OPTS.*#export HBASE_SSH_OPTS=\"-p $SSH_PORT\"#" -i $HBASE_ENV;
 
@@ -57,6 +58,7 @@ conf_hbase()
   sed -r "s#<value>hbase.rootdir<\/value>#<value>$HBASE_ROOTDIR<\/value>#" -i $HBASE;
   sed -r "s#<value>hbase.tmp.dir<\/value>#<value>$HBASE_TMP_DIR<\/value>#" -i $HBASE;
   echo $NODE_HOSTS > $REGIONSERVERS;
+  echo ${DN//$NN/} > $BACKUP_MASTERS;
 
   echo ">> rsync hbase configuration";
   rsync_all "$HBASE_CONF_DIR/*" $HBASE_CONF_DIR/;
