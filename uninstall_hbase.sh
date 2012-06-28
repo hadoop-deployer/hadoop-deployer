@@ -35,13 +35,13 @@ undeploy()
 main()
 {
   cd $DIR
-  . install_env.sh
-  [ -f ~/.hbase_profile ] && . ~/.hbase_profile
+  rsync_all $DIR $HOME
   
   for s in $NODE_HOSTS; do
     undeploy $s; 
     rm -f logs/deploy_hbase_${s}_ok
   done
+
   rm -f logs/hbase_ok
 }
 
