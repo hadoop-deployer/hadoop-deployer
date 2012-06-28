@@ -5,7 +5,8 @@ if [ ! -z $DEPLOYER_HOME ]; then
 elif [ ! -z $DIR ]; then
   . $DIR/PUB.sh
 else
-  . ./PUB.sh
+  DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
 fi
 ##############################################################################
 
