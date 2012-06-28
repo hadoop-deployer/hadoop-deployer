@@ -1,6 +1,12 @@
 #!/bin/env echo "Warning: this file should be sourced"
 #cd $DIR
-#. PUB.sh
+if [ ! -z $DEPLOYER_HOME ]; then
+  . $DEPLOYER_HOME/PUB.sh
+elif [ ! -z $DIR ]; then
+  . $DIR/PUB.sh
+else
+  . ./PUB.sh
+fi
 ##############################################################################
 
 ##### Public #####
