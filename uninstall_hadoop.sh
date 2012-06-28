@@ -3,10 +3,10 @@
 
 main()
 {
-  . ./PUB.sh
+  DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
   cd $DIR
 
-  nodes;
   rsync_all $DIR $HOME
 
   for s in $NODE_HOSTS; do
@@ -19,5 +19,5 @@ main()
   echo ">> OK"
 }
 
-#====
+#==========
 main

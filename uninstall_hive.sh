@@ -4,6 +4,7 @@
 undeploy()
 {
   echo ">> undeploy"
+  . $DIR/deploy_env.sh
   # for safe
   if [ "$HIVE_VERSION" != "" ]; then
     echo ">> delete $HIVE_VERSION"
@@ -24,11 +25,8 @@ undeploy()
 main()
 {
   DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
   cd $DIR
-  . PUB.sh
-  . install_env.sh
-  [ -f ~/.hive_profile ] && . ~/.hive_profile ||:;
-  . deploy_env.sh
 
   undeploy;
   rm -rf logs/hive_ok

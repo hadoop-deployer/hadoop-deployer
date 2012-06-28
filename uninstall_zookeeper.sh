@@ -1,9 +1,6 @@
 #!/bin/env bash
 # -- utf-8 --
 
-DIR=`cd $(dirname $0);pwd`
-. $DIR/PUB.sh
-cd $DIR
 
 undeploy()
 {
@@ -36,6 +33,12 @@ undeploy()
 
 main()
 {
+  DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
+  cd $DIR
+
+  rsync_all $DIR $HOME 
+
   for s in $ZK_NODES; do
     undeploy $s; 
     rm -f logs/deploy_zookeeper_${s}_ok

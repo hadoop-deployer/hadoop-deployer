@@ -4,6 +4,8 @@
 undeploy()
 {
   echo ">> undeploy"
+  [ -f ~/.hue_profile ] && . ~/.hue_profile
+  . $DIR/deploy_env.sh
   # for safe
   if [ "$HUE_VERSION" != "" ]; then
     echo ">> delete $HUE_VERSION"
@@ -30,11 +32,8 @@ undeploy()
 main()
 {
   DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
   cd $DIR
-  . PUB.sh
-  . install_env.sh
-  [ -f ~/.hue_profile ] && . ~/.hue_profile
-  . deploy_env.sh
 
   undeploy;
   rm -f logs/hue_make_ok
@@ -42,5 +41,5 @@ main()
   echo ">> OK"
 }
 
-#====
+#==========
 main

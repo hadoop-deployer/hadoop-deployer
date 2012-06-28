@@ -1,7 +1,5 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=`cd $(dirname $0);pwd`
-. $DIR/PUB.sh
 
 undeploy()
 {
@@ -34,7 +32,10 @@ undeploy()
 
 main()
 {
+  DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
   cd $DIR
+
   rsync_all $DIR $HOME
   
   for s in $NODE_HOSTS; do
