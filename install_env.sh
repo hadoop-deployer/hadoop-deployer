@@ -10,3 +10,9 @@ host4
 host5
 host6
 "
+
+ZK_NODES="
+host3
+host4
+host5
+"

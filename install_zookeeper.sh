@@ -1,7 +1,5 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=$(cd $(dirname $0); pwd)
-. $DIR/PUB.sh
 
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
 check_tools()
@@ -67,6 +65,9 @@ config_it()
 
 main() 
 {
+  DIR=$(cd $(dirname $0); pwd)
+  . $DIR/PUB.sh
+  cd $DIR
   [ -f logs/zookeeper_ok ] && die "zookeeper is installed"
   show_head;
   check_tools;
@@ -82,6 +83,7 @@ main()
   config_it; 
   touch logs/zookeeper_ok
   echo ">> OK"
+  cd $OLD_DIR
 }
 
 #=================

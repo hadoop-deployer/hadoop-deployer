@@ -51,20 +51,21 @@ conf_hive()
 main() 
 {
   DIR=`cd $(dirname $0);pwd`
+  . $DIR/PUB.sh
   cd $DIR
   [ -f logs/hadoop_ok ] || die "must install hadoop first"
   [ -f logs/hive_ok ] && die "hive is installed"
-  . PUB.sh
   show_head;
   params;
   download
   rsync_all $DIR $HOME
-  . profile_hive.sh;
-  . deploy_env.sh
+  . $DEPLOYER_HOME/profile_hive.sh;
+  . $DEPLOYER_HOME/deploy_env.sh
   deploy_hive;
   conf_hive;
   touch logs/hive_ok
   echo ">> OK"
+  cd $OLD_DIR
 }
 
 #====

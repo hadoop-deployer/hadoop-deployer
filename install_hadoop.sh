@@ -1,11 +1,5 @@
 #!/bin/env bash
 # -- utf-8 --
-DIR=$(cd $(dirname $0); pwd)
-cd $DIR
-
-DEPLOYER_HOME=$DIR
-. PUB.sh
-show_head;
 
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
 check_tools()
@@ -143,7 +137,13 @@ conf_hadoop()
 
 main() 
 {
+  DIR=$(cd $(dirname $0); pwd)
+  . $DIR/PUB.sh
+  cd $DIR
+
   [ -f logs/hadoop_ok ] && die "hadoop is installed"
+
+  show_head;
   check_tools;
   params;
   chmod_for_run;
@@ -156,12 +156,14 @@ main()
     deploy $s; 
     touch "logs/deploy_${s}_ok"
   done
-  . ./profile.sh
-  . ./deploy_env.sh
+  . $DEPLOYER_HOME/profile.sh
+  . $DEPLOYER_HOME/deploy_env.sh
   conf_hadoop; 
   touch logs/hadoop_ok
   echo ">> OK"
+  cd $OLD_DIR
 }
 
+#==========
 main $*;
 

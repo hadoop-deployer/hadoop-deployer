@@ -18,7 +18,6 @@
 #    before you start your Hue.
 #########################################################
 
-
 check_tools()
 {
   check_tool ssh 
@@ -26,7 +25,6 @@ check_tools()
   check_tool gcc 
   check_tool g++ 
 }
-
 
 hue_deploy()
 {
@@ -85,16 +83,20 @@ hue_deploy()
 
 main()
 {
+  DIR=$(cd $(dirname $0); pwd)
+  . $DIR/PUB.sh
+  cd $DIR
+
   [ -f logs/hue_ok ] && die "hue is already installed"
-  . PUB.sh;
   show_head;
-  . deploy_env.sh
+  . $DEPLOYER_HOME/deploy_env.sh
   check_tools;
-  . $DIR/profile_hue.sh;
+  . $DEPLOYER_HOME/profile_hue.sh;
   hue_deploy;
   touch logs/hue_ok
   echo ">> OK"
+  cd $OLD_DIR
 }
 
-#====
+#==========
 main $*;
