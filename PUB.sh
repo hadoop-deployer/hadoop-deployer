@@ -69,7 +69,6 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   }
 
   [ -f $D/install_env.sh ] && . $D/install_env.sh 
-  [ -f $D/install_zookeeper_env.sh ] && . $D/install_zookeeper_env.sh 
   
   nodes()
   {
