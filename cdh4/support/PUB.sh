@@ -91,7 +91,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 source target 
   rsync_all()
   {
-    for s in $NODE_HOSTS; do
+    #for s in $NODE_HOSTS; do
+    for s in $NODES; do
       [ `hostname` == "$s" ] && continue 
       echo ">> rsync to $s";
       rsync -a --exclude=.svn --exclude=.git --exclude=logs $1 -e "ssh -p $SSH_PORT" $s:$2;
