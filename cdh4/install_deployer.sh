@@ -35,14 +35,17 @@ main()
   DIR=$(cd $(dirname $0); pwd)
   . $DIR/support/PUB.sh
   cd $DIR
+  
+  show_head;
+
+  [ -e logs ] || mkdir logs
+  [ -e tars ] || mkdir tars
 
   [ -f logs/install_deployer_ok ] && {cd $OLD_DIR; die "deployer is installed"}
 
-  show_head;
   check_tools;
   params;
   chmod_for_run;
-  [ -e logs ] || mkdir logs
   [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
   rsync_all $DIR $HOME
   for s in $NODES; do

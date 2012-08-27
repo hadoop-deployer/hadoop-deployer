@@ -3,9 +3,8 @@
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   set -e
   shopt -s expand_aliases
-  #[ -f $HOME/.hadoop_profile ] && . $HOME/.hadoop_profile
   [ -f $HOME/.bash_profile ] && . $HOME/.bash_profile
-  
+
   [ "$OLDDIR" == "" ] && OLDDIR=`pwd` ||:;
   [ "$DIR" == "" ] && DIR=`cd $(dirname $0);pwd` ||:;
   
@@ -27,7 +26,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     echo "@   @ @   @ @   @ @   @ @   @ @           @   @ @     @     @     @   @   @   @     @  @"
     echo "@   @ @   @ @@@@   @@@   @@@  @           @@@@  @@@@@ @     @@@@@  @@@    @   @@@@@ @   @"
     echo ""
-    echo "V0.2 by uc.cn 2012-06"
+    echo "V0.6 by uc.cn 2012-08"
     echo ""
     echo "========================================================================================="
   }
@@ -35,12 +34,13 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
+  file_die() { [ ! -e "$1" ] && die "file $1 is not exists" ||:; }
   
   if [ "$DEPLOYER_HOME" == "" ]; then
-    #DEPLOYER_HOME="$HOME/hadoop-deployer";
-    DEPLOYER_HOME=`sh anchor.sh`;
+    file_die support/anchor.sh
+    DEPLOYER_HOME=$DIR
+    #DEPLOYER_HOME=`sh anchor.sh`;
   fi
-  #var_die DEPLOYER_HOME;
   D=$DEPLOYER_HOME
   
   # $0 url.list.file
