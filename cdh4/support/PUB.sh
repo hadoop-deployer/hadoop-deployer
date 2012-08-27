@@ -65,29 +65,28 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     else 
       die "$1 is not exists"
     fi
-    #[ -f "`which $1`" ] && echo "$1 is exists" || die "$1 is not exists"
   }
 
-  [ -f $D/install_env.sh ] && . $D/install_env.sh 
+#  [ -f $D/install_env.sh ] && . $D/install_env.sh 
   
-  nodes()
-  {
-    if [ -z "$DN" ]; then
-      return true; #return true for not stop
-    fi
-    if [ -z "$NODE_HOSTS" ]; then
-      local TMP_F="tmp_uniq_nodes.txt.tmp";
-      :>$TMP_F
-      for s in $DN; do
-        echo $s >> $TMP_F;
-      done
-      echo $NN >> $TMP_F; 
-      [ "$SNN" != "" ] && echo $SNN >> $TMP_F
-      export NODE_HOSTS=`sort $TMP_F | uniq`
-      rm -f $TMP_F
-    fi
-  }
-  nodes;
+#  nodes()
+#  {
+#    if [ -z "$DN" ]; then
+#      return true; #return true for not stop
+#    fi
+#    if [ -z "$NODE_HOSTS" ]; then
+#      local TMP_F="tmp_uniq_nodes.txt.tmp";
+#      :>$TMP_F
+#      for s in $DN; do
+#        echo $s >> $TMP_F;
+#      done
+#      echo $NN >> $TMP_F; 
+#      [ "$SNN" != "" ] && echo $SNN >> $TMP_F
+#      export NODE_HOSTS=`sort $TMP_F | uniq`
+#      rm -f $TMP_F
+#    fi
+#  }
+#  nodes;
 
   # $0 source target 
   rsync_all()
@@ -99,13 +98,13 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     done
   }
 
-  alias ssh="ssh -p $SSH_PORT"
-  alias scp="scp -P $SSH_PORT"
+#  alias ssh="ssh -p $SSH_PORT"
+#  alias scp="scp -P $SSH_PORT"
   
-  [ -e logs ] || mkdir logs
-  [ -e tars ] || mkdir tars
+#  [ -e logs ] || mkdir logs
+#  [ -e tars ] || mkdir tars
   
-  chmod +x $D/bin/*;
+#  chmod +x $D/bin/*;
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

@@ -27,7 +27,7 @@ params()
 deploy()
 {
   echo ">> deploy $1";
-  ssh "$USER@$1" sh $DIR/deploy.sh
+  #ssh "$USER@$1" sh $DIR/deploy.sh
 }
 
 main() 
@@ -36,7 +36,7 @@ main()
   . $DIR/PUB.sh
   cd $DIR
 
-  [ -f logs/hadoop_ok ] && {cd $OLD_DIR; die "hadoop is installed"}
+  [ -f logs/install_deployer_ok ] && {cd $OLD_DIR; die "deployer is installed"}
 
   show_head;
   check_tools;
@@ -44,17 +44,14 @@ main()
   chmod_for_run;
   [ -e logs ] || mkdir logs
   [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
-  download
   rsync_all $DIR $HOME
-  for s in $NODE_HOSTS; do
-    [ -f "logs/deploy_${s}_ok" ] && continue 
+  for s in $NODES; do
+    [ -f "logs/install_deployer_ok_${s}" ] && continue 
     deploy $s; 
-    touch "logs/deploy_${s}_ok"
+    touch "logs/install_deployer_ok_${s}"
   done
-  . $DEPLOYER_HOME/profile.sh
-  . $DEPLOYER_HOME/deploy_env.sh
-  . config_hadoop.sh; 
-  touch logs/hadoop_ok
+  . $HOME/.bash_profile.sh
+  touch logs/install_deployer_ok
   echo ">> OK"
   cd $OLD_DIR
 }

@@ -1,7 +1,8 @@
 --针对特定版本，目标更清晰
 --nfs安装
 --把安装和配置分开，先安装，后配置
---hadoop,hive,hbase
+--deployer,hadoop,hive,hbase
+--安装过程独立为程序
 
 
 目录设计
