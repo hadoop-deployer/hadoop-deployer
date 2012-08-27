@@ -41,7 +41,7 @@ main()
   [ -e logs ] || mkdir logs
   [ -e tars ] || mkdir tars
 
-  [ -f logs/install_deployer_ok ] && {cd $OLD_DIR; die "deployer is installed"}
+  [ -f logs/install_deployer_ok ] && { cd $OLD_DIR; die "deployer is installed"; }
 
   check_tools;
   params;
