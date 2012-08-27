@@ -19,8 +19,8 @@ chmod_for_run()
 params()
 {
   . ./config_deployer.sh
-  sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" ./deployer_profile.sh
-  sed -i "s:SSH_PORT=[0-9]\+:SSH_PORT=$SSH_PORT:" ./deployer_profile.sh
+  sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" support/deployer_profile.sh
+  sed -i "s:SSH_PORT=[0-9]\+:SSH_PORT=$SSH_PORT:" support/deployer_profile.sh
 }
 
 # $0 host
@@ -53,7 +53,8 @@ main()
     deploy $s; 
     touch "logs/install_deployer_ok_${s}"
   done
-  . $HOME/.bash_profile.sh
+  . support/deployer_profile.sh
+  . $HOME/.bash_profile
   touch logs/install_deployer_ok
   echo ">> OK"
   cd $OLD_DIR

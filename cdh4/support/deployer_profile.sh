@@ -4,7 +4,7 @@ HDPF="$HOME/.deployer_profile"
 
 [ ! -e $BAPF ] && touch $BAPF;
 
-DPFLAG="\# hadoop deployer profile - uc.cn"
+DPFLAG="# hadoop deployer profile - uc.cn"
 if ! grep -q "$DPFLAG" $BAPF; then 
   echo "#" >> $BAPF;
   echo "$DPFLAG" >> $BAPF;
@@ -15,7 +15,7 @@ fi
 
 echo "$DPFLAG
 
-export DEPLOYER_HOME=$HOME/hadoop-deployer
+export DEPLOYER_HOME=/home/zgy/hadoop-deployer/cdh4
 export SSH_PORT=$SSH_PORT
 
 export PATH=\$DEPLOYER_HOME/bin:\$PATH
