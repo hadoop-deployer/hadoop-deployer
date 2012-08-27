@@ -33,7 +33,7 @@ deploy()
 main() 
 {
   DIR=$(cd $(dirname $0); pwd)
-  . $DIR/PUB.sh
+  . $DIR/support/PUB.sh
   cd $DIR
 
   [ -f logs/install_deployer_ok ] && {cd $OLD_DIR; die "deployer is installed"}
