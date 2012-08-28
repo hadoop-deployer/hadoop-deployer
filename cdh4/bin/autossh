@@ -49,7 +49,7 @@ setup_keys()
     keygen;
   fi;
 
-  for j in $NODE_HOSTS; do
+  for j in $NODES; do
     #echo "";
     #echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
     echo ">>>>>>>>>>>>>>>>>>> $j >>>>>>>>>>>>>>>>>>>>";
@@ -60,7 +60,7 @@ setup_keys()
 
 clean_keys()
 {
-  for i in $NODE_HOSTS; do
+  for i in $NODES; do
     expect -c ";
     set timeout 1;
     spawn ssh -p $SSH_PORT $USER@$i;
@@ -88,10 +88,8 @@ main()
   flag=$1 
 
   if [ "$flag" == "setup" ]; then
-    nodes
     setup_keys;
   elif [ "$flag" == "clean" ]; then
-    nodes
     clean_keys;
   else
     usage;

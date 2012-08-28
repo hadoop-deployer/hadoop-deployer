@@ -1,5 +1,7 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # -- utf-8 --
+DIR=$(cd $(dirname $0); pwd)
+. $DIR/support/PUB.sh
 
 #必要工具的检查
 check_tools()
@@ -29,7 +31,7 @@ deploy()
   echo ">> deploy $1";
   # 无实际的安装动作，这里只配置profile文件
   #ssh -p $SSH_PORT $USER@$1 "
-  sshp $USER@$1 "
+  ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
     . support/deployer_profile.sh;
@@ -39,8 +41,6 @@ deploy()
 
 main() 
 {
-  DIR=$(cd $(dirname $0); pwd)
-  . $DIR/support/PUB.sh
   cd $DIR
   
   show_head;
@@ -54,10 +54,13 @@ main()
   config;
   chmod_for_run;
   
-  [ -e logs/autossh_ok ] || { ./bin/autossh setup && touch ./logs/autossh_ok; }
+  if [ ! -e logs/autossh_ok ]; then
+    ./bin/autossh setup
+    touch ./logs/autossh_ok;
+  fi
   
   for s in $NODES; do
-    rsync_to $s $DIR $HOME
+    same_to $s $DIR
     [ -f "logs/install_deployer_ok_${s}" ] && continue 
     deploy $s; 
     touch "logs/install_deployer_ok_${s}"

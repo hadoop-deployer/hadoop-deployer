@@ -49,6 +49,9 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   ME=`hostname`
   NOW8_6=`date +"%Y%m%d_%H%M%S"`
 
+  # load all config
+  [ -f $D/config_deployer.sh ] && . $D/config_deployer.sh
+
   # $0 url.list.file
   download()
   {
@@ -112,6 +115,14 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     [ "$ME" == "$1" ] && return
     echo ">> rsync to $1";
     rsync -a --exclude=.svn --exclude=.git --exclude=logs $2 -e "ssh -p $SSH_PORT" $1:$3;
+  }
+ 
+  # $0 host dir
+  same_to()
+  {
+    [ ! -e $2 ] && return 1
+    dir=`cd $2/..;pwd`
+    rsync_to $1 $dir 
   }
 
   # $0 hosts source target 

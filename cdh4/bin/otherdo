@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+usage="Usage: alldo command..."
+
+# if no args specified, show usage
+if [ $# -le 0 ]; then
+  echo $usage
+  exit 1
+fi
+
+[ -z $DEPLOYER_HOME ] && echo "deployer hasn't install or install fail" && exit 1;
+. $DEPLOYER_HOME/support/PUB.sh;
+
+. $D/config_deployer.sh
+
+for slave in $NODES ; do
+  [ "$slave" == "`hostname`" ] && continue
+  ssh $slave $"${@// /\\ }" 2>&1 | sed "s/^/$slave: /"
+  sleep 1
+done
+
+wait

@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # -- utf-8 --
 DIR=`cd $(dirname $0);pwd`
 . $DIR/support/PUB.sh
@@ -14,14 +14,14 @@ undeploy()
 {
   ssh $USER@$1 "
   cd $D;
-  source support/PUB.sh;
-  source support/deployer_profile.sh;
+  . support/PUB.sh;
+  . support/deployer_profile.sh;
   unprofile;
-  if [\"$ME\" != \"\`hostname\`\"]; then
-    cd ..
-    # rm -rf \$D
-    touch "rm.txt"
-  fi
+  if [ \"$ME\" != \"\`hostname\`\" ]; then
+    cd ..;
+    rm -rf \$D;
+    #touch "rm.txt";
+  fi;
   "
 }
 
@@ -34,8 +34,8 @@ main()
   config;
 
   for s in $NODES; do
-    rsync_to $s $DIR $DIR/..
-    [ ! -f "logs/install_deployer_ok_$s" ] && continue
+    same_to $s $DIR
+    #[ ! -f "logs/install_deployer_ok_$s" ] && continue
     echo ">> undeploy $s"
     undeploy $s
     rm -f "logs/install_deployer_ok_$s"
