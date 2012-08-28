@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/bin/env bash
 # Author: zhenghh@ucweb.com
-[ -z $DEPLOYER_HOME ] && echo "hadoop hasn't install or install fail" && exit
-. $DEPLOYER_HOME/PUB.sh;
 
 if [ $# != 1 ]; then
   echo "USAGE: $0 SERVER_NAME";
   echo "eg: $0 kpi11";
   exit 1;
 fi
+
+[ -z $DEPLOYER_HOME ] && echo "deployer hasn't install or install fail" && exit 1;
+. $DEPLOYER_HOME/support/PUB.sh;
 
 ssh $1

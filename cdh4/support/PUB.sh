@@ -1,7 +1,7 @@
 #!/bin/env echo "Warning: this file should be sourced"
 # zhaigy@ucweb.com
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
-  set -e
+  set -e #错误即时退出
   shopt -s expand_aliases
   [ -f $HOME/.bash_profile ] && . $HOME/.bash_profile
 
@@ -35,14 +35,20 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
   file_die() { [ ! -e "$1" ] && die "file $1 is not exists" ||:; }
-  
+ 
+  # $0 var_name 
+  var_def() { [ "X$1" == "X" ] && true || false; } 
+
   if [ "$DEPLOYER_HOME" == "" ]; then
     file_die support/anchor.sh
     DEPLOYER_HOME=$DIR
     #DEPLOYER_HOME=`sh anchor.sh`;
   fi
-  D=$DEPLOYER_HOME
   
+  D=$DEPLOYER_HOME
+  ME=`hostname`
+  NOW8_6=`date +"%Y%m%d_%H%M%S"`
+
   # $0 url.list.file
   download()
   {
@@ -89,23 +95,34 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 #  nodes;
 
   # $0 source target 
-  rsync_all()
+#  rsync_all()
+#  {
+#    #for s in $NODE_HOSTS; do
+#    for s in $NODES; do
+#      [ `hostname` == "$s" ] && continue 
+#      echo ">> rsync to $s";
+#      rsync -a --exclude=.svn --exclude=.git --exclude=logs $1 -e "ssh -p $SSH_PORT" $s:$2;
+#    done
+#  }
+
+  # $0 host source target
+  rsync_to()
   {
-    #for s in $NODE_HOSTS; do
-    for s in $NODES; do
-      [ `hostname` == "$s" ] && continue 
-      echo ">> rsync to $s";
-      rsync -a --exclude=.svn --exclude=.git --exclude=logs $1 -e "ssh -p $SSH_PORT" $s:$2;
+    # 如果rsync自己会报错
+    [ "$ME" == "$1" ] && return
+    echo ">> rsync to $1";
+    rsync -a --exclude=.svn --exclude=.git --exclude=logs $2 -e "ssh -p $SSH_PORT" $1:$3;
+  }
+
+  # $0 hosts source target 
+  rsync_to_all()
+  {
+    for s in $1; do
+      rsync_to $s $2 $3
     done
   }
 
-#  alias ssh="ssh -p $SSH_PORT"
-#  alias scp="scp -P $SSH_PORT"
-  
-#  [ -e logs ] || mkdir logs
-#  [ -e tars ] || mkdir tars
-  
-#  chmod +x $D/bin/*;
+  [ -z "$SSH_PORT" ] || { alias ssh="ssh -p $SSH_PORT"; alias scp="scp -P $SSH_PORT"; }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

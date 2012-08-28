@@ -4,7 +4,6 @@
 #必要工具的检查
 check_tools()
 {
-  #yum -y install lrzsz gcc gcc-c++ libstdc++-devel
   check_tool bash 
   check_tool ssh 
   check_tool scp 
@@ -16,7 +15,8 @@ chmod_for_run()
   chmod +x bin/*;
 }
 
-params()
+#params()
+config()
 {
   . ./config_deployer.sh
   sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" support/deployer_profile.sh
@@ -27,7 +27,14 @@ params()
 deploy()
 {
   echo ">> deploy $1";
-  #ssh "$USER@$1" sh $DIR/deploy.sh
+  # 无实际的安装动作，这里只配置profile文件
+  #ssh -p $SSH_PORT $USER@$1 "
+  sshp $USER@$1 "
+    cd $D;
+    . support/PUB.sh;
+    . support/deployer_profile.sh;
+    profile;
+  "
 }
 
 main() 
@@ -44,18 +51,23 @@ main()
   [ -f logs/install_deployer_ok ] && { cd $OLD_DIR; die "deployer is installed"; }
 
   check_tools;
-  params;
+  config;
   chmod_for_run;
-  [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
-  rsync_all $DIR $HOME
+  
+  [ -e logs/autossh_ok ] || { ./bin/autossh setup && touch ./logs/autossh_ok; }
+  
   for s in $NODES; do
+    rsync_to $s $DIR $HOME
     [ -f "logs/install_deployer_ok_${s}" ] && continue 
     deploy $s; 
     touch "logs/install_deployer_ok_${s}"
   done
-  . support/deployer_profile.sh
+
+  #安装后加载环境
   . $HOME/.bash_profile
+
   touch logs/install_deployer_ok
+
   echo ">> OK"
   cd $OLD_DIR
 }

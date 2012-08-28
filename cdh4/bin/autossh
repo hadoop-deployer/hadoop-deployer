@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/env bash
 
 if [ "$DEPLOYER_HOME" != "" ]; then
-  . $DEPLOYER_HOME/PUB.sh
+  . $DEPLOYER_HOME/support/PUB.sh
 else
+  # hasn't install deployer 
   DIR=`cd $(dirname $0);pwd`
-  . $DIR/../PUB.sh
+  . $DIR/../support/PUB.sh
 fi
 
 save_keys()
