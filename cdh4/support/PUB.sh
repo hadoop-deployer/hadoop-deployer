@@ -56,14 +56,15 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   download()
   {
     local dls=`cat $D/download.list.txt`
-    mkdir -p $D/tars
-    cd $D/tars
+    cd tars
     for dl in $dls; do
+      #删除空格
       dl=`echo $dl|sed "s:\\s\\+::"`
+      #跳过注释
       [ "${dl::1}" == "#" ] && continue ||:;
       wget --no-check-certificate -c $dl; 
     done
-    cd $OLDDIR 
+    cd ..
   }
 
   # $0 cmd

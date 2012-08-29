@@ -21,8 +21,8 @@ chmod_for_run()
 config()
 {
   . ./config_deployer.sh
-  sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" support/deployer_profile.sh
-  sed -i "s:SSH_PORT=[0-9]\+:SSH_PORT=$SSH_PORT:" support/deployer_profile.sh
+  sed -i "s:DEPLOYER_HOME=.*$:DEPLOYER_HOME=$DIR:" support/profile_deployer.sh
+  sed -i "s:SSH_PORT=[0-9]\+:SSH_PORT=$SSH_PORT:" support/profile_deployer.sh
 }
 
 # $0 host
@@ -34,7 +34,7 @@ deploy()
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
-    . support/deployer_profile.sh;
+    . support/profile_deployer.sh;
     profile;
   "
 }

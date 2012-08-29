@@ -15,11 +15,11 @@ undeploy()
   ssh $USER@$1 "
   cd $D;
   . support/PUB.sh;
-  . support/deployer_profile.sh;
+  . support/profile_deployer.sh;
   unprofile;
   if [ \"$ME\" != \"\`hostname\`\" ]; then
     cd ..;
-    rm -rf \$D;
+    rm -rf $D;
     #touch "rm.txt";
   fi;
   "
