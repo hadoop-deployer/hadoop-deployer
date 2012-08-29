@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  
+  <property>
+    <name>dfs.nameservices</name>
+    <value>zgycluster</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.namenodes.zgycluster</name>
+    <value>nn1,nn2</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.rpc-address.zgycluster.nn1</name>
+    <value>platform30:41900</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.rpc-address.zgycluster.nn2</name>
+    <value>platform31:41900</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.http-address.zgycluster.nn1</name>
+    <value>platform30:41070</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.http-address.zgycluster.nn2</name>
+    <value>platform31:41070</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.https-address.zgycluster.nn1</name>
+    <value>platform30:41470</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.https-address.zgycluster.nn2</name>
+    <value>platform31:41470</value>
+  </property>
+  
+  <property>
+    <name>dfs.datanode.address</name>
+    <value>0.0.0.0:41010</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.ipc.address</name>
+    <value>0.0.0.0:41020</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.http.address</name>
+    <value>0.0.0.0:41075</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>0.0.0.0:41090</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.shared.edits.dir</name>
+    <value>file:///home/ztest/hadoop_edit_1/nn_edit</value>
+  </property>
+
+  <property>
+    <name>dfs.client.failover.proxy.provider.zgycluster</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.fencing.methods</name>
+    <value>sshfence(ztest:9922)</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.fencing.ssh.private-key-files</name>
+    <value>/home/ztest/.ssh/id_rsa</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.automatic-failover.enabled</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/ztest/hadoop_name</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home1/ztest/hadoop_data</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.safemode.threshold-pct</name>
+    <value>1.0f</value>
+  </property>
+  
+  <property>
+    <name>dfs.umaskmode</name>
+    <value>077</value>
+  </property>
+  
+  <property>
+    <name>dfs.block.size</name>
+    <value>134217728</value>
+  </property>
+  
+  <property>
+    <name>dfs.block.access.token.enable</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir.perm</name>
+    <value>700</value>
+  </property>
+
+  <property>
+    <name>dfs.cluster.administrators</name>
+    <value>ztest</value>
+  </property>
+
+  <property>
+    <name>dfs.permissions.superusergroup</name>
+    <value>ztest</value>
+  </property>
+
+  <property>
+    <name>dfs.hosts</name>
+    <value>/home/ztest/hadoop/etc/hadoop/dfs.include</value>
+  </property>
+
+  <property>
+    <name>dfs.hosts.exclude</name>
+    <value>/home/ztest/hadoop/etc/hadoop/dfs.exclude</value>
+  </property>
+  
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.support.append</name>
+    <value>true</value>
+  </property>
+  
+  <property>
+    <name>dfs.datanode.max.xcievers</name>
+    <value>4096</value>
+  </property>
+
+  <property>
+    <name>dfs.balance.bandwidthPerSec</name>
+    <value>20000000</value>
+  </property>
+
+</configuration>
