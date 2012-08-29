@@ -122,7 +122,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   {
     [ ! -e $2 ] && return 1
     dir=`cd $2/..;pwd`
-    rsync_to $1 $dir 
+    rsync_to $1 $2 $dir 
   }
 
   # $0 hosts source target 
