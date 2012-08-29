@@ -1,33 +1,37 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 BAPF="$HOME/.bash_profile"
 ZKPF="$HOME/.zookeeper_profile"
 
-if [ ! -e $BAPF ]; then
-  touch $BAPF;
-fi
+ZKFLAG="# zookeeper profile - uc.cn"
 
-if ! grep -q "zookeeper profile" $BAPF; then 
-  echo "" >> $BAPF;
-  echo "#" >> $BAPF;
-  echo "# zookeeper profile" >> $BAPF;
-  echo "#" >> $BAPF;
-  echo "if [ -f $ZKPF ]; then" >> $BAPF;
-  echo "  . $ZKPF" >> $BAPF;
-  echo "fi" >> $BAPF;
-  echo "#END#" >> $BAPF;
-fi
+profile()
+{
+  if ! grep -q "$ZKFLAG" $BAPF; then 
+    echo "$ZKFLAG" >> $BAPF;
+    echo "if [ -f $ZKPF ]; then" >> $BAPF;
+    echo "  . $ZKPF;" >> $BAPF;
+    echo "fi" >> $BAPF;
+    echo "#END#" >> $BAPF;
+  fi
 
-echo "# HBase profile
+  echo "$ZKFLAG
 
-export ZK_HOME=\$HOME/zookeeper
-export ZK_BIN=\$ZK_HOME/bin
-export ZK_CONF_DIR=\$ZK_HOME/conf
+  export ZK_HOME=\$HOME/zookeeper
+  export ZK_BIN=\$ZK_HOME/bin
+  export ZK_CONF_DIR=\$ZK_HOME/conf
 
-export PATH=\$ZK_BIN:\$PATH
+  export PATH=\$ZK_BIN:\$PATH
 
-alias \"ccz=cd \$ZK_HOME\"
+  alias \"cczk=cd \$ZK_HOME\"
 
-" > $ZKPF
+  " > $ZKPF
 
-. $BAPF
+  . $BAPF
+}
+
+unprofile()
+{
+  rm -f $ZKPF
+  cp $BAPF "$BAPF.$NOW8_6"
+  sed -i "/$ZKFLAG/,/#END#/d $BAPF
+}

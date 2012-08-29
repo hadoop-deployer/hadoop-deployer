@@ -7,7 +7,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 
   [ "$OLDDIR" == "" ] && OLDDIR=`pwd` ||:;
   [ "$DIR" == "" ] && DIR=`cd $(dirname $0);pwd` ||:;
-  
+
   if [ `uname -m | sed -e 's/i.86/32/'` == '32' ]; then
     alias IS_32='true';
   else
@@ -34,7 +34,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
-  file_die() { [ ! -e "$1" ] && die "file $1 is not exists" ||:; }
+  file_die() { [ -e "$1" ] && { cd $OLD_DIR; die "file $1 is already exists"; } }
+  notfile_die() { [ ! -e "$1" ] && { cd $OLD_DIR; die "file $1 is not exists"; } }
  
   # $0 var_name 
   var_def() { [ "X$1" == "X" ] && true || false; } 
@@ -51,6 +52,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 
   # load all config
   [ -f $D/config_deployer.sh ] && . $D/config_deployer.sh
+  [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
+  [ -f $D/config_zookeeper.sh ] && . $D/config_zookeeper.sh
 
   # $0 url.list.file
   download()
@@ -135,6 +138,12 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   }
 
   [ -z "$SSH_PORT" ] || { alias ssh="ssh -p $SSH_PORT"; alias scp="scp -P $SSH_PORT"; }
+
+  # $0 xmlfile name value
+  xml_set()
+  {
+    sed -r "/<name>$2<\/name>/{ n; s/<value>.*<\/value>/<value>$3<\/value>/; }" -i $1;
+  }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

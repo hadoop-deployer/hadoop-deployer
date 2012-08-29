@@ -10,3 +10,6 @@ platform32
 platform33
 platform34
 "
+
+# 其它应用的众多服务端口前缀
+PORT_PREFIX=50
