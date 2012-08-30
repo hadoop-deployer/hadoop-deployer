@@ -34,8 +34,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
   var() { eval echo \$"$1"; }
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
-  file_die() { [ -e "$1" ] && { cd $OLD_DIR; die "file $1 is already exists"; } }
-  notfile_die() { [ ! -e "$1" ] && { cd $OLD_DIR; die "file $1 is not exists"; } }
+  file_die() { if [ -e "$1" ]; then cd $OLD_DIR; msg=${2:-"file $1 is already exists"}; die $msg; fi }
+  notfile_die() { if [ ! -e "$1" ]; then cd $OLD_DIR; msg=${2:-"file $1 is not exists"}; die $msg; fi }
  
   # $0 var_name 
   var_def() { [ "X$1" == "X" ] && true || false; } 
