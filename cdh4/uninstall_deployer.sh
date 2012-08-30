@@ -3,25 +3,19 @@
 DIR=`cd $(dirname $0);pwd`
 . $DIR/support/PUB.sh
 
-# $0
-config()
-{
-  . config_deployer.sh
-}
-
 # $0 host
 undeploy()
 {
   ssh $USER@$1 "
-  cd $D;
-  . support/PUB.sh;
-  . support/profile_deployer.sh;
-  unprofile;
-  if [ \"$ME\" != \"\`hostname\`\" ]; then
-    cd ..;
-    rm -rf $D;
-    #touch "rm.txt";
-  fi;
+    cd $D;
+    . support/PUB.sh;
+    if [ \"$ME\" != \"\`hostname\`\" ]; then
+      cd ..;
+      rm -rf $D;
+      #touch "rm.txt";
+    fi;
+    . support/profile_deployer.sh;
+    unprofile;
   "
 }
 
@@ -30,8 +24,6 @@ main()
   cd $DIR
 
   show_head;
-
-  config;
 
   for s in $NODES; do
     same_to $s $DIR
