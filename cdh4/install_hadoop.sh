@@ -8,7 +8,50 @@ deploy()
 {
   echo ">> deploy $1";
   # 1. 解压安装
-  ssh "$USER@$1" sh $DIR/support/deploy_hadoop.sh
+  ssh "$USER@$1" " 
+    cd $D;
+    . support/PUB.sh;
+    . support/deploy_hadoop_env.sh;
+    
+    echo \">> deploy java\";
+    var_die JAVA_TAR;
+    mkdir -p $HOME/java;
+    tar -xzf tars/\$JAVA_TAR -C $HOME/java;
+    JAVA_VERSION=\`find $HOME/java -maxdepth 1 -name \"jdk*\"|sed \"s:.*/::;1q\"\`
+    ln -sf \$JAVA_VERSION $HOME/java/jdk;
+
+    if [ \"\$ANT_TAR\" != \"\" ]; then
+      tar -xzf tars/\$ANT_TAR -C $HOME/java
+      ANT_VERSION=\`find $HOME/java -maxdepth 1 -name \"apache-ant*\"|sed \"s:.*/::;1q\"\`
+      ln -sf \$ANT_VERSION $HOME/java/ant;
+    fi
+
+    if [ \"\$MAVEN_TAR\" != \"\" ]; then
+      tar -xzf tars/\$MAVEN_TAR -C $HOME/java ||:;
+      MAVEN_VERSION=\`find $HOME/java -maxdepth 1 -name \"apache-maven*\"|sed \"s:.*/::;1q\"\`
+      ln -sf \$MAVEN_VERSION $HOME/java/maven;
+    fi
+  
+    echo \">> deploy hadoop\"
+    var_die HADOOP_TAR
+    tar -xzf tars/\$HADOOP_TAR -C $HOME
+    ln -sf ./\$HADOOP_VERSION $HOME/hadoop
+
+    if [ \"\$HADOOP_LZO_TAR\" != \"\" ]; then
+      tar -xzf tars/\$HADOOP_LZO_TAR -C $HOME/hadoop;
+    fi
+
+    if [ \"\$LZO_TAR\" != \"\" ]; then
+      mkdir -p $HOME/pkg;
+      tar -xzf tars/\$LZO_TAR -C $HOME/pkg; 
+    fi
+
+    if [ \"\$FUSE_DFS_TAR\" != \"\" ]; then
+      mkdir -p $HOME/pkg;
+      tar -xzf tars/\$FUSE_DFS_TAR -C \$HOME/pkg;
+    fi
+  "
+
   # 2. profile文件
   ssh $USER@$1 "
     cd $D;

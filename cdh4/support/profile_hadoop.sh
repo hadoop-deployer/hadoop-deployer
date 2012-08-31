@@ -50,5 +50,5 @@ unprofile()
 {
   rm -f $HDPF
   cp $BAPF "$BAPF.$NOW8_6"
-  sed -i "/$HDFLAG/,/#END#/d $BAPF
+  sed -i "/$HDFLAG/,/#END#/d" $BAPF
 }

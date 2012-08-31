@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # -- utf-8 --
 DIR=$(cd $(dirname $0); pwd)
-. $DIR/support/PUB.sh
+# DIR是support目录
+. $DIR/PUB.sh
+. $DIR/deploy_hadoop_env.sh
 
 conf_hadoop()
 {
@@ -11,13 +13,15 @@ conf_hadoop()
   CORE="$HADOOP_CONF_DIR/core-site.xml"
   HDFS="$HADOOP_CONF_DIR/hdfs-site.xml"
 
-  cp -f support/hadoop_conf/* $HADOOP_CONF_DIR;
-  
-  sed -r "/^# The java implementation to use\./i\\shopt -s expand_aliases" -i $ENVSH;
+  cp -f hadoop_conf/* $HADOOP_CONF_DIR;
+ 
+  #是别名在脚本中可用
+  #sed -r "/# The java implementation to use./i\\shopt -s expand_aliases;" -i $ENVSH;
 
   # core-site.xml
   xml_set $CORE hadoop.tmp.dir $HADOOP_TMP_DIR
-  #ha zk sed -r "/<name>hadoop.tmp.dir<\/name>/{ n; s/<value>.*<\/value>/<value>$HADOOP_TMP_DIR<\/value>/; }" -i $CORE;
+  quorum=`echo $ZK_NODES|sed "s/ /,/g"` #注意，前面的$ZK..变量不可以加引号"
+  xml_set $CORE ha.zookeeper.quorum $quorum
 
   # hdfs-site.xml
   i=1
@@ -47,12 +51,10 @@ conf_hadoop()
   xml_set $HDFS dfs.balance.bandwidthPerSec $DFS_BALANCE_BANDWIDTHpERsEC
 
   # masters & slaves
+  :>$HADOOP_CONF_DIR/slaves
   for dn in $DATA_NODES; do
     echo $dn >> $HADOOP_CONF_DIR/slaves;
   done;
-
-  echo ">> rsync hadoop configuration";
-  #rsync_all "$HADOOP_CONF_DIR" $HADOOP_HOME/;
 }
 
 main() 

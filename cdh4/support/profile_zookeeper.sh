@@ -33,5 +33,5 @@ unprofile()
 {
   rm -f $ZKPF
   cp $BAPF "$BAPF.$NOW8_6"
-  sed -i "/$ZKFLAG/,/#END#/d $BAPF
+  sed -i "/$ZKFLAG/,/#END#/d" $BAPF
 }

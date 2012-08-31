@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 # -- utf-8 --
 DIR=$(cd $(dirname $0); pwd)
-. $DIR/PUB.sh
+. $DIR/support/PUB.sh
 
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
-check_tools()
-{
-}
 
 # $0 host
 deploy()
@@ -15,10 +12,10 @@ deploy()
   # 1. 分发安装
   ssh "$USER@$1" "
     cd $D;
-    . support/PUB.sh
-    . support/deploy_zookeeper_env.sh
-    tar -xzf tars/$ZK_TAR -C $HOME;
-    ln -sf ./$ZK_VERSION $ZK_HOME;
+    . support/PUB.sh;
+    . support/deploy_zookeeper_env.sh;
+    tar -xzf tars/\$ZK_TAR -C $HOME;
+    ln -sf ./\$ZK_VERSION $HOME/zookeeper;
   "
   # 2. profile文件
   ssh $USER@$1 "
@@ -38,9 +35,7 @@ main()
   show_head;
   
   file_die logs/install_zookeeper_ok "zookeeper is installed"
-  notfile_die logs/install_deployer_ok
-  
-  check_tools;
+  notfile_die logs/install_deployer_ok "deployer is not installed"
 
   . ./config_zookeeper.sh
 
@@ -55,7 +50,7 @@ main()
 
   . $HOME/.bash_profile
 
-  touch logs/zookeeper_ok
+  touch logs/install_zookeeper_ok
   echo ">> OK"
   cd $OLD_DIR
 }

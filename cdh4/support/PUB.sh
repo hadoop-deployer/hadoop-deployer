@@ -14,8 +14,12 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     alias IS_32='false'
   fi
 
+  already_show_head="false";
   show_head()
   {
+    if [ "$already_show_head" == "true"]; then
+      return 0;
+    fi
     echo "========================================================================================="
     echo ""
     echo "@   @  @@@  @@@@   @@@   @@@  @@@@        @@@@  @@@@@ @@@@  @      @@@  @   @ @@@@@ @@@@"
@@ -29,6 +33,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     echo "V0.6 by uc.cn 2012-08"
     echo ""
     echo "========================================================================================="
+    already_show_head="true"
   }
 
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
@@ -52,8 +57,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 
   # load all config
   [ -f $D/config_deployer.sh ] && . $D/config_deployer.sh
-  [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
   [ -f $D/config_zookeeper.sh ] && . $D/config_zookeeper.sh
+  [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
 
   # $0 url.list.file
   download()
@@ -82,26 +87,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
 
 #  [ -f $D/install_env.sh ] && . $D/install_env.sh 
   
-#  nodes()
-#  {
-#    if [ -z "$DN" ]; then
-#      return true; #return true for not stop
-#    fi
-#    if [ -z "$NODE_HOSTS" ]; then
-#      local TMP_F="tmp_uniq_nodes.txt.tmp";
-#      :>$TMP_F
-#      for s in $DN; do
-#        echo $s >> $TMP_F;
-#      done
-#      echo $NN >> $TMP_F; 
-#      [ "$SNN" != "" ] && echo $SNN >> $TMP_F
-#      export NODE_HOSTS=`sort $TMP_F | uniq`
-#      rm -f $TMP_F
-#    fi
-#  }
-#  nodes;
 
-  # $0 source target 
+# $0 source target 
 #  rsync_all()
 #  {
 #    #for s in $NODE_HOSTS; do
@@ -142,7 +129,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 xmlfile name value
   xml_set()
   {
-    sed -r "/<name>$2<\/name>/{ n; s/<value>.*<\/value>/<value>$3<\/value>/; }" -i $1;
+    sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1;
   }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"

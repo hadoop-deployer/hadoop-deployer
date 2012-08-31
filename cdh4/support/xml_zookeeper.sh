@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # -- utf-8 --
 DIR=$(cd $(dirname $0); pwd)
-. $DIR/support/PUB.sh
+# DIR 是support目录
+. $DIR/PUB.sh
 
 config()
 {
@@ -21,12 +22,13 @@ config()
 
   local i=0;
   for s in $ZK_NODES; do
-    echo "server.${i}=$node:${ZK_PORT_PREFIX}288:${ZK_PORT_PREFIX}388" >> $ZOO_CFG;
-    if [ $ME == $S ]; then
-      echo $i > $HOME/zookeeper/data/myid
+    echo "server.${i}=$s:${ZK_PORT_PREFIX}288:${ZK_PORT_PREFIX}388" >> $ZOO_CFG;
+    if [ "$ME" == "$s" ]; then
+      echo "$i" > $HOME/zookeeper/data/myid
     fi
-    let i++;
+    i=$[i+1];
   done
+  echo ">> config zookeeper ok"
 }
 
 main() 

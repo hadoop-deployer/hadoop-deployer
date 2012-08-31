@@ -29,7 +29,7 @@ JT=""
 #------------------------------------------------------------------------------
 # 计算实际的Hadoop节点，排除重复
 if [ -z "$HADOOP_NODES" ]; then
-  local TMP_F="tmp_uniq_nodes.txt.tmp";
+  TMP_F="tmp_uniq_nodes.txt.tmp";
   :>$TMP_F
   for s in $DATA_NODES; do
     echo $s >> $TMP_F;
@@ -39,6 +39,7 @@ if [ -z "$HADOOP_NODES" ]; then
   done
   export HADOOP_NODES=`sort $TMP_F | uniq`
   rm -f $TMP_F
+  unset TMP_F
 fi
 #------------------------------------------------------------------------------
 

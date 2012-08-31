@@ -16,7 +16,6 @@ HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
 
 # core-site
 HADOOP_TMP_DIR="$HOME/hadoop_data"
-FS_DEFAULT_NAME="hdfs://$NN:${HADOOP_PORT_PREFIX}900"
 
 # hdfs-site
 #DFS_DATANODE_HANDLER_COUNT="3"
