@@ -22,5 +22,18 @@ platform34
 if [ -z "$MASTER_NODES" ]; then
   MASTER_NODES="$MASTER_NODE $BACKUP_NODES"
 fi
+if [ -z "$HBASE_NODES" ]; then
+  TMP_F="tmp_uniq_nodes.txt.tmp";
+  :>$TMP_F
+  for s in $RS_NODES; do
+    echo $s >> $TMP_F;
+  done
+  for s in $MASTER_NODES; do
+    echo $s >> $TMP_F;
+  done
+  export HBASE_NODES=`sort $TMP_F | uniq`
+  rm -f $TMP_F
+  unset TMP_F
+fi
 #------------------------------------------------------------------------------
 
