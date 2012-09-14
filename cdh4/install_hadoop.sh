@@ -71,10 +71,7 @@ show_head;
 
 file_die logs/install_hadoop_ok "hadoop is installed"
 notfile_die logs/install_deployer_ok "deployer is not installed"
-if [ ! -e logs/install_zookeeper_ok ]; then 
-  #先安装zk
-  bash install_zookeeper.sh; 
-fi
+notfile_die logs/install_zookeeper_ok "need pre install zookeeper!"
 
 . ./config_hadoop.sh
 

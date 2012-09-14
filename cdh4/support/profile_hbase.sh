@@ -3,30 +3,32 @@
 BAPF="$HOME/.bash_profile"
 HBPF="$HOME/.hbase_profile"
 
-if [ ! -e $BAPF ]; then
-  touch $BAPF;
-fi
+HBFLAG="# hbase profile - uc.cn"
 
-if ! grep -q "hbase profile" $BAPF; then 
-  echo "" >> $BAPF;
-  echo "#" >> $BAPF;
-  echo "# hbase profile" >> $BAPF;
-  echo "#" >> $BAPF;
-  echo "if [ -f $HBPF ]; then" >> $BAPF;
-  echo "    . $HBPF" >> $BAPF;
-  echo "fi" >> $BAPF;
-  echo "#END#" >> $BAPF;
-fi
+profile()
+{
+  if ! grep -q "#HBFLAG" $BAPF; then 
+    echo "$HBFLAG" >> $BAPF;
+    echo "if [ -f $HBPF ]; then" >> $BAPF;
+    echo "  . $HBPF;" >> $BAPF;
+    echo "fi" >> $BAPF;
+    echo "#END#" >> $BAPF;
+  fi
 
-echo "# HBase profile
+  echo "$HBFLAG
 
-export HBASE_HOME=\$HOME/hbase
-export HBASE_BIN=\$HBASE_HOME/bin
-export HBASE_CONF_DIR=\$HBASE_HOME/conf
+  export HBASE_HOME=\$HOME/hbase
+  export HBASE_BIN=\$HBASE_HOME/bin
+  export HBASE_CONF_DIR=\$HBASE_HOME/conf
 
-export PATH=\$HBASE_BIN:\$PATH
+  export PATH=\$HBASE_BIN:\$PATH
 
-" > $HBPF
+  " > $HBPF
+}
 
-#. $BAPF
-. $HBPF
+unprofile()
+{
+  rm -f $HBPF
+  cp $BAPF "$BAPF.$NOW8_6"
+  sed -i "/$HBFLAG/,/#END#/d" $BAPF
+}

@@ -17,7 +17,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   already_show_head="false";
   show_head()
   {
-    if [ "$already_show_head" == "true"]; then
+    if [ "$already_show_head" == "true" ]; then
       return 0;
     fi
     echo "========================================================================================="
@@ -46,7 +46,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   var_def() { [ "X$1" == "X" ] && true || false; } 
 
   if [ "$DEPLOYER_HOME" == "" ]; then
-    file_die support/anchor.sh
+    #file_die support/anchor.sh
     DEPLOYER_HOME=$DIR
     #DEPLOYER_HOME=`sh anchor.sh`;
   fi
@@ -59,6 +59,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   [ -f $D/config_deployer.sh ] && . $D/config_deployer.sh
   [ -f $D/config_zookeeper.sh ] && . $D/config_zookeeper.sh
   [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
+  [ -f $D/config_hbase.sh ] && . $D/config_hbase.sh
 
   # $0 url.list.file
   download()

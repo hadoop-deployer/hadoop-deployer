@@ -35,23 +35,23 @@ deploy()
     REGIONSERVERS=\"\$HBASE_CONF_DIR/regionservers\";
     BACKUP_MASTERS=\"\$HBASE_CONF_DIR/backup-masters\";
 
-    set_xml \$HBASE hbase.zookeeper.quorum \$HBASE_ZOOKEEPER_QUORUM
+    xml_set \$HBASE hbase.zookeeper.quorum \$HBASE_ZOOKEEPER_QUORUM
 
-    set_xml \$HBASE hbase.tmp.dir \$HOME/hbase_temp
-    set_xml \$HBASE hbase.master.port \$HBASE_MASTER_PORT
-    set_xml \$HBASE hbase.master.info.port \$HBASE_MASTER_INFO_PORT
-    set_xml \$HBASE hbase.regionserver.port \$HBASE_RS_PORT
-    set_xml \$HBASE hbase.regionserver.info.port \$HBASE_RS_INFO_PORT
-    set_xml \$HBASE hbase.hregion.memstore.flush.size \$HBASE_HREGION_M_F_SIZE
-    set_xml \$HBASE hbase.hregion.max.filesize \$HBASE_HREGION_M_FILESIZE
-    set_xml \$HBASE hbase.hstore.blockingWaitTime \$HBASE_HSTORE.BLOCKINGWAITTIME
-    set_xml \$HBASE zookeeper.znode.parent /hbase
+    xml_set \$HBASE hbase.tmp.dir \$HOME/hbase_temp
+    xml_set \$HBASE hbase.master.port \$HBASE_MASTER_PORT
+    xml_set \$HBASE hbase.master.info.port \$HBASE_MASTER_INFO_PORT
+    xml_set \$HBASE hbase.regionserver.port \$HBASE_RS_PORT
+    xml_set \$HBASE hbase.regionserver.info.port \$HBASE_RS_INFO_PORT
+    xml_set \$HBASE hbase.hregion.memstore.flush.size \$HBASE_HREGION_M_F_SIZE
+    xml_set \$HBASE hbase.hregion.max.filesize \$HBASE_HREGION_M_FILESIZE
+    xml_set \$HBASE hbase.hstore.blockingWaitTime \$HBASE_HSTORE.BLOCKINGWAITTIME
+    xml_set \$HBASE zookeeper.znode.parent /hbase
     quorum=\`echo \$ZK_NODES|sed \"s/ /,/g\"\`;
-    set_xml \$HBASE hbase.zookeeper.quorum \"\$quorum\"
-    set_xml \$HBASE hbase.zookeeper.peerport \${ZK_PORT_PREFIX}288
-    set_xml \$HBASE hbase.zookeeper.leaderport \${ZK_PORT_PREFIX}388
-    set_xml \$HBASE hbase.zookeeper.property.clientPort \${ZK_PORT_PREFIX}181
-    set_xml \$HBASE hbase.rest.port \$HBASE_REST_PORT
+    xml_set \$HBASE hbase.zookeeper.quorum \"\$quorum\"
+    xml_set \$HBASE hbase.zookeeper.peerport \${ZK_PORT_PREFIX}288
+    xml_set \$HBASE hbase.zookeeper.leaderport \${ZK_PORT_PREFIX}388
+    xml_set \$HBASE hbase.zookeeper.property.clientPort \${ZK_PORT_PREFIX}181
+    xml_set \$HBASE hbase.rest.port \$HBASE_REST_PORT
 
     echo \"\$RS_NODES\" > \$REGIONSERVERS;
     echo \${BACKUP_NODES} > \$BACKUP_MASTERS;
@@ -71,7 +71,7 @@ notfile_die logs/install_hadoop_ok "must install hadoop first"
 
 download
 
-for s in $HBASE_HOSTS; do
+for s in $HBASE_NODES; do
   same_to $s $DIR
   [ -f "logs/install_hbase_ok_${s}" ] && continue 
   deploy $s; 

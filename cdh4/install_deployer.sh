@@ -39,42 +39,37 @@ deploy()
   "
 }
 
-main() 
-{
-  cd $DIR
-  
-  show_head;
-
-  [ -e logs ] || mkdir logs
-  [ -e tars ] || mkdir tars
-
-  [ -f logs/install_deployer_ok ] && { cd $OLD_DIR; die "deployer is installed"; }
-
-  check_tools;
-  config;
-  chmod_for_run;
-  
-  if [ ! -e logs/autossh_ok ]; then
-    ./bin/autossh setup
-    touch ./logs/autossh_ok;
-  fi
-  
-  for s in $NODES; do
-    same_to $s $DIR
-    [ -f "logs/install_deployer_ok_${s}" ] && continue 
-    deploy $s; 
-    touch "logs/install_deployer_ok_${s}"
-  done
-
-  #安装后加载环境
-  . $HOME/.bash_profile
-
-  touch logs/install_deployer_ok
-
-  echo ">> OK"
-  cd $OLD_DIR
-}
-
 #==========
-main $*;
+cd $DIR
+
+show_head;
+
+[ -e logs ] || mkdir logs
+[ -e tars ] || mkdir tars
+
+[ -f logs/install_deployer_ok ] && { cd $OLD_DIR; die "deployer is installed"; }
+
+check_tools;
+config;
+chmod_for_run;
+
+if [ ! -e logs/autossh_ok ]; then
+  ./bin/autossh setup
+  touch ./logs/autossh_ok;
+fi
+
+for s in $NODES; do
+  same_to $s $DIR
+  [ -f "logs/install_deployer_ok_${s}" ] && continue 
+  deploy $s; 
+  touch "logs/install_deployer_ok_${s}"
+done
+
+#安装后加载环境
+. $HOME/.bash_profile
+
+touch logs/install_deployer_ok
+
+echo ">> OK"
+cd $OLD_DIR
 

@@ -7,7 +7,11 @@ fi
 . $DEPLOYER_HOME/support/PUB.sh
 
 # Tar包
-JAVA_TAR="jdk-7u3-linux-x64.tar.gz"
+if [ IS_32 ];then
+  JAVA_TAR="jdk-7u3-linux-i586.tar.gz"
+else
+  JAVA_TAR="jdk-7u3-linux-x64.tar.gz"
+fi
 
 HADOOP_TAR="hadoop-2.0.0-cdh4.0.0.tar.gz"
 HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
