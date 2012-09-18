@@ -5,7 +5,8 @@ if [ "$DEPLOYER_HOME" != "" ]; then
 else
   # hasn't install deployer 
   DIR=`cd $(dirname $0);pwd`
-  . $DIR/../support/PUB.sh
+  DIR=`cd $DIR/..;pwd`
+  . $DIR/support/PUB.sh
 fi
 
 save_keys()
