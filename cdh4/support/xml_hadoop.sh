@@ -20,7 +20,15 @@ conf_hadoop()
 
   # core-site.xml
   xml_set $CORE hadoop.tmp.dir $HADOOP_TMP_DIR
-  quorum=`echo $ZK_NODES|sed "s/ /,/g"` #注意，前面的$ZK..变量不可以加引号"
+  quorum=""
+  for s in $ZK_NODES; do
+    if [ $quorum == "" ]; then
+      quorum="$s:${ZK_PORT_PREFIX}181"
+    else
+      quorum="$quorum,$s:${ZK_PORT_PREFIX}181"
+    fi
+  done
+  #quorum=`echo $ZK_NODES|sed "s/ /,/g"` #注意，前面的$ZK..变量不可以加引号"
   xml_set $CORE ha.zookeeper.quorum $quorum
 
   # hdfs-site.xml
@@ -36,7 +44,7 @@ conf_hadoop()
   xml_set $HDFS dfs.datanode.http.address "0.0.0.0:${HADOOP_PORT_PREFIX}075"
   xml_set $HDFS dfs.namenode.secondary.http-address "0.0.0.0:${HADOOP_PORT_PREFIX}090"
 
-  xml_set $HDFS dfs.namenode.shared.edits.dir "file://$HOME/hadoop_edit/nn_edit"
+  xml_set $HDFS dfs.namenode.shared.edits.dir "file://$HOME/hadoop_ha_edit/nn_edit"
   xml_set $HDFS dfs.ha.fencing.methods "sshfence($USER:$SSH_PORT)"
   xml_set $HDFS dfs.ha.fencing.ssh.private-key-files $HOME/.ssh/id_rsa
   xml_set $HDFS dfs.namenode.name.dir file://$HOME/hadoop_name
@@ -55,6 +63,9 @@ conf_hadoop()
   for dn in $DATA_NODES; do
     echo $dn >> $HADOOP_CONF_DIR/slaves;
   done;
+
+  mkdir $HOME/hadoop_name
+  mkdir $HOME/hadoop_ha_edit
 }
 
 main() 

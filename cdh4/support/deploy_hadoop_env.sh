@@ -7,14 +7,17 @@ fi
 . $DEPLOYER_HOME/support/PUB.sh
 
 # Tar包
-if [ IS_32 ];then
-  JAVA_TAR="jdk-7u3-linux-i586.tar.gz"
+if IS_32 ; then
+  #JAVA_TAR="jdk-7u3-linux-i586.tar.gz"
+  JAVA_TAR=`find_tar "jdk-.*-linux-i586"`
 else
-  JAVA_TAR="jdk-7u3-linux-x64.tar.gz"
+  #JAVA_TAR="jdk-7u3-linux-x64.tar.gz"
+  JAVA_TAR=`find_tar "jdk-.*-linux-x64"`
 fi
 
-HADOOP_TAR="hadoop-2.0.0-cdh4.0.0.tar.gz"
-HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
+#HADOOP_TAR="hadoop-2.0.0-cdh4.0.0.tar.gz"
+HADOOP_TAR=`find_tar "hadoop-2\\..*-cdh4\\..*"`
+#HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
 
 # 配置
 

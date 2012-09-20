@@ -132,6 +132,12 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   {
     sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1;
   }
+  
+  find_tar()
+  {
+    #find $D/tars -regex ".*/$1-.*(\.tar)\.gz" -printf "%f\n" 
+    find $D/tars -regex ".*/$1(\.tar)?\.gz" -printf "%f\n" 
+  }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

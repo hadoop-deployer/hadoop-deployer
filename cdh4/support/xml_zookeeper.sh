@@ -28,6 +28,8 @@ config()
     fi
     i=$[i+1];
   done
+  #复制小工具脚本
+  cp $DEPLOYER_HOME/support/zookeeper_conf/zk-*-all.sh $HOME/zookeeper/bin/
   echo ">> config zookeeper ok"
 }
 

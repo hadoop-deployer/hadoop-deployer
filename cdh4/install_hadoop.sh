@@ -35,6 +35,7 @@ deploy()
     echo \">> deploy hadoop\";
     var_die HADOOP_TAR;
     tar -xzf tars/\$HADOOP_TAR -C $HOME;
+    HADOOP_VERSION=\${HADOOP_TAR%.tar.gz};
     ln -sf ./\$HADOOP_VERSION $HOME/hadoop;
 
     if [ \"\$HADOOP_LZO_TAR\" != \"\" ]; then

@@ -36,7 +36,7 @@ profile()
   #export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$ANT_HOME/bin:\$MAVEN_HOME/bin:\$PATH
   export PATH=\$JAVA_HOME/bin:\$PATH
   #export PATH=\$PKG_PATH/lzop/bin:\$PKG_PATH/fuse-dfs:\$PATH
-  export PATH=.:\$HADOOP_BIN:\$PATH
+  export PATH=.:\$HADOOP_BIN:\$HADOOP_SBIN:\$PATH
 
   alias ccd='cd \$HADOOP_HOME'
   alias ccb='cd \$HADOOP_BIN'

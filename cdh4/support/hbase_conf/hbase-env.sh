@@ -1,4 +1,5 @@
-shopt -s expand_aliases
+shopt -s expand_aliases;
+. $HOME/.bash_profile;
 export JAVA_HOME=$HOME/java/jdk
 # export HBASE_CLASSPATH=
 
