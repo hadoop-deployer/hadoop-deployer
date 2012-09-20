@@ -44,7 +44,7 @@ deploy()
     xml_set \$HBASE hbase.regionserver.info.port \$HBASE_RS_INFO_PORT
     xml_set \$HBASE hbase.hregion.memstore.flush.size \$HBASE_HREGION_M_F_SIZE
     xml_set \$HBASE hbase.hregion.max.filesize \$HBASE_HREGION_M_FILESIZE
-    xml_set \$HBASE hbase.hstore.blockingWaitTime \$HBASE_HSTORE.BLOCKINGWAITTIME
+    xml_set \$HBASE hbase.hstore.blockingWaitTime \$HBASE_HSTORE_BLOCKINGWAITTIME
     xml_set \$HBASE zookeeper.znode.parent /hbase
     quorum=\`echo \$ZK_NODES|sed \"s/ /,/g\"\`;
     xml_set \$HBASE hbase.zookeeper.quorum \"\$quorum\"
