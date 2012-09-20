@@ -10,7 +10,7 @@ if [ $# -ne 1 ]; then
 fi
 
 MYHOST=`hostname`
-for i in $NODE_HOSTS; do
+for i in $NODES; do
   [ "$MYHOST" == "$i" ] && continue
   myscp $1 $i;
 done
