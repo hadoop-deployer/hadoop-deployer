@@ -14,14 +14,15 @@ undeploy()
 
     echo \">> delete java\";
     rm -rf $HOME/java;
+    
+    echo \">> delete $HOME/hadoop\";
+    rm -rf $HOME/hadoop;
 
     if [ \"\$HADOOP_VERSION\" != \"\" ]; then
       echo \">> delete \$HADOOP_VERSION\";
       rm -rf $HOME/\$HADOOP_VERSION;
     fi;
 
-    echo \">> delete $HOME/hadoop\";
-    rm -rf $HOME/hadoop;
 
     if [ \"\$PKG_PATH\" != \"\" ]; then
       echo \">> delete \$PKG_PATH\"

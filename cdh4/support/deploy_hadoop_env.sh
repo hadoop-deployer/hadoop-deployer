@@ -17,7 +17,7 @@ fi
 
 #HADOOP_TAR="hadoop-2.0.0-cdh4.0.0.tar.gz"
 HADOOP_TAR=`find_tar "hadoop-2\\..*-cdh4\\..*"`
-#HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
+HADOOP_VERSION=${HADOOP_TAR%.tar.gz}
 
 # 配置
 

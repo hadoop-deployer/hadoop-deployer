@@ -6,7 +6,7 @@ HBASE_PORT_PREFIX=$PORT_PREFIX
 # Active NN和Standby NN，最少一个，最多两个
 # 这里及以下设定的所有host值，都必须是在config_deployer中指定的
 MASTER_NODE="platform30"
-BACKUP_NODES="platfrom31 platfrom32"
+BACKUP_NODES="platform31 platform32"
 
 # 作为Region Server节点的机器
 RS_NODES="
