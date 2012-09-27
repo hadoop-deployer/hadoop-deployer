@@ -1,5 +1,0 @@
-#!/bin/bash
-
-mysql -u $1 --password=$2 -h $3 <<END
-CREATE DATABASE IF NOT EXISTS $4;
-END
