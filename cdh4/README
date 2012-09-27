@@ -23,12 +23,25 @@ Hadoop,HBase,Zookeeper
 
 安装完成后：
 1，对于Zookeeper，可以直接启动使用
-  注意：启动zookeeper可能需要你登陆每个zoookeeper机器启动它，它没有start-all之类的脚本。
+  注意：启动zookeeper可能需要你登陆每个zoookeeper机器启动
+    它，它没有start-all之类的脚本。
   注意：你不需要运行它的初始化initial.sh脚本。
 2，对于Hadoop，需要
-  2.1，配置NFS，在两个NN所在机器之间配置，这是Hadoop的HA。或者，你只启动一个NN也可以运行。
+  2.1，配置NFS，在两个NN所在机器之间配置，这是Hadoop的HA。
+    或者，你只启动一个NN也可以运行。
   2.2，格式化
   然后你就可以启动了。
-  注意：你很可能需要根据自己的机器情况配置，一些默认配置只是通用项
+  注意：你很可能需要根据自己的机器情况配置，一些默认配
+    置只是通用项
 3，对于HBase，必须先要启动Zookeeper和Hadoop
 
+特别重要，关于Hadoop等安装软件的下载：
+本程序只是安装脚本，不提供Hadoop等安装软件，你需要自己
+把需要的软件下载下来，并放置到本安装脚本目录下的tars目
+录。
+本程序设计可以支持从网络为你下载这些软件，但需要你
+提供下载网址，把它们以列表形式写在download.list.txt
+文件中。通常这个下载比较慢，最好别依赖这个。如果你自己
+下载了Hadoop等安装软件，你可以清空download.list.txt。
+注意，全部是CDH4版本，直接到Cloudera网址下载。
+另外，你需要提供JDK，tar.gz类型的，放置到tars目录。
