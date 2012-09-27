@@ -1,5 +1,7 @@
-#!/bin/env echo "Warning: this file should be sourced"
-# zhaigy@ucweb.com
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   set -e #错误即时退出
   shopt -s expand_aliases

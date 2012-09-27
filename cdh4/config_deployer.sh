@@ -1,5 +1,8 @@
-# UTF-8
-# 用户密码，用于远程登录其它机器
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
+
 PASS=$USER #user's login password
 SSH_PORT=9922
 

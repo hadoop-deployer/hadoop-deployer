@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# -- utf-8 --
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
 DIR=$(cd $(dirname $0); pwd)
 # DIR是support目录
 . $DIR/PUB.sh

@@ -1,5 +1,8 @@
-#!/bin/env bash
-# -- utf-8 --
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
+
 DIR=`cd $(dirname $0);pwd`
 . $DIR/support/PUB.sh
     

@@ -1,22 +1,7 @@
-#!/bin/bash
-# Author: lishan@ucweb.com
-#########################################################
-# 1. Required Dependencies of Hue on Redhat:
-#    gcc
-#    libxml2-devel
-#    libxslt-devel
-#    cyrus-sasl-devel
-#    mysql-devel
-#    python-devel
-#    python-setuptools
-#    python-simplejson
-#    Note: yum installs python 2.4.3 by default, if you
-#    have already installed python 2.6 in your machine, 
-#    you are required to install "easy_install" 2.6,then
-#    run "easy_install setuptools;easy_install simplejson"
-# 2. Please check whether your hadoop cluster is running
-#    before you start your Hue.
-#########################################################
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
 
 check_tools()
 {

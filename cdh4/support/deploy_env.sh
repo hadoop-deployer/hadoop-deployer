@@ -1,5 +1,7 @@
-#!/bin/env echo "Warning: this file should be sourced"
-#cd $DIR
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
 if [ ! -z $DEPLOYER_HOME ]; then
   . $DEPLOYER_HOME/PUB.sh
 elif [ ! -z $DIR ]; then

@@ -1,0 +1,34 @@
+Hadoop cdh4 快速安装
+作者：zhaigy@ucweb.com
+日期：2012-09
+
+支持:
+Hadoop,HBase,Zookeeper
+
+安装文件分为3类：
+1. config_*****.sh
+2. install_*****.sh
+3. uninstall_*****.sh
+
+安装方法：
+1. 配置 config_*****.sh
+2. 执行 install_******.sh 完成安装和配置
+3. 如果要卸载，执行 uninstall_*****.sh
+
+安装具有依赖性:
+1. Zookeeper -> deployer
+2. Hadoop -> Zookeeper -> deployer
+3. HBase -> Hadoop -> Zookeeper -> deployer
+因此，deployer 是所有安装的依赖，必须首先安装
+
+安装完成后：
+1，对于Zookeeper，可以直接启动使用
+  注意：启动zookeeper可能需要你登陆每个zoookeeper机器启动它，它没有start-all之类的脚本。
+  注意：你不需要运行它的初始化initial.sh脚本。
+2，对于Hadoop，需要
+  2.1，配置NFS，在两个NN所在机器之间配置，这是Hadoop的HA。或者，你只启动一个NN也可以运行。
+  2.2，格式化
+  然后你就可以启动了。
+  注意：你很可能需要根据自己的机器情况配置，一些默认配置只是通用项
+3，对于HBase，必须先要启动Zookeeper和Hadoop
+

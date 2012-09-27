@@ -1,4 +1,7 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
 
 undeploy()
 {
