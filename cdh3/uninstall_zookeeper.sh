@@ -1,6 +1,7 @@
 #!/bin/env bash
 # -- utf-8 --
-
+DIR=`cd $(dirname $0);pwd`
+. $DIR/PUB.sh
 
 undeploy()
 {
@@ -31,20 +32,18 @@ undeploy()
   ssh -p $SSH_PORT $USER@$1 "sh $DIR/tmp.sh;rm -f $DIR/tmp.sh"
 }
 
-main()
-{
-  DIR=`cd $(dirname $0);pwd`
-  . $DIR/PUB.sh
-  cd $DIR
-
-  rsync_all $DIR $HOME 
-
-  for s in $ZK_NODES; do
-    undeploy $s; 
-    rm -f logs/deploy_zookeeper_${s}_ok
-  done
-  rm -f logs/zookeeper_ok
-}
-
 #==========
-main
+# main
+#==========
+cd $DIR
+
+toDIR=`cd $DIR/..; pwd`
+rsync_all $DIR $toDIR
+
+for s in $ZK_NODES; do
+  undeploy $s; 
+  rm -f logs/deploy_zookeeper_${s}_ok
+done
+rm -f logs/zookeeper_ok
+
+cd $OLD_DIR

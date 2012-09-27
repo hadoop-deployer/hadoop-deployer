@@ -1,5 +1,7 @@
 #!/bin/env bash
 # -- utf-8 --
+DIR=`cd $(dirname $0);pwd`
+. $DIR/PUB.sh
 
 undeploy()
 {
@@ -29,17 +31,13 @@ undeploy()
   fi
 }
 
-main()
-{
-  DIR=`cd $(dirname $0);pwd`
-  . $DIR/PUB.sh
-  cd $DIR
-
-  undeploy;
-  rm -f logs/hue_make_ok
-  rm -f logs/hue_ok
-  echo ">> OK"
-}
-
 #==========
-main
+# main
+#==========
+cd $DIR
+
+undeploy;
+rm -f logs/hue_make_ok
+rm -f logs/hue_ok
+echo ">> OK"
+

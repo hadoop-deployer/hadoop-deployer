@@ -1,5 +1,7 @@
 #!/bin/env bash
 # -- utf-8 --
+DIR=$(cd $(dirname $0); pwd)
+. $DIR/PUB.sh
 
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
 check_tools()
@@ -135,35 +137,31 @@ conf_hadoop()
   rsync_all "$HADOOP_CONF_DIR" $HADOOP_HOME/;
 }
 
-main() 
-{
-  DIR=$(cd $(dirname $0); pwd)
-  . $DIR/PUB.sh
-  cd $DIR
-
-  [ -f logs/hadoop_ok ] && die "hadoop is installed"
-
-  show_head;
-  check_tools;
-  params;
-  chmod_for_run;
-  [ -e logs ] || mkdir logs
-  [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
-  download
-  rsync_all $DIR $HOME
-  for s in $NODE_HOSTS; do
-    [ -f "logs/deploy_${s}_ok" ] && continue 
-    deploy $s; 
-    touch "logs/deploy_${s}_ok"
-  done
-  . $DEPLOYER_HOME/profile.sh
-  . $DEPLOYER_HOME/deploy_env.sh
-  conf_hadoop; 
-  touch logs/hadoop_ok
-  echo ">> OK"
-  cd $OLD_DIR
-}
-
 #==========
-main $*;
+# main
+#==========
+cd $DIR
 
+[ -f logs/hadoop_ok ] && die "hadoop is installed"
+
+show_head;
+check_tools;
+params;
+chmod_for_run;
+[ -e logs ] || mkdir logs
+[ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
+download
+#rsync_all $DIR $HOME
+toDIR=`cd $DIR/..; pwd`
+rsync_all $DIR $toDIR
+for s in $NODE_HOSTS; do
+  [ -f "logs/deploy_${s}_ok" ] && continue 
+  deploy $s; 
+  touch "logs/deploy_${s}_ok"
+done
+. $DEPLOYER_HOME/profile.sh
+. $DEPLOYER_HOME/deploy_env.sh
+conf_hadoop; 
+touch logs/hadoop_ok
+echo ">> OK"
+cd $OLD_DIR

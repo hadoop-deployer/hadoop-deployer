@@ -48,26 +48,26 @@ conf_hive()
   #hive/database-init $MYSQL_USERNAME $MYSQL_PASSWORD $METASTORE;
 }
 
-main() 
-{
-  DIR=`cd $(dirname $0);pwd`
-  . $DIR/PUB.sh
-  cd $DIR
-  [ -f logs/hadoop_ok ] || die "must install hadoop first"
-  [ -f logs/hive_ok ] && die "hive is installed"
-  show_head;
-  params;
-  download
-  rsync_all $DIR $HOME
-  . $DEPLOYER_HOME/profile_hive.sh;
-  . $DEPLOYER_HOME/deploy_env.sh
-  deploy_hive;
-  conf_hive;
-  touch logs/hive_ok
-  echo ">> OK"
-  cd $OLD_DIR
-}
+#==========
+# main $*;
+#==========
+DIR=`cd $(dirname $0);pwd`
+. $DIR/PUB.sh
+cd $DIR
+[ -f logs/hadoop_ok ] || die "must install hadoop first"
+[ -f logs/hive_ok ] && die "hive is installed"
+show_head;
+params;
+download
+#rsync_all $DIR $HOME
+#toDIR=`cd $DIR/..; pwd`
+#rsync_all $DIR $toDIR
+. $DEPLOYER_HOME/profile_hive.sh;
+. $DEPLOYER_HOME/deploy_env.sh
+deploy_hive;
+conf_hive;
+touch logs/hive_ok
+echo ">> OK"
+cd $OLD_DIR
 
-#====
-main $*;
 

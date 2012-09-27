@@ -12,7 +12,7 @@ fi
 
 echo "# Hadoop profile - uc.cn
 
-export DEPLOYER_HOME=/home/zgy/hadoop-deployer
+export DEPLOYER_HOME=/home/zgy/hadoop-deployer/cdh3
 export SSH_PORT=9922
 
 export PKG_PATH=\$HOME/pkg

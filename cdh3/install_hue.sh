@@ -17,6 +17,8 @@
 # 2. Please check whether your hadoop cluster is running
 #    before you start your Hue.
 #########################################################
+DIR=$(cd $(dirname $0); pwd)
+. $DIR/PUB.sh
 
 check_tools()
 {
@@ -81,22 +83,18 @@ hue_deploy()
   chmod +x $HUE_HOME/hue.sh;
 }
 
-main()
-{
-  DIR=$(cd $(dirname $0); pwd)
-  . $DIR/PUB.sh
-  cd $DIR
-
-  [ -f logs/hue_ok ] && die "hue is already installed"
-  show_head;
-  . $DEPLOYER_HOME/deploy_env.sh
-  check_tools;
-  . $DEPLOYER_HOME/profile_hue.sh;
-  hue_deploy;
-  touch logs/hue_ok
-  echo ">> OK"
-  cd $OLD_DIR
-}
-
 #==========
-main $*;
+# main $*;
+#==========
+cd $DIR
+
+[ -f logs/hue_ok ] && die "hue is already installed"
+show_head;
+. $DEPLOYER_HOME/deploy_env.sh
+check_tools;
+. $DEPLOYER_HOME/profile_hue.sh;
+hue_deploy;
+touch logs/hue_ok
+echo ">> OK"
+cd $OLD_DIR
+

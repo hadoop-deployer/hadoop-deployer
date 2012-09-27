@@ -89,6 +89,16 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   }
   nodes;
 
+  #$0 target_host source target
+  rsync_to()
+  {
+    t=$1
+    if [ `hostname` == "$t" ]; then
+      return;
+    fi
+    echo ">> rsync to $t";
+    rsync -a --exclude=.svn --exclude=.git --exclude=logs $2 -e "ssh -p $SSH_PORT" $t:$3;
+  }
   # $0 source target 
   rsync_all()
   {
@@ -102,8 +112,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   alias ssh="ssh -p $SSH_PORT"
   alias scp="scp -P $SSH_PORT"
   
-  [ -e logs ] || mkdir logs
-  [ -e tars ] || mkdir tars
+  [ -e $D/logs ] || mkdir -p $D/logs
+  [ -e $D/tars ] || mkdir -p $D/tars
   
   chmod +x $D/bin/*;
 

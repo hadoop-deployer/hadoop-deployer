@@ -1,5 +1,7 @@
 #!/bin/env bash
 # -- utf-8 --
+DIR=$(cd $(dirname $0); pwd)
+. $DIR/PUB.sh
 
 #必要工具的检查和安装,需要root或者sodu,考虑单独脚本
 check_tools()
@@ -15,19 +17,26 @@ deploy()
 {
   echo ">> deploy $1";
   . deploy_env.sh
-  var_die ZK_HOME; 
-  ssh "$USER@$1" cd $HOME \; tar -xzf $DEPLOYER_HOME/tars/$ZK_TAR -C $HOME \; ln -sf ./$ZK_VERSION $ZK_HOME ;
+  var_die ZK_TAR
+  ssh "$USER@$1" "
+    cd $HOME;
+    tar -xzf $DEPLOYER_HOME/tars/$ZK_TAR -C $HOME;
+    ln -sf ./$ZK_VERSION $HOME/zookeeper;
+    "
 }
 
 profile()
 {
   echo ">> profile $1";
-  ssh "$USER@$1" cd $DEPLOYER_HOME\; sh ./profile_zookeeper.sh;
+  ssh "$USER@$1" "
+    cd $DEPLOYER_HOME;
+    sh ./profile_zookeeper.sh;
+    "
 }
 
 config_it()
 {
-  echo ">> config it ..."
+  echo ">> config zookeeper ..."
   
   CONF_TMP="./"
   ZOO_CFG_TMP="$CONF_TMP/zoo.cfg"
@@ -45,7 +54,6 @@ config_it()
     local i=0;
     for node in $ZK_NODES; do
       i=$[i+1]
-      if [ "$THIS" == "$node" ]; then alias "have_this=true";else alias "have_this=false"; fi
       echo "server.${i}=$node:41288:41388" >> $ZOO_CFG_TMP;
       #for myid file
       ssh "$USER@$node" mkdir -p $HOME/zookeeper/data\; cd $HOME/zookeeper/data\; echo $i \> myid;
@@ -54,38 +62,38 @@ config_it()
   fi
 
   echo ">> rsync configuration";
-  if [ have_this ]; then cp $ZOO_CFG_TMP $ZK_CONF_DIR/; fi
-  rsync_all "$ZOO_CFG_TMP" $ZK_CONF_DIR/;
-
-  
+  if [ ! -z "$ZK_NODES" ]; then
+    for node in $ZK_NODES; do
+      if [ "$THIS" == "$node" ]; then 
+        cp $ZOO_CFG_TMP $HOME/zookeeper/conf/;
+      fi
+      rsync_to $node "$ZOO_CFG_TMP" $HOME/zookeeper/conf/;
+    done
+  fi
 
   [ -e $ZOO_CFG_TMP ] && rm -f $ZOO_CFG_TMP ||:;
-  unalias have_this;
-}
-
-main() 
-{
-  DIR=$(cd $(dirname $0); pwd)
-  . $DIR/PUB.sh
-  cd $DIR
-  [ -f logs/zookeeper_ok ] && die "zookeeper is installed"
-  show_head;
-  check_tools;
-  [ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
-  download
-  rsync_all $DIR $HOME
-  for s in $NODE_HOSTS; do
-    [ -f "logs/deploy_zookeeper_${s}_ok" ] && continue 
-    deploy $s; 
-    profile $s; 
-    touch "logs/deploy_zookeeper_${s}_ok"
-  done
-  config_it; 
-  touch logs/zookeeper_ok
-  echo ">> OK"
-  cd $OLD_DIR
 }
 
 #=================
-main $*;
+# main $*;
+#=================
+cd $DIR
+[ -f logs/zookeeper_ok ] && die "zookeeper is installed"
+show_head;
+check_tools;
+[ -e logs/autossh_ok ] || (./bin/autossh setup && touch ./logs/autossh_ok)
+download
+#rsync_all $DIR $HOME
+toDIR=`cd $DIR/..; pwd`
+rsync_all $DIR $toDIR
+for s in $ZK_NODES; do
+  [ -f "logs/deploy_zookeeper_${s}_ok" ] && continue 
+  deploy $s; 
+  profile $s; 
+  touch "logs/deploy_zookeeper_${s}_ok"
+done
+config_it; 
+touch logs/zookeeper_ok
+echo ">> OK"
+cd $OLD_DIR
 

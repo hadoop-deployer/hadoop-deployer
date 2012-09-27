@@ -1,5 +1,8 @@
 #!/bin/env bash
+#coding=utf8
 
+DIR=$(cd $(dirname $0);pwd)
+. $DIR/PUB.sh
 
 params()
 {
@@ -63,30 +66,27 @@ conf_hbase()
   rsync_all "$HBASE_BIN/*" $HBASE_BIN/;
 }
 
-main() 
-{
-  DIR=$(cd $(dirname $0);pwd)
-  . $DIR/PUB.sh
-  cd $DIR
-  [ -f logs/hadoop_ok ] || die "must install hadoop first"
-  [ -f logs/hbase_ok ] && die "hbase is installed" ||:;
-  show_head;
-  params;
-  download
-  rsync_all $DIR $HOME
-  for s in $NODE_HOSTS; do
-    [ -f "logs/deploy_hbase_${s}_ok" ] && echo " $s already install hbase" && continue 
-    deploy $s; 
-    touch "logs/deploy_hbase_${s}_ok"
-  done
-  . $DEPLOYER_HOME/profile_hbase.sh;
-  . $DEPLOYER_HOME/deploy_env.sh
-  conf_hbase;
-  touch logs/hbase_ok
-  echo ">> OK"
-  cd $OLD_DIR
-}
-
 #==========
-main $*;
+# main $*;
+#==========
+cd $DIR
+[ -f logs/hadoop_ok ] || die "must install hadoop first"
+[ -f logs/hbase_ok ] && die "hbase is installed" ||:;
+show_head;
+params;
+download
+#rsync_all $DIR $HOME
+toDIR=`cd $DIR/..; pwd`
+rsync_all $DIR $toDIR
+for s in $NODE_HOSTS; do
+  [ -f "logs/deploy_hbase_${s}_ok" ] && echo " $s already install hbase" && continue 
+  deploy $s; 
+  touch "logs/deploy_hbase_${s}_ok"
+done
+. $DEPLOYER_HOME/profile_hbase.sh;
+. $DEPLOYER_HOME/deploy_env.sh
+conf_hbase;
+touch logs/hbase_ok
+echo ">> OK"
+cd $OLD_DIR
 
