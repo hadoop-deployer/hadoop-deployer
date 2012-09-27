@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mysql -u $1 --password=$2 -h $3 <<END
+USE $4;
+INSERT INTO auth_group VALUES (1,'group1'),(2,'group2');
+COMMIT;
+END

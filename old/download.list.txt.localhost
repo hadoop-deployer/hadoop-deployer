@@ -1,0 +1,16 @@
+http://localhost/c/jdk1.6.0_26-64.tar.gz
+http://localhost/c/jdk1.6.0_26-32.tar.gz
+http://localhost/c/hadoop-0.20.2-cdh3u3.tar.gz
+http://localhost/c/hbase-0.90.4-cdh3u3.tar.gz
+http://localhost/c/hive-0.7.1-cdh3u3.tar.gz
+http://localhost/c/hue-1.2.0.0-cdh3u3.tar.gz
+http://localhost/c/apache-ant-1.8.2-bin.tar.gz
+http://localhost/c/apache-maven-3.0.3-bin.tar.gz
+http://localhost/c/mysql-connector-java-5.1.16-bin.jar
+http://localhost/c/libhdfs-64.tar.gz
+http://localhost/c/libhdfs-32.tar.gz
+http://localhost/c/fuse-dfs-32.tar.gz
+http://localhost/c/fuse-dfs-64.tar.gz
+http://localhost/c/lzo-64.tar.gz
+http://localhost/c/lzo-32.tar.gz
+http://localhost/c/hadoop-lzo.tar.gz
