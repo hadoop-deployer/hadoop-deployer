@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# coding=utf-8
+# zhaigy@ucweb.com
+# 2012-09
+
 BAPF="$HOME/.bash_profile"
 HDPF="$HOME/.hadoop_profile"
 

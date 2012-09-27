@@ -1,5 +1,7 @@
-#!/bin/env bash
-# -- utf-8 --
+#!/usr/bin/env bash
+# coding=utf-8
+# zhaigy@ucweb.com
+# 2012-09
 
 params()
 {

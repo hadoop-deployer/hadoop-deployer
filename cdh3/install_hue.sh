@@ -1,5 +1,8 @@
-#!/bin/bash
-# Author: lishan@ucweb.com
+#!/usr/bin/env bash
+# coding=utf-8
+# zhaigy@ucweb.com
+# 2012-09
+
 #########################################################
 # 1. Required Dependencies of Hue on Redhat:
 #    gcc
@@ -17,6 +20,7 @@
 # 2. Please check whether your hadoop cluster is running
 #    before you start your Hue.
 #########################################################
+
 DIR=$(cd $(dirname $0); pwd)
 . $DIR/PUB.sh
 

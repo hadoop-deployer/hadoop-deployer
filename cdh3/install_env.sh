@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+# coding=utf-8
+# zhaigy@ucweb.com
+# 2012-09
+
 PASS=$USER #user's login password
 SSH_PORT=9922
 HADOOP_PORT_PREFIX=50

@@ -1,5 +1,8 @@
-#!/bin/env echo "Warning: this file should be sourced"
+#!/usr/bin/env echo "Warning: this file should be sourced"
+# coding=utf-8
 # zhaigy@ucweb.com
+# 2012-09
+
 if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   set -e
   shopt -s expand_aliases
