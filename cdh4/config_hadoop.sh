@@ -8,16 +8,10 @@ HADOOP_PORT_PREFIX=$PORT_PREFIX
 
 # Active NN和Standby NN，最少一个，最多两个
 # 这里及以下设定的所有host值，都必须是在config_deployer中指定的
-NAME_NODES="platform30 platform31"
+NAME_NODES="host1 host2"
 
 # 作为DFS数据节点的机器
-DATA_NODES="
-platform30
-platform31
-platform32
-platform33
-platform34
-"
+DATA_NODES=$NODES
 
 # YARN 
 # 暂不支持YARN安装

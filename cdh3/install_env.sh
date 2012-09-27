@@ -4,21 +4,21 @@
 # 2012-09
 
 PASS=$USER #user's login password
-SSH_PORT=9922
+SSH_PORT=22
 HADOOP_PORT_PREFIX=50
 
-NN="platform30"  #namenode's host,just one
-SNN="platform31" #second namenode's host,can be blank
+NN="host1"  #namenode's host,just one
+SNN="host2" #second namenode's host,can be blank
 DN="
-platform30
-platform31
-platform32
-platform33
-platform34
+host1
+host2
+host3
+host4
+host5
 "
 
 ZK_NODES="
-platform30
-platform31
-platform32
+host1
+host2
+host3
 "

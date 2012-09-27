@@ -4,14 +4,14 @@
 # Data:   2012-09
 
 PASS=$USER #user's login password
-SSH_PORT=9922
+SSH_PORT=22
 
 NODES="
-platform30
-platform31
-platform32
-platform33
-platform34
+host1
+host2
+host3
+host4
+host5
 "
 
 # 其它应用的众多服务端口前缀
