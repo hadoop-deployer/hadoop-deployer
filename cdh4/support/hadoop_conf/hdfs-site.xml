@@ -169,4 +169,9 @@
     <value>20000000</value>
   </property>
 
+  <property>
+    <name>dfs.ha.zkfc.port</name>
+    <value>41819</value>
+  </property>
+
 </configuration>

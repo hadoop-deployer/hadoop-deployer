@@ -45,6 +45,8 @@ conf_hadoop()
   xml_set $HDFS dfs.datanode.ipc.address "0.0.0.0:${HADOOP_PORT_PREFIX}020"
   xml_set $HDFS dfs.datanode.http.address "0.0.0.0:${HADOOP_PORT_PREFIX}075"
   xml_set $HDFS dfs.namenode.secondary.http-address "0.0.0.0:${HADOOP_PORT_PREFIX}090"
+  
+  xml_set $HDFS dfs.ha.zkfc.port "${HADOOP_PORT_PREFIX}819"
 
   xml_set $HDFS dfs.namenode.shared.edits.dir "file://$HOME/hadoop_ha_edit/nn_edit"
   xml_set $HDFS dfs.ha.fencing.methods "sshfence($USER:$SSH_PORT)"
