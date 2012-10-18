@@ -174,4 +174,9 @@
     <value>41819</value>
   </property>
 
+  <property>
+    <name>dfs.namenode.num.extra.edits.retained</name>
+    <value>2200</value>
+  </property>
+
 </configuration>
