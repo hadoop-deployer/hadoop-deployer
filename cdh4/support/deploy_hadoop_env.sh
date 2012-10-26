@@ -11,10 +11,10 @@ fi
 # Tar包
 if IS_32 ; then
   #JAVA_TAR="jdk-7u3-linux-i586.tar.gz"
-  JAVA_TAR=`find_tar "jdk-.*-linux-i586"`
+  JAVA_TAR=`find_tar "jdk.*86"`
 else
   #JAVA_TAR="jdk-7u3-linux-x64.tar.gz"
-  JAVA_TAR=`find_tar "jdk-.*-linux-x64"`
+  JAVA_TAR=`find_tar "jdk.*x64"`
 fi
 
 #HADOOP_TAR="hadoop-2.0.0-cdh4.0.0.tar.gz"

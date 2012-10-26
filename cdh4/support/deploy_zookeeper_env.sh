@@ -9,7 +9,7 @@ fi
 . $DEPLOYER_HOME/support/PUB.sh
 
 ##### tar package #####
-ZK_TAR="zookeeper-3.4.3-cdh4.0.0.tar.gz"
+ZK_TAR=`find_tar "zookeeper.*-cdh4.*"
 ZK_VERSION=${ZK_TAR%.tar.gz}
 
 ##### conf file #####

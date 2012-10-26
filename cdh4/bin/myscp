@@ -5,7 +5,7 @@
 
 if [ $# -ne 2 ]; then
   echo "USAGE: $0 filename SERVER_NAME";
-  echo "eg.: $0 main.cpp kpi11";
+  echo "eg.: $0 main.cpp host1";
   exit 1;
 fi
 
