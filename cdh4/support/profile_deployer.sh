@@ -19,7 +19,7 @@ profile()
   
   echo "$DPFLAG
   
-  export DEPLOYER_HOME=/home/zgy/hadoop-deployer/cdh4
+  export DEPLOYER_HOME=/home/zhaigy3/hadoop-deployer/cdh4
   export SSH_PORT=$SSH_PORT
   
   export PATH=\$DEPLOYER_HOME/bin:\$PATH
