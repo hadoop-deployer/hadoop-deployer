@@ -9,8 +9,8 @@ fi
 . $DEPLOYER_HOME/support/PUB.sh
 
 #hive-0.9.0-cdh4.1.1.tar.gz
-HIVE_TAR=`find_tar "hbase-.*-cdh4.*"`
-HIVE_VERSION=${HBASE_TAR%.tar.gz} ||:;
+HIVE_TAR=`find_tar "hive-.*-cdh4.*"`
+HIVE_VERSION=${HIVE_TAR%.tar.gz} ||:;
 
 ##### conf file #####
 # hive-site

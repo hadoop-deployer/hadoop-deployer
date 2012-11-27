@@ -62,6 +62,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   [ -f $D/config_zookeeper.sh ] && . $D/config_zookeeper.sh
   [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
   [ -f $D/config_hbase.sh ] && . $D/config_hbase.sh
+  [ -f $D/config_hive.sh ] && . $D/config_hive.sh
 
   # $0 url.list.file
   download()

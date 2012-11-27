@@ -15,6 +15,7 @@ deploy()
     . support/PUB.sh;
     . support/deploy_hive_env.sh;
     echo \">>deploy hive\";
+    var_die HIVE_TAR
     tar -xzf tars/\$HIVE_TAR -C $HOME;
     ln -sf ./\$HIVE_VERSION \$HOME/hive;
   "
@@ -35,7 +36,7 @@ deploy()
     cp -f support/hive_conf/* \$HIVE_CONF_DIR;
 
     HIVESITE=\"\$HIVE_CONF_DIR/hive-site.xml\";
-    xml_set \$HIVESITE fs.default.name \$FS_DEFAULT_NAME
+    xml_set \$HIVESITE fs.default.name 'hdfs://zgycluster' 
     xml_set \$HIVESITE mapred.job.tracker \$MAPRED_JOB_TRACKER
     xml_set \$HIVESITE hive.metastore.local \$HIVE_METASTORE_LOCAL
     xml_set \$HIVESITE javax.jdo.option.ConnectionURL \$JAVAX_JDO_OPTION_CONNECTIONURL
