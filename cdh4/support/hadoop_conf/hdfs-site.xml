@@ -178,5 +178,10 @@
     <name>dfs.namenode.num.extra.edits.retained</name>
     <value>2200</value>
   </property>
+ 
+  <property>
+    <name>dfs.datanode.du.reserved</name>
+    <value>1024000000</value>
+  </property>
 
 </configuration>

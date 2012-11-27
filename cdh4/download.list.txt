@@ -1,6 +1,0 @@
-http://localhost/c/jdk-7u3-linux-x64.tar.gz
-http://localhost/c/hadoop-2.0.0-cdh4.0.0.tar.gz
-http://localhost/c/hbase-0.92.1-cdh4.0.0.tar.gz
-http://localhost/c/hive-0.8.1-cdh4.0.0.tar.gz
-http://localhost/c/mysql-connector-java-5.1.16-bin.jar
-http://localhost/c/zookeeper-3.4.3-cdh4.0.0.tar.gz

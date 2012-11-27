@@ -138,7 +138,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   find_tar()
   {
     #find $D/tars -regex ".*/$1-.*(\.tar)\.gz" -printf "%f\n" 
-    find $D/tars -regex ".*/$1(\.tar)?\.gz" -printf "%f\n" 
+    find $D/tars -regex ".*/$1\(\.tar\)?\.gz" -printf "%f\n" 
   }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"

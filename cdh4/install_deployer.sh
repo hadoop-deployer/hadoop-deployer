@@ -47,8 +47,8 @@ cd $DIR
 
 show_head;
 
-[ -e logs ] || mkdir logs
-[ -e tars ] || mkdir tars
+mkdir -p logs
+mkdir -p tars
 
 [ -f logs/install_deployer_ok ] && { cd $OLD_DIR; die "deployer is installed"; }
 

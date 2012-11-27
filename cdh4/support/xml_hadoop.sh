@@ -24,7 +24,7 @@ conf_hadoop()
   xml_set $CORE hadoop.tmp.dir $HADOOP_TMP_DIR
   quorum=""
   for s in $ZK_NODES; do
-    if [ $quorum == "" ]; then
+    if [ "$quorum" == "" ]; then
       quorum="$s:${ZK_PORT_PREFIX}181"
     else
       quorum="$quorum,$s:${ZK_PORT_PREFIX}181"
@@ -68,8 +68,8 @@ conf_hadoop()
     echo $dn >> $HADOOP_CONF_DIR/slaves;
   done;
 
-  mkdir $HOME/hadoop_name
-  mkdir $HOME/hadoop_ha_edit
+  mkdir -p $HOME/hadoop_name
+  mkdir -p $HOME/hadoop_ha_edit
 }
 
 main() 

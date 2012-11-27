@@ -8,7 +8,7 @@ if [ -z $DEPLOYER_HOME ]; then
 fi
 . $DEPLOYER_HOME/support/PUB.sh
 
-HBASE_TAR="hbase-0.92.1-cdh4.0.0.tar.gz"
+HBASE_TAR=`find_tar "hbase-.*-cdh4.*"`
 HBASE_VERSION=${HBASE_TAR%.tar.gz} ||:;
 
 ##### conf file #####

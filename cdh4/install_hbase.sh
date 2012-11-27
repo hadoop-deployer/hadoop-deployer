@@ -38,8 +38,6 @@ deploy()
     REGIONSERVERS=\"\$HBASE_CONF_DIR/regionservers\";
     BACKUP_MASTERS=\"\$HBASE_CONF_DIR/backup-masters\";
 
-    xml_set \$HBASE hbase.zookeeper.quorum \$HBASE_ZOOKEEPER_QUORUM
-
     xml_set \$HBASE hbase.tmp.dir \$HOME/hbase_temp
     xml_set \$HBASE hbase.master.port \$HBASE_MASTER_PORT
     xml_set \$HBASE hbase.master.info.port \$HBASE_MASTER_INFO_PORT

@@ -10,7 +10,7 @@ HBFLAG="# hbase profile - uc.cn"
 
 profile()
 {
-  if ! grep -q "#HBFLAG" $BAPF; then 
+  if ! grep -q "$HBFLAG" $BAPF; then 
     echo "$HBFLAG" >> $BAPF;
     echo "if [ -f $HBPF ]; then" >> $BAPF;
     echo "  . $HBPF;" >> $BAPF;
@@ -19,13 +19,14 @@ profile()
   fi
 
   echo "$HBFLAG
-
   export HBASE_HOME=\$HOME/hbase
   export HBASE_BIN=\$HBASE_HOME/bin
   export HBASE_CONF_DIR=\$HBASE_HOME/conf
 
   export PATH=\$HBASE_BIN:\$PATH
 
+  alias cchb='cd \$HBASE_HOME'
+  alias cchbf='cd \$HBASE_CONF_DIR'
   " > $HBPF
 }
 
