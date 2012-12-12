@@ -9,7 +9,7 @@
 
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://zgycluster</value>
+    <value>hdfs://mycluster</value>
   </property>
 
   <property>

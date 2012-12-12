@@ -4,41 +4,41 @@
   
   <property>
     <name>dfs.nameservices</name>
-    <value>zgycluster</value>
+    <value>mycluster</value>
   </property>
 
   <property>
-    <name>dfs.ha.namenodes.zgycluster</name>
+    <name>dfs.ha.namenodes.mycluster</name>
     <value>nn1,nn2</value>
   </property>
 
   <property>
-    <name>dfs.namenode.rpc-address.zgycluster.nn1</name>
+    <name>dfs.namenode.rpc-address.mycluster.nn1</name>
     <value>platform30:41900</value>
   </property>
 
   <property>
-    <name>dfs.namenode.rpc-address.zgycluster.nn2</name>
+    <name>dfs.namenode.rpc-address.mycluster.nn2</name>
     <value>platform31:41900</value>
   </property>
   
   <property>
-    <name>dfs.namenode.http-address.zgycluster.nn1</name>
+    <name>dfs.namenode.http-address.mycluster.nn1</name>
     <value>platform30:41070</value>
   </property>
 
   <property>
-    <name>dfs.namenode.http-address.zgycluster.nn2</name>
+    <name>dfs.namenode.http-address.mycluster.nn2</name>
     <value>platform31:41070</value>
   </property>
   
   <property>
-    <name>dfs.namenode.https-address.zgycluster.nn1</name>
+    <name>dfs.namenode.https-address.mycluster.nn1</name>
     <value>platform30:41470</value>
   </property>
   
   <property>
-    <name>dfs.namenode.https-address.zgycluster.nn2</name>
+    <name>dfs.namenode.https-address.mycluster.nn2</name>
     <value>platform31:41470</value>
   </property>
   
@@ -68,7 +68,7 @@
   </property>
 
   <property>
-    <name>dfs.client.failover.proxy.provider.zgycluster</name>
+    <name>dfs.client.failover.proxy.provider.mycluster</name>
     <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
   </property>
 
