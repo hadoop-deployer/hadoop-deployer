@@ -1,0 +1,16 @@
+#!/bin/bash
+# Author: zhenghh@ucweb.com
+[ -z $DEPLOYER_HOME ] && echo "hadoop hasn't install or install fail" && exit
+. $DEPLOYER_HOME/support/PUB.sh;
+
+if [ $# -ne 1 ]; then
+  echo "USAGE: $0 filename";
+  echo "eg.: $0 main.cpp";
+  exit 1;
+fi
+
+MYHOST=`hostname`
+for i in $NODES; do
+  [ "$MYHOST" == "$i" ] && continue
+  myscp $1 $i;
+done

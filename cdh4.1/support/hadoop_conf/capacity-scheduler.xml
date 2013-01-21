@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<configuration>
+    <property>
+        <name>yarn.scheduler.capacity.root.queues</name>
+        <value>default</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.root.capacity</name>
+        <value>100</value>
+    </property>
+    
+    <property>
+        <name>yarn.scheduler.capacity.root.default.capacity</name>
+        <value>100</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.root.maximum-capacity</name>
+        <value>100</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.root.minimum-user-limit-percent</name>
+        <value>100</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.root.user-limit-factor</name>
+        <value>1</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.maximum-applications</name>
+        <value>400</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.maximum-am-resource-percent</name>
+        <value>0.1</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.capacity.root.state</name>
+        <value>RUNNING</value>
+    </property>
+</configuration>
