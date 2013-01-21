@@ -55,7 +55,11 @@ deploy()
   "
 
   # 3. 配置文件 
-  ssh $USER@$1 sh $DIR/support/hadoop_conf.sh; 
+  ssh $USER@$1 "
+    cd $D;
+    . support/PUB.sh;
+    sh $DIR/support/hadoop_conf.sh; 
+  "
 }
 
 # main
@@ -66,7 +70,7 @@ show_head;
 
 file_die logs/install_hadoop_ok "hadoop is installed"
 if [ ! -e logs/install_zookeeper_ok ]; then
-  ./install_zookeeper.sh
+  source ./install_zookeeper.sh
 fi
 notfile_die logs/install_zookeeper_ok "need pre install zookeeper!"
 

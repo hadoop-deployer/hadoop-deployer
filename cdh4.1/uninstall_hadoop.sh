@@ -13,7 +13,7 @@ undeploy()
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
-    . support/deploy_hadoop_env.sh;
+    . support/hadoop_deploy_env.sh;
 
     echo \">> delete java\";
     rm -rf $HOME/java;
@@ -31,7 +31,7 @@ undeploy()
       echo \">> delete \$PKG_PATH\"
       rm -rf \$PKG_PATH
     fi;
-    . support/profile_hadoop.sh;
+    . support/hadoop_profile.sh;
     unprofile;
   "
 }

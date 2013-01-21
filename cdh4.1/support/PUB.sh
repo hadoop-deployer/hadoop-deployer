@@ -37,6 +37,10 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     echo "========================================================================================="
     already_show_head="true"
   }
+  show_head()
+  {
+    echo "HEAD========="
+  }
 
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
   var() { eval echo \$"$1"; }

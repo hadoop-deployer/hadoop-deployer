@@ -23,28 +23,13 @@ RM=""
 # 不支持MRv1安装
 
 # 用于支持，不是配置项，不要修改
-#------------------------------------------------------------------------------
+#---------------------------------
 if [ -z "$NAME_NODES" ]; then
-  NAME_NODES=${NODES[@]:0:2} 
+  NAME_NODES=${NODES[@]:0:2}
 fi
 
 if [ -z "$RM" ]; then
   RM=${NODES[@]:0:1} 
 fi
-
-# 计算实际的Hadoop节点，排除重复
-#if [ -z "$HADOOP_NODES" ]; then
-#  TMP_F="tmp_uniq_nodes.txt.tmp";
-#  :>$TMP_F
-#  for s in $DATA_NODES; do
-#    echo $s >> $TMP_F;
-#  done
-#  for s in $NAME_NODES; do
-#    echo $s >> $TMP_F;
-#  done
-#  export HADOOP_NODES=`sort $TMP_F | uniq`
-#  rm -f $TMP_F
-#  unset TMP_F
-#fi
-#------------------------------------------------------------------------------
+#---------------------------------
 

@@ -13,7 +13,7 @@ undeploy()
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
-    . support/deploy_zookeeper_env.sh;
+    . support/zookeeper_deploy_env.sh;
     if [ \"\$ZK_VERSION\" != \"\" ]; then
       echo \">> delete \$ZK_VERSION\";
       rm -rf $HOME/\$ZK_VERSION;
@@ -22,7 +22,7 @@ undeploy()
     echo \">> delete $HOME/zookeeper\";
     rm -rf $HOME/zookeeper;
 
-    . support/profile_zookeeper.sh;
+    . support/zookeeper_profile.sh;
     unprofile;
   "
 }

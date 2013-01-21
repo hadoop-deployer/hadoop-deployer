@@ -24,40 +24,45 @@ deploy()
   # 2. profile文件
   ssh $USER@$1 "
     cd $D;
-    . support/zookeeper_profile.sh;
     . support/PUB.sh;
+    . support/zookeeper_profile.sh;
+    profile;
   "
   
   # 3. 配置文件 
-  #ssh $USER@$1 sh $DIR/support/xml_zookeeper.sh; 
-
   ssh $USER@$1 "
-    cd $D; 
+    cd $D;
     . support/PUB.sh;
-    ZOO_CFG=\"\$ZK_CONF_DIR/zoo.cfg\";
-  
-    :>\$ZOO_CFG;
-    echo \"tickTime=2000\" >> \$ZOO_CFG;
-    echo \"initLimit=10\" >> \$ZOO_CFG;
-    echo \"syncLimit=2\" >> \$ZOO_CFG;
-    echo \"clientPort=${PORT_PREFIX}181\" >> \$ZOO_CFG;
-    echo \"dataDir=$ZK_HOME/data\" >> \$ZOO_CFG;
-    echo \"dataLogDir=$ZK_HOME/data\" >> \$ZOO_CFG;
-    mkdir -p $ZK_HOME/data;
-    mkdir -p $ZK_HOME/logs;
-
-    local i=0;
-    for s in \$ZK_NODES; do
-      echo \"server.\${i}=\$s:${PORT_PREFIX}288:${PORT_PREFIX}388\" >> \$ZOO_CFG;
-      if [ \"\$ME\" == \"\$s\" ]; then
-        echo \"\$i\" > $ZK_HOME/data/myid
-      fi
-      i=\$[i+1];
-    done;
-    #复制小工具脚本
-    cp support/zookeeper_conf/*.sh $ZK_HOME/bin/
-    echo \">> config zookeeper ok\"
+    . support/zookeeper_conf.sh; 
   "
+
+  #ssh $USER@$1 "
+  #  cd $D; 
+  #  . support/PUB.sh;
+  #  ZOO_CFG=\"\$ZK_CONF_DIR/zoo.cfg\";
+  #
+  #  :>\$ZOO_CFG;
+  #  echo \"tickTime=2000\" >> \$ZOO_CFG;
+  #  echo \"initLimit=10\" >> \$ZOO_CFG;
+  #  echo \"syncLimit=2\" >> \$ZOO_CFG;
+  #  echo \"clientPort=${PORT_PREFIX}181\" >> \$ZOO_CFG;
+  #  echo \"dataDir=$ZK_HOME/data\" >> \$ZOO_CFG;
+  #  echo \"dataLogDir=$ZK_HOME/data\" >> \$ZOO_CFG;
+  #  mkdir -p $ZK_HOME/data;
+  #  mkdir -p $ZK_HOME/logs;
+
+  #  local i=0;
+  #  for s in \$ZK_NODES; do
+  #    echo \"server.\${i}=\$s:${PORT_PREFIX}288:${PORT_PREFIX}388\" >> \$ZOO_CFG;
+  #    if [ \"\$ME\" == \"\$s\" ]; then
+  #      echo \"\$i\" > $ZK_HOME/data/myid
+  #    fi
+  #    i=\$[i+1];
+  #  done;
+  #  #复制小工具脚本
+  #  cp support/zookeeper_conf/*.sh $ZK_HOME/bin/
+  #  echo \">> config zookeeper ok\"
+  #"
 }
 
 #------------------

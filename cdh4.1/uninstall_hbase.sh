@@ -13,7 +13,7 @@ undeploy()
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
-    . support/deploy_hbase_env.sh;
+    . support/hbase_deploy_env.sh;
 
     if [ \"\$HBASE_VERSION\" != \"\" ]; then
       echo \">> delete \$HBASE_VERSION\";
@@ -23,7 +23,7 @@ undeploy()
     echo \">> delete $HOME/hbase\";
     rm -rf $HOME/hbase;
 
-    . support/profile_hbase.sh;
+    . support/hbase_profile.sh;
     unprofile;
   "
 }

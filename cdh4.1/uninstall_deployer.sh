@@ -13,7 +13,7 @@ undeploy()
     cd $D;
     . support/PUB.sh;
 
-    . support/profile_deployer.sh;
+    . support/deployer_profile.sh;
     unprofile;
 
     if [ \"$ME\" != \"\`hostname\`\" ]; then

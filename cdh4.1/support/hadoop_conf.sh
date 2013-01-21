@@ -2,10 +2,15 @@
 # coding=utf-8
 # Author: zhaigy@ucweb.com
 # Data:   2012-09
-DIR=$(cd $(dirname $0); pwd)
-# DIR是support目录
-. $DIR/PUB.sh
-. $DIR/deploy_hadoop_env.sh
+
+if [ -z "$DEPLOYER_HOME" ]; then
+  echo "deployer is not installed or install fail"
+  exit -1
+fi
+. $DEPLOYER_HOME/support/PUB.sh
+#DIR=$(cd $(dirname $0); pwd)
+#. $DIR/PUB.sh
+#. $DIR/deploy_hadoop_env.sh
 
 conf_hadoop()
 {
