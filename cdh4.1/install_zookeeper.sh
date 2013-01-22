@@ -75,16 +75,16 @@ show_head;
 file_die logs/install_zookeeper_ok "zookeeper is installed"
 if [ ! -e logs/install_deployer_ok ]; then
   ./install_deployer.sh
+  source ~/.bash_profile
 fi
 notfile_die logs/install_deployer_ok "deployer is not installed"
-
-. ./config_zookeeper.sh
 
 for s in $ZK_NODES; do
   same_to $s $DIR
   [ -f "logs/install_zookeeper_ok_${s}" ] && continue 
   deploy $s; 
   touch "logs/install_zookeeper_ok_${s}"
+  echo ">>"
 done
 
 touch logs/install_zookeeper_ok

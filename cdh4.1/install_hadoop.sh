@@ -70,7 +70,8 @@ show_head;
 
 file_die logs/install_hadoop_ok "hadoop is installed"
 if [ ! -e logs/install_zookeeper_ok ]; then
-  source ./install_zookeeper.sh
+  ./install_zookeeper.sh
+  source ~/.bash_profile
 fi
 notfile_die logs/install_zookeeper_ok "need pre install zookeeper!"
 

@@ -21,7 +21,7 @@ undeploy()
       rm -rf $HOME/\$HIVE_VERSION;
     fi;
 
-    . support/hadoop_profile.sh;
+    . support/hive_profile.sh;
     unprofile;
   "
 }

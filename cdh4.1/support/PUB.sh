@@ -27,28 +27,9 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     if [ "$already_show_head" == "true" ]; then
       return 0;
     fi
-    echo "========================================================================================="
-    echo ""
-    echo "@   @  @@@  @@@@   @@@   @@@  @@@@        @@@@  @@@@@ @@@@  @      @@@  @   @ @@@@@ @@@@"
-    echo "@   @ @   @ @   @ @   @ @   @ @   @       @   @ @     @   @ @     @   @ @   @ @     @   @"
-    echo "@   @ @   @ @   @ @   @ @   @ @   @       @   @ @     @   @ @     @   @  @ @  @     @   @"
-    echo "@@@@@ @@@@@ @   @ @   @ @   @ @@@@        @   @ @@@@  @@@@  @     @   @   @   @@@@  @@@@"
-    echo "@   @ @   @ @   @ @   @ @   @ @           @   @ @     @     @     @   @   @   @     @ @"
-    echo "@   @ @   @ @   @ @   @ @   @ @           @   @ @     @     @     @   @   @   @     @  @"
-    echo "@   @ @   @ @@@@   @@@   @@@  @           @@@@  @@@@@ @     @@@@@  @@@    @   @@@@@ @   @"
-    echo ""
-    echo "V0.7 by uc.cn 2013-01"
-    echo ""
-    echo "========================================================================================="
-    already_show_head="true"
-  }
-  show_head()
-  {
-    if [ "$already_show_head" == "true" ]; then
-      return 0;
-    fi
     echo "==========Hadoop Deployer 0.7=========="
     already_show_head="true"
+    export already_show_head
   }
 
   die() { [ $# -gt 0 ] && echo $@; if [ "X$OLD_DIR" != "X" ]; then cd $OLD_DIR; fi; exit -1; }

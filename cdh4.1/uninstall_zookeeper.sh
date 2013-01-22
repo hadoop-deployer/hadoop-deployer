@@ -39,6 +39,7 @@ main()
     echo ">> undeploy $s"
     undeploy $s; 
     rm -f logs/install_zookeeper_ok_${s}
+    echo ">>"
   done
 
   rm -f logs/install_zookeeper_ok

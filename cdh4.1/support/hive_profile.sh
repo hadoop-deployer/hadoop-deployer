@@ -20,14 +20,14 @@ profile()
   fi
   
   echo "$HIFLAG
-  export HIVE_HOME=\$HOME/hive
-  export HIVE_BIN=\$HIVE_HOME/bin
-  export HIVE_CONF_DIR=\$HIVE_HOME/conf
-  
-  export PATH=\$HIVE_BIN:\$PATH
-  
-  alias cchi='cd \$HIVE_HOME'
-  alias cchif='cd \$HIVE_CONF_DIR'
+export HIVE_HOME=\$HOME/hive
+export HIVE_BIN=\$HIVE_HOME/bin
+export HIVE_CONF_DIR=\$HIVE_HOME/conf
+ 
+export PATH=\$HIVE_BIN:\$PATH
+ 
+alias cchi='cd \$HIVE_HOME'
+alias cchif='cd \$HIVE_CONF_DIR'
   " > $HIPF
 }
 
