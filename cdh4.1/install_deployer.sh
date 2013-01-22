@@ -3,7 +3,10 @@
 # Author: zhaigy@ucweb.com
 # Data:   2013-01
 
+OLD_DIR=`pwd`
 DIR=$(cd $(dirname $0); pwd)
+
+export DP_HOME=$DIR
 . $DIR/support/PUB.sh
 
 #必要工具的检查
@@ -21,9 +24,9 @@ deploy()
 {
   echo ">> deploy $1";
   # 无实际的安装动作，这里只配置profile文件
-  #ssh -p $SSH_PORT $USER@$1 "
   ssh $USER@$1 "
     cd $D;
+    DP_HOME=$DP_HOME;
     . support/PUB.sh;
     . support/deployer_profile.sh;
     profile;
@@ -39,7 +42,6 @@ mkdir -p logs
 mkdir -p tars
 
 file_die "logs/install_deployer_ok" "deployer is installed"
-
 check_tools;
 chmod +x bin/*;
 

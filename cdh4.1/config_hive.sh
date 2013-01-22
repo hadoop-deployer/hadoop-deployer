@@ -14,7 +14,8 @@ HIVE_NODES=""
 # -------------------------
 if [ -z "$HIVE_NODES" ]; then
   N=3
-  if ((${#NODES[*]} <= N)); then
+  len=${#NODES[*]}
+  if ((len <= N)); then
     HIVE_NODES=$NODES
   else
     NS=($NODES)

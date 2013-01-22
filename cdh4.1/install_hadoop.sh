@@ -16,7 +16,7 @@ deploy()
     . support/PUB.sh;
     . support/hadoop_deploy_env.sh;
     
-    echo \">> deploy java\";
+    echo \">> +-->deploy java\";
     var_die JAVA_TAR;
     mkdir -p $HOME/java;
     tar -xzf tars/\$JAVA_TAR -C $HOME/java;
@@ -35,7 +35,7 @@ deploy()
       ln -sf \$MAVEN_VERSION $HOME/java/maven;
     fi;
   
-    echo \">> deploy hadoop\";
+    echo \">> +-->deploy hadoop\";
     var_die HADOOP_TAR;
     tar -xzf tars/\$HADOOP_TAR -C $HOME;
     ln -sf ./\$HADOOP_VERSION $HOME/hadoop;
@@ -79,6 +79,7 @@ for s in $NODES; do
   [ -f "logs/install_hadoop_ok_${s}" ] && continue 
   deploy $s; 
   touch "logs/install_hadoop_ok_${s}"
+  echo ">>"
 done
 
 touch logs/install_hadoop_ok

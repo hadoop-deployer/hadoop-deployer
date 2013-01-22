@@ -6,7 +6,6 @@
 DIR=`cd $(dirname $0);pwd`
 . $DIR/support/PUB.sh
     
-#ssh -p $SSH_PORT $USER@$s sh $DIR/undeploy.sh 
 undeploy()
 {
   # for safe
@@ -15,14 +14,14 @@ undeploy()
     . support/PUB.sh;
     . support/hadoop_deploy_env.sh;
 
-    echo \">> delete java\";
+    echo \">> +-->delete $HOME/java\";
     rm -rf $HOME/java;
     
-    echo \">> delete $HOME/hadoop\";
+    echo \">> +-->delete $HOME/hadoop\";
     rm -rf $HOME/hadoop;
 
     if [ \"\$HADOOP_VERSION\" != \"\" ]; then
-      echo \">> delete \$HADOOP_VERSION\";
+      echo \">> +-->delete \$HADOOP_VERSION\";
       rm -rf $HOME/\$HADOOP_VERSION;
     fi;
 
@@ -33,7 +32,7 @@ undeploy()
     rm -rf $HOME/yarn_nm
 
     if [ \"\$PKG_PATH\" != \"\" ]; then
-      echo \">> delete \$PKG_PATH\"
+      echo \">> +-->delete \$PKG_PATH\"
       rm -rf \$PKG_PATH
     fi;
     . support/hadoop_profile.sh;
@@ -47,13 +46,12 @@ main()
   
   show_head;
 
-  #for s in $HADOOP_NODES; do
   for s in $NODES; do
     same_to $s $DIR
-    #[ ! -f "logs/install_hadoop_ok_$s" ] && continue
     echo ">> undeploy $s"
     undeploy $s
     rm -f logs/install_hadoop_ok_${s}
+    echo ">>"
   done
 
   rm -f logs/install_hadoop_ok

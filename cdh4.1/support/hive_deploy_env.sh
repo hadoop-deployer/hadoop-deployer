@@ -4,12 +4,13 @@
 # Data:   2012-09
 
 if [ -z $DP_HOME ]; then
-  die "deployer is not installed or install fail"
+  echo "deployer is not installed or install fail"
+  exit -1
 fi
 . $DP_HOME/support/PUB.sh
 
 #hive-0.9.0-cdh4.1.1.tar.gz
-HIVE_TAR=`find_tar "hive-.*-cdh4.*"`
+HIVE_TAR=`find_tar "hive-.*-cdh4.*"`;
 HIVE_VERSION=${HIVE_TAR%.tar.gz} ||:;
 
 ##### conf file #####

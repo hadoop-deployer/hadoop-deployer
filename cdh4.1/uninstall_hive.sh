@@ -13,10 +13,11 @@ undeploy()
 
     echo \">> undeploy $1\";
     . support/hive_deploy_env.sh;
+    
     rm -rf $HOME/hive;
   
     if [ \"\$HIVE_VERSION\" != \"\" ]; then
-      echo \">> delete \$HIVE_VERSION\";
+      echo \">> +-->delete \$HIVE_VERSION\";
       rm -rf $HOME/\$HIVE_VERSION;
     fi;
 
@@ -28,9 +29,10 @@ undeploy()
 #============================
 cd $D
 for s in $HIVE_NODES; do
-  same_to $s $DIR
+  same_to $s $D
   undeploy $s; 
   rm -f "logs/install_hive_ok_${s}"
+  echo ">>"
 done
 
 rm -f logs/install_hive_ok
