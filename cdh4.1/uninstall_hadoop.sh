@@ -26,6 +26,11 @@ undeploy()
       rm -rf $HOME/\$HADOOP_VERSION;
     fi;
 
+    rm -rf $HOME/hadoop_data
+    rm -rf $HOME/hadoop_name
+    rm -rf $HOME/hadoop_nfs
+    rm -rf $HOME/hadoop_temp
+    rm -rf $HOME/yarn_nm
 
     if [ \"\$PKG_PATH\" != \"\" ]; then
       echo \">> delete \$PKG_PATH\"
