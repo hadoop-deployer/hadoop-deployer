@@ -2,13 +2,12 @@
 # coding=utf-8
 # Author: zhaigy@ucweb.com
 # Data:   2012-09
-if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
-  set -e #错误即时退出
-  shopt -s expand_aliases
-  [ -f $HOME/.bash_profile ] && . $HOME/.bash_profile
 
-  [ "$OLDDIR" == "" ] && OLDDIR=`pwd` ||:;
-  [ "$DIR" == "" ] && DIR=`cd $(dirname $0);pwd` ||:;
+if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
+  #错误即时退出
+  set -e 
+  shopt -s expand_aliases #运行脚本中使用别名
+  [ -f $HOME/.bash_profile ] && . $HOME/.bash_profile
 
   if [ `uname -m | sed -e 's/i.86/32/'` == '32' ]; then
     alias IS_32='true';
@@ -39,23 +38,24 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   }
   show_head()
   {
-    echo "HEAD========="
+    if [ "$already_show_head" == "true" ]; then
+      return 0;
+    fi
+    echo "==========Hadoop Deployer 0.7=========="
+    already_show_head="true"
   }
 
   die() { [ $# -gt 0 ] && echo $@; exit -1; }
   var() { eval echo \$"$1"; }
+  #变量不存在或者为空即退出
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
   file_die() { if [ -e "$1" ]; then cd $OLD_DIR; msg=${2:-"file $1 is already exists"}; die $msg; fi }
   notfile_die() { if [ ! -e "$1" ]; then cd $OLD_DIR; msg=${2:-"file $1 is not exists"}; die $msg; fi }
- 
-  # $0 var_name 
-  var_def() { [ "X$1" == "X" ] && true || false; } 
+  #var_def() { [ "X$1" == "X" ] && true || false; } 
 
-  if [ "$DEPLOYER_HOME" == "" ]; then
-    DEPLOYER_HOME=$DIR
-  fi
+  var_die DP_HOME
   
-  D=$DEPLOYER_HOME
+  D=$DP_HOME
   ME=`hostname`
   NOW8_6=`date +"%Y%m%d_%H%M%S"`
 
@@ -65,6 +65,8 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
   [ -f $D/config_hbase.sh ] && . $D/config_hbase.sh
   [ -f $D/config_hive.sh ] && . $D/config_hive.sh
+  
+  [ -z "$SSH_PORT" ] || { alias ssh="ssh -p $SSH_PORT"; alias scp="scp -P $SSH_PORT"; }
 
   # $0 url.list.file
   download()
@@ -84,26 +86,10 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 cmd
   check_tool()
   {
-    if alias $1 > /dev/null 2>&1 || [ -f "`which $1`" ]; then
-      echo "$1 is exists";
-    else 
-      die "$1 is not exists"
+    if alias $1 > /dev/null 2>&1 || [ -f "`which $1`" ]; then echo "$1 is exists";
+    else die "$1 is not exists";
     fi
   }
-
-#  [ -f $D/install_env.sh ] && . $D/install_env.sh 
-  
-
-# $0 source target 
-#  rsync_all()
-#  {
-#    #for s in $NODE_HOSTS; do
-#    for s in $NODES; do
-#      [ `hostname` == "$s" ] && continue 
-#      echo ">> rsync to $s";
-#      rsync -a --exclude=.svn --exclude=.git --exclude=logs $1 -e "ssh -p $SSH_PORT" $s:$2;
-#    done
-#  }
 
   # $0 host source target
   rsync_to()
@@ -115,34 +101,16 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   }
  
   # $0 host dir
-  same_to()
-  {
-    [ ! -e $2 ] && return 1
-    dir=`cd $2/..;pwd`
-    rsync_to $1 $2 $dir 
-  }
+  same_to() { [ ! -e $2 ] && return 1; dir=`cd $2/..;pwd`; rsync_to $1 $2 $dir; }
 
   # $0 hosts source target 
-  rsync_to_all()
-  {
-    for s in $1; do
-      rsync_to $s $2 $3
-    done
-  }
+  rsync_to_all() { for s in $1; do rsync_to $s $2 $3 done; }
 
-  [ -z "$SSH_PORT" ] || { alias ssh="ssh -p $SSH_PORT"; alias scp="scp -P $SSH_PORT"; }
 
   # $0 xmlfile name value
-  xml_set()
-  {
-    sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1;
-  }
+  xml_set() { sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1; }
   
-  find_tar()
-  {
-    #find $D/tars -regex ".*/$1-.*(\.tar)\.gz" -printf "%f\n" 
-    find $D/tars -regex ".*/$1\(\.tar\)?\.gz" -printf "%f\n" 
-  }
+  find_tar() { find $D/tars -regex ".*/$1\(\.tar\)?\.gz" -printf "%f\n" }
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

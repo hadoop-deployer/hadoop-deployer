@@ -3,10 +3,10 @@
 # Author: zhaigy@ucweb.com
 # Data:   2012-09
 
-if [ -z $DEPLOYER_HOME ]; then
+if [ -z $DP_HOME ]; then
   die "deployer is not installed or install fail"
 fi
-. $DEPLOYER_HOME/support/PUB.sh
+. $DP_HOME/support/PUB.sh
 
 #hive-0.9.0-cdh4.1.1.tar.gz
 HIVE_TAR=`find_tar "hive-.*-cdh4.*"`

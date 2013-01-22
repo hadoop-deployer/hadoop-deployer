@@ -3,11 +3,11 @@
 # Author: zhaigy@ucweb.com
 # Data:   2012-09
 
-if [ -z "$DEPLOYER_HOME" ]; then
+if [ -z "$DP_HOME" ]; then
   echo "deployer is not installed or install fail"
   exit -1
 fi
-. $DEPLOYER_HOME/support/PUB.sh
+. $DP_HOME/support/PUB.sh
 
 #DIR=$(cd $(dirname $0); pwd)
 ## DIR 是support目录
@@ -38,7 +38,7 @@ config()
     i=$[i+1];
   done
   #复制小工具脚本
-  cp $DEPLOYER_HOME/support/zookeeper_conf/zk-*-all.sh $HOME/zookeeper/bin/
+  cp $DP_HOME/support/zookeeper_conf/zk-*-all.sh $HOME/zookeeper/bin/
   echo ">> config zookeeper ok"
 }
 

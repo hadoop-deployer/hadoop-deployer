@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ "$DEPLOYER_HOME" != "" ]; then
-  . $DEPLOYER_HOME/support/PUB.sh
+if [ "$DP_HOME" != "" ]; then
+  . $DP_HOME/support/PUB.sh
 else
   echo "must install deployer"
   exit 1

@@ -35,7 +35,7 @@ profile()
   export HADOOP_SBIN=\$HADOOP_HOME/sbin
   export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
 
-  export PATH=\$DEPLOYER_HOME/bin:\$PATH
+  export PATH=\$DP_HOME/bin:\$PATH
   #export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$ANT_HOME/bin:\$MAVEN_HOME/bin:\$PATH
   export PATH=\$JAVA_HOME/bin:\$PATH
   #export PATH=\$PKG_PATH/lzop/bin:\$PKG_PATH/fuse-dfs:\$PATH

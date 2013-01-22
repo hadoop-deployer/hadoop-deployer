@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: zhenghh@ucweb.com
-[ -z $DEPLOYER_HOME ] && echo "hadoop hasn't install or install fail" && exit
-. $DEPLOYER_HOME/support/PUB.sh;
+[ -z $DP_HOME ] && echo "hadoop hasn't install or install fail" && exit
+. $DP_HOME/support/PUB.sh;
 
 if [ $# -ne 1 ]; then
   echo "USAGE: $0 filename";

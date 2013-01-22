@@ -19,17 +19,17 @@ profile()
   fi
   
   echo "#!/usr/bin/env bash
-export DEPLOYER_HOME=$DEPLOYER_HOME
+export DP_HOME=$DP_HOME
 export SSH_PORT=$SSH_PORT
 export PORT_PREFIX=$PORT_PREFIX
 
-export DEP_HOME=$DEPLOYER_HOME
+export DEP_HOME=$DP_HOME
 
-export PATH=\$DEPLOYER_HOME/bin:\$PATH
+export PATH=\$DP_HOME/bin:\$PATH
 
 alias ssh='ssh -p \$SSH_PORT'
 alias scp='scp -P \$SSH_PORT'
-alias ccdp='cd \$DEPLOYER_HOME'
+alias ccdp='cd \$DP_HOME'
 " > $DPPF
 }
 
