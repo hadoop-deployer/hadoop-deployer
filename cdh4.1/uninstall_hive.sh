@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# coding=utf-8
+# Author: zhaigy@ucweb.com
+# Data:   2012-09
+
+. $DP_HOME/support/PUB.sh
+
+undeploy()
+{
+  ssh $USER@$1 "
+    cd $D;
+    . support/PUB.sh;
+
+    echo \">> undeploy $1\";
+    . support/hive_deploy_env.sh;
+    rm -rf $HOME/hive;
+  
+    if [ \"\$HIVE_VERSION\" != \"\" ]; then
+      echo \">> delete \$HIVE_VERSION\";
+      rm -rf $HOME/\$HIVE_VERSION;
+    fi;
+
+    . support/hadoop_profile.sh;
+    unprofile;
+  "
+}
+
+#============================
+cd $D
+for s in $HIVE_NODES; do
+  same_to $s $DIR
+  undeploy $s; 
+  rm -f "logs/install_hive_ok_${s}"
+done
+
+rm -f logs/install_hive_ok
+
+echo ">> OK"
