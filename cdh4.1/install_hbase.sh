@@ -70,6 +70,7 @@ show_head;
 file_die logs/install_hbase_ok "hbase is installed"
 if [ ! -e logs/install_hadoop_ok ]; then
   ./install_hadoop.sh
+  source ~/.bash_profile
 fi
 notfile_die logs/install_hadoop_ok "must install hadoop first"
 

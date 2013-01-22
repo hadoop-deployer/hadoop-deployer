@@ -24,12 +24,14 @@ RM=""
 
 # 用于支持，不是配置项，不要修改
 #---------------------------------
+NS=($NODES)
 if [ -z "$NAME_NODES" ]; then
-  NAME_NODES=${NODES[@]:0:2}
+  NAME_NODES=${NS[@]:0:2}
 fi
 
 if [ -z "$RM" ]; then
-  RM=${NODES[@]:0:1} 
+  RM=${NS[@]:0:1} 
 fi
+unset NS
 #---------------------------------
 

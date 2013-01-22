@@ -63,7 +63,8 @@ show_head;
 
 file_die logs/install_hive_ok "hive is installed"
 if [ ! -e logs/install_hadoop_ok ]; then
-  source ./install_hadoop.sh
+  ./install_hadoop.sh
+  source ~/.bash_profile
 fi
 notfile_die logs/install_hadoop_ok "must install hadoop first"
 

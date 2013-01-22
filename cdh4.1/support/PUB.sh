@@ -28,16 +28,20 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
       return 0;
     fi
     echo "==========Hadoop Deployer 0.7=========="
+    if [ $0 != "bash" ]; then 
+      AP=`basename ${0%.sh}`; 
+      echo "==$AP";
+    fi
     already_show_head="true"
     export already_show_head
   }
 
-  die() { [ $# -gt 0 ] && echo $@; if [ "X$OLD_DIR" != "X" ]; then cd $OLD_DIR; fi; exit -1; }
+  die() { [ $# -gt 0 ] && echo "$@"; if [ "X$OLD_DIR" != "X" ]; then cd $OLD_DIR; fi; exit -1; }
   var() { eval echo \$"$1"; }
   #变量不存在或者为空即退出
   var_die() { [ "`var $1`" == "" ] && die "var $1 is not definded" ||:; }
-  file_die() { if [ -e "$1" ]; then msg=${2:-"file $1 is already exists"}; die $msg; fi }
-  notfile_die() { if [ ! -e "$1" ]; then msg=${2:-"file $1 is not exists"}; die $msg; fi }
+  file_die() { if [ -e "$1" ]; then msg=${2:-"file $1 is already exists"}; die "$msg"; fi }
+  notfile_die() { if [ ! -e "$1" ]; then msg=${2:-"file $1 is not exists"}; die "$msg"; fi }
   #var_def() { [ "X$1" == "X" ] && true || false; } 
 
   [ "$DEPLOYER_HOME" == "" ] || DP_HOME=$DEPLOYER_HOME;
@@ -97,6 +101,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 xmlfile name value
   xml_set() { sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1; }
   find_tar() { find $D/tars -regex ".*/$1\(\.tar\)?\.gz" -printf "%f\n"; }
+ 
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"
 fi

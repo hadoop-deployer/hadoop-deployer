@@ -13,15 +13,13 @@ HIVE_NODES=""
 # 非配置文件，不要修改
 # -------------------------
 if [ -z "$HIVE_NODES" ]; then
-  N=3
-  len=${#NODES[*]}
-  if ((len <= N)); then
+  NS=($NODES)
+  if ((${#NS[*]}<=3)); then
     HIVE_NODES=$NODES
   else
-    NS=($NODES)
-    HIVE_NODES=${NS[@]:0:$N}
-    unset NS
+    HIVE_NODES=${NS[@]:0:3}
   fi
+  unset NS
 fi
 # -------------------------
 

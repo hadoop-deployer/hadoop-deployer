@@ -11,13 +11,13 @@ ZK_NODES=""
 # 用于支持，不是配置项，不要修改
 #-------------------------------------
 if [ -z "$ZK_NODES" ]; then
-  if ((${#NODES[@]} <= 5)); then
+  NS=($NODES)
+  if ((${#NS[@]} <= 5)); then
     ZK_NODES=$NODES
   else
-    NS=($NODES)
     ZK_NODES=${NS[@]:0:5}
-    unset NS
   fi
+  unset NS
 fi
 #-------------------------------------
 

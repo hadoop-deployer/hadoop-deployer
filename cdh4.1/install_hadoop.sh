@@ -73,7 +73,7 @@ if [ ! -e logs/install_zookeeper_ok ]; then
   ./install_zookeeper.sh
   source ~/.bash_profile
 fi
-notfile_die logs/install_zookeeper_ok "need pre install zookeeper!"
+notfile_die logs/install_zookeeper_ok "need pre install zookeeper"
 
 for s in $NODES; do
   same_to $s $DIR

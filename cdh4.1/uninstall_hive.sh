@@ -28,6 +28,9 @@ undeploy()
 
 #============================
 cd $D
+
+show_head;
+
 for s in $HIVE_NODES; do
   same_to $s $D
   undeploy $s; 
