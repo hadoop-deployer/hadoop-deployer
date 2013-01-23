@@ -33,4 +33,4 @@ for s in $ZK_NODES; do
 done
 unset i
 #复制小工具脚本
-cp $DP_HOME/support/zookeeper_conf/zk-*-all.sh $HOME/zookeeper/bin/
+cp $DP_HOME/support/zookeeper_conf/*.sh $HOME/zookeeper/bin/

@@ -14,7 +14,9 @@ profile()
 {
   if ! grep -q "$DPFLAG" $BAPF; then 
     echo "$DPFLAG" >> $BAPF;
-    echo "if [ -f $DPPF ]; then . $DPPF; fi" >> $BAPF;
+    echo "if [ -f $DPPF ]; then" >> $BAPF;
+    echo "  . $DPPF;" >> $BAPF;
+    echo "fi" >> $BAPF;
     echo "#END#" >> $BAPF;
   fi
   

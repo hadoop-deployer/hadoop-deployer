@@ -28,7 +28,7 @@ export PATH=\$HIVE_BIN:\$PATH
  
 alias cchi='cd \$HIVE_HOME'
 alias cchif='cd \$HIVE_CONF_DIR'
-  " > $HIPF
+" > $HIPF
 }
 
 unprofile()

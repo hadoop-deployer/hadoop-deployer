@@ -17,5 +17,5 @@ platform34
 "
 
 # 其它应用的众多服务端口前缀
-PORT_PREFIX=55
+PORT_PREFIX=41
 

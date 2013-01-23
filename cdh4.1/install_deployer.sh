@@ -55,6 +55,7 @@ for s in ${NODES[*]}; do
   [ -f "logs/install_deployer_ok_${s}" ] && continue 
   deploy $s; 
   touch "logs/install_deployer_ok_${s}"
+  echo ">>"
 done
 
 touch logs/install_deployer_ok

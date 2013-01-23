@@ -17,36 +17,34 @@ profile()
     echo "#END#" >> $BAPF;
   fi
 
-  echo "$HDFLAG
-  
-  export PKG_PATH=\$HOME/pkg
-  export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$PKG_PATH/lzo/lib
+  echo "$HDFLAG 
+export PKG_PATH=\$HOME/pkg
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$PKG_PATH/lzo/lib
 
-  export JAVA_HOME=\$HOME/java/jdk
-  # export JRE_HOME=\$JAVA_HOME/jre
-  # ddexport ANT_HOME=\$HOME/java/ant
-  # export MAVEN_HOME=\$HOME/java/maven
+export JAVA_HOME=\$HOME/java/jdk
+# export JRE_HOME=\$JAVA_HOME/jre
+# ddexport ANT_HOME=\$HOME/java/ant
+# export MAVEN_HOME=\$HOME/java/maven
 
-  # export CLASSPATH=.:\$JAVA_HOME/lib:\$JRE_HOME/lib:\$ANT_HOME/lib:\$MAVEN_HOME/lib
-  export CLASSPATH=.:\$JAVA_HOME/lib/tools.jar
+# export CLASSPATH=.:\$JAVA_HOME/lib:\$JRE_HOME/lib:\$ANT_HOME/lib:\$MAVEN_HOME/lib
+export CLASSPATH=.:\$JAVA_HOME/lib/tools.jar
 
-  export HADOOP_HOME=\$HOME/hadoop
-  export HADOOP_BIN=\$HADOOP_HOME/bin
-  export HADOOP_SBIN=\$HADOOP_HOME/sbin
-  export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
+export HADOOP_HOME=\$HOME/hadoop
+export HADOOP_BIN=\$HADOOP_HOME/bin
+export HADOOP_SBIN=\$HADOOP_HOME/sbin
+export HADOOP_CONF_DIR=\$HADOOP_HOME/etc/hadoop
 
-  export PATH=\$DP_HOME/bin:\$PATH
-  #export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$ANT_HOME/bin:\$MAVEN_HOME/bin:\$PATH
-  export PATH=\$JAVA_HOME/bin:\$PATH
-  #export PATH=\$PKG_PATH/lzop/bin:\$PKG_PATH/fuse-dfs:\$PATH
-  export PATH=.:\$HADOOP_BIN:\$HADOOP_SBIN:\$PATH
+export PATH=\$DP_HOME/bin:\$PATH
+#export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$ANT_HOME/bin:\$MAVEN_HOME/bin:\$PATH
+export PATH=\$JAVA_HOME/bin:\$PATH
+#export PATH=\$PKG_PATH/lzop/bin:\$PKG_PATH/fuse-dfs:\$PATH
+export PATH=.:\$HADOOP_BIN:\$HADOOP_SBIN:\$PATH
 
-  alias ccd='cd \$HADOOP_HOME'
-  alias ccb='cd \$HADOOP_BIN'
-  alias ccsb='cd \$HADOOP_SBIN'
-  alias ccf='cd \$HADOOP_CONF_DIR'
-
-  " > $HDPF
+alias ccd='cd \$HADOOP_HOME'
+alias ccb='cd \$HADOOP_BIN'
+alias ccsb='cd \$HADOOP_SBIN'
+alias ccf='cd \$HADOOP_CONF_DIR'
+" > $HDPF
 }
 
 unprofile()

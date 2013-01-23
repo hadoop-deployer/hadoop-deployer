@@ -35,6 +35,7 @@ main()
     echo ">> undeploy $s"
     undeploy $s
     rm -f "logs/install_deployer_ok_$s"
+    echo ">>"
   done
 
   rm -f logs/install_deployer_ok

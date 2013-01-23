@@ -15,11 +15,11 @@ undeploy()
     . support/PUB.sh;
     . support/zookeeper_deploy_env.sh;
     if [ \"\$ZK_VERSION\" != \"\" ]; then
-      echo \">> --delete \$ZK_VERSION\";
+      echo \">> +-->delete \$ZK_VERSION\";
       rm -rf $HOME/\$ZK_VERSION;
     fi;
 
-    echo \">> --delete $HOME/zookeeper\";
+    echo \">> +-->delete $HOME/zookeeper\";
     rm -rf $HOME/zookeeper;
 
     . support/zookeeper_profile.sh;

@@ -3,6 +3,8 @@
 # Author: zhaigy@ucweb.com
 # Data:   2013-01
 
+#
+ZK_PORT_PREFIX=$PORT_PREFIX
 # ZooKeeper服务器，新版本会配置成自动切换热备模式，ZK是必须的。
 # 本脚本会根据此配置安装ZK
 # 如果不配置，会使用$NODES中的最多5个
