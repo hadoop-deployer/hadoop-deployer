@@ -1,0 +1,11 @@
+hdfs fs -mkdir /tmp;
+hdfs fs -chmod -R 1777 /tmp;
+hdfs fs -mkdir /tmp/hadoop-yarn/staging;
+hdfs fs -chmod -R 1777 /tmp/hadoop-yarn/staging;
+hdfs fs -mkdir /tmp/hadoopyarn/staging/history/done_intermediate;
+hdfs fs -chmod -R 1777 /tmp/hadoopyarn/staging/history/done_intermediate;
+hdfs fs -chown -R mapred:mapred /tmp/hadoop-yarn/staging;
+hdfs fs -mkdir /var/log/hadoop-yarn;
+hdfs fs -chown hadoop:hadoop /var/log/hadoop-yarn;
+hdfs fs -mkdir /user/$USER;
+hdfs fs -chown $USER /user/$USER;

@@ -17,7 +17,8 @@ HDFS="$HADOOP_CONF_DIR/hdfs-site.xml"
 HDFS_P="$HADOOP_CONF_DIR/hdfs-site.private.xml"
 PP=${HADOOP_PORT_PREFIX}
 
-cp -f support/hadoop_conf/* $HADOOP_CONF_DIR;
+cp -f support/hadoop_conf/conf/* $HADOOP_CONF_DIR;
+cp -f support/hadoop_conf/sbin/* $HADOOP_SBIN;
 
 # core-site.xml
 xml_set $CORE hadoop.tmp.dir "\${user.home}/hadoop_temp"
