@@ -14,6 +14,10 @@ NAME_NODES=""
 # 作为DFS数据节点的机器
 DATA_NODES=$NODES
 
+# QJM的节点
+# 如果不指定，会选择$NODES的前5个
+QJOURNAL_NODES=""
+
 # YARN
 # 一个，
 # 如果不指定，会选择$NODES的第一个
@@ -31,6 +35,14 @@ fi
 
 if [ -z "$RM" ]; then
   RM=${NS[@]:0:1} 
+fi
+
+if [ -z "$QJOURNAL_NODES" ]; then
+  if ((${#NS[@]} <= 5)); then
+    QJOURNAL_NODES=$NODES
+  else
+    QJOURNAL_NODES=${NS[@]:0:5}
+  fi
 fi
 unset NS
 #---------------------------------

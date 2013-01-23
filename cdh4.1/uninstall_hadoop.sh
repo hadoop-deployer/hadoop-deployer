@@ -30,6 +30,7 @@ undeploy()
     rm -rf $HOME/hadoop_nfs
     rm -rf $HOME/hadoop_temp
     rm -rf $HOME/yarn_nm
+    rm -rf $HOME/hadoop_journal
 
     if [ \"\$PKG_PATH\" != \"\" ]; then
       echo \">> +-->delete \$PKG_PATH\"

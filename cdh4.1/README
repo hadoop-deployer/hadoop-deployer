@@ -34,15 +34,16 @@ Hadoop,HBase,Zookeeper,Hive
    4. 运行:sh install_hadoop.sh
 
 初始化：
-  默认配置阐述已经可以使用
-  但是，或许你还是需要自行修改配置，例如修改数据存储磁盘目录等设定
-  修改完成后，运行init_hadoop.sh进行初始化工作
+  默认配置参数已经可以使用
+  但是，你还可以按需要修改配置，例如修改数据存储磁盘目录等设定
+  修改完成后，
+  运行init_hadoop.sh进行初始化工作
 
 启动：
-   start-zk-all.sh
-   start-dfs.sh
-   start-yarn.sh
-   start-hbase.sh
+  start-zk-all.sh
+  start-dfs.sh
+  start-yarn.sh
+  start-hbase.sh
 
 安装完成后：
   1. 对于Zookeeper，可以直接启动使用

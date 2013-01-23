@@ -77,7 +77,7 @@
   
   <property>
     <name>dfs.journalnode.edits.dir</name>
-    <value>/home/hadoop/hadoop_journal/edits</value>
+    <value>${user.home}/hadoop_journal/edits</value>
   </property>
 
   <property>

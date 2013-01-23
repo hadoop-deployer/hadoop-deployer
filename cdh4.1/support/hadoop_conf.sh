@@ -21,7 +21,6 @@ cp -f support/hadoop_conf/conf/* $HADOOP_CONF_DIR;
 cp -f support/hadoop_conf/sbin/* $HADOOP_SBIN;
 
 # core-site.xml
-xml_set $CORE hadoop.tmp.dir "\${user.home}/hadoop_temp"
 quorum=""
 for s in $ZK_NODES; do
   if [ "$quorum" == "" ]; then
@@ -30,6 +29,7 @@ for s in $ZK_NODES; do
     quorum="$quorum,$s:${PORT_PREFIX}181"
   fi
 done
+xml_set $CORE hadoop.tmp.dir "\${user.home}/hadoop_temp"
 #quorum=`echo $ZK_NODES|sed "s/ /,/g"` #注意，前面的$ZK..变量不可以加引号"
 xml_set $CORE ha.zookeeper.quorum $quorum
 
@@ -49,18 +49,29 @@ xml_set $HDFS dfs.namenode.secondary.http-address "0.0.0.0:${PP}090"
 xml_set $HDFS dfs.ha.zkfc.port "${PP}819"
 
 #xml_set $HDFS dfs.namenode.shared.edits.dir "file://$HOME/hadoop_ha_edit/nn_edit"
+quorum=""
+for s in $QJOURNAL_NODES; do
+  if [ "$quorum" == "" ]; then
+    quorum="$s:${PORT_PREFIX}485"
+  else
+    quorum="$quorum;$s:${PORT_PREFIX}485"
+  fi
+done
 xml_set $HDFS dfs.ha.fencing.methods "sshfence($USER:$SSH_PORT)"
 xml_set $HDFS dfs.ha.fencing.ssh.private-key-files $HOME/.ssh/id_rsa
 xml_set $HDFS dfs.namenode.name.dir file://$HOME/hadoop_name,file://$HOME/hadoop_nfs/name
-xml_set $HDFS_P dfs.datanode.data.dir file://$HOME/hadoop_data
 xml_set $HDFS dfs.replication `[ ${#NN} -gt 9 ] && echo 3 || echo 2`
 xml_set $HDFS dfs.cluster.administrators $USER
 xml_set $HDFS dfs.permissions.superusergroup `groups`
 xml_set $HDFS dfs.hosts $HADOOP_CONF_DIR/dfs.include
 xml_set $HDFS dfs.hosts.exclude $HADOOP_CONF_DIR/dfs.exclude
-
 xml_set $HDFS dfs.block.size $[128*1024*1024] 
 xml_set $HDFS dfs.balance.bandwidthPerSec $[20*1024*1024]
+xml_set $HDFS dfs.namenode.shared.edits.dir qjournal://$quorum/mycluster;
+xml_set $HDFS dfs.journalnode.rpc-address 0.0.0.0:${PP}485
+xml_set $HDFS dfs.journalnode.http-address  0.0.0.0:${PP}480
+
+xml_set $HDFS_P dfs.datanode.data.dir file://$HOME/hadoop_data
 
 #yarn
 YARN="$HADOOP_CONF_DIR/yarn-site.xml"
@@ -99,4 +110,5 @@ mkdir -p $HOME/yarn_nm/jobhistory/intermediate-done-dir
 mkdir -p $HOME/yarn_nm/jobhistory/done
 mkdir -p $HOME/yarn_nm/local-dir
 mkdir -p $HOME/yarn_nm/log-dir
+mkdir -p $HOME/hadoop_journal/edits
 unset PP
