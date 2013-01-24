@@ -4,7 +4,7 @@
 
   <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://zgycluster/hbase</value>
+    <value>hdfs://mycluster/hbase</value>
   </property>
 
   <property>

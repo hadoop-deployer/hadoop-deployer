@@ -36,9 +36,9 @@ xml_set $CORE ha.zookeeper.quorum $quorum
 # hdfs-site.xml
 i=1
 for s in $NAME_NODES; do
-  xml_set $HDFS dfs.namenode.rpc-address.zgycluster.nn${i} "$s:${PP}900"
-  xml_set $HDFS dfs.namenode.http-address.zgycluster.nn${i} "$s:${PP}070"
-  xml_set $HDFS dfs.namenode.https-address.zgycluster.nn${i} "$s:${PP}470"
+  xml_set $HDFS dfs.namenode.rpc-address.mycluster.nn${i} "$s:${PP}900"
+  xml_set $HDFS dfs.namenode.http-address.mycluster.nn${i} "$s:${PP}070"
+  xml_set $HDFS dfs.namenode.https-address.mycluster.nn${i} "$s:${PP}470"
   let i++
 done
 xml_set $HDFS dfs.datanode.address "0.0.0.0:${PP}010" 
@@ -59,7 +59,8 @@ for s in $QJOURNAL_NODES; do
 done
 xml_set $HDFS dfs.ha.fencing.methods "sshfence($USER:$SSH_PORT)"
 xml_set $HDFS dfs.ha.fencing.ssh.private-key-files $HOME/.ssh/id_rsa
-xml_set $HDFS dfs.namenode.name.dir file://$HOME/hadoop_name,file://$HOME/hadoop_nfs/name
+#xml_set $HDFS dfs.namenode.name.dir file://$HOME/hadoop_name,file://$HOME/hadoop_nfs/name
+xml_set $HDFS dfs.namenode.name.dir file://$HOME/hadoop_name
 xml_set $HDFS dfs.replication `[ ${#NN} -gt 9 ] && echo 3 || echo 2`
 xml_set $HDFS dfs.cluster.administrators $USER
 xml_set $HDFS dfs.permissions.superusergroup `groups`

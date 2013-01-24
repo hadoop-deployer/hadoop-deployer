@@ -27,37 +27,11 @@ deploy()
   "
 
   #配置文件
-  quorum=`echo $ZK_NODES|sed "s/ /,/g"`;
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
     . support/hbase_deploy_env.sh;
-
-    echo \">> +-->conf hbase\";
-    cp -f support/hbase_conf/* \$HBASE_CONF_DIR;
-
-    HBASE=\"\$HBASE_CONF_DIR/hbase-site.xml\";
-    REGIONSERVERS=\"\$HBASE_CONF_DIR/regionservers\";
-    BACKUP_MASTERS=\"\$HBASE_CONF_DIR/backup-masters\";
-
-    PP=\${HBASE_PORT_PREFIX};
-    xml_set \$HBASE hbase.tmp.dir $HOME/hbase_temp
-    xml_set \$HBASE hbase.master.port \${PP}600
-    xml_set \$HBASE hbase.master.info.port \${PP}610
-    xml_set \$HBASE hbase.regionserver.port \${PP}620
-    xml_set \$HBASE hbase.regionserver.info.port \${PP}630
-    xml_set \$HBASE hbase.hregion.memstore.flush.size $((128*1024*1024)) 
-    xml_set \$HBASE hbase.hregion.max.filesize $((512*1024*1024)) 
-    xml_set \$HBASE hbase.hstore.blockingWaitTime 90000 
-    xml_set \$HBASE zookeeper.znode.parent /hbase
-    xml_set \$HBASE hbase.zookeeper.quorum \"$quorum\"
-    xml_set \$HBASE hbase.zookeeper.peerport \${PP}288
-    xml_set \$HBASE hbase.zookeeper.leaderport \${PP}388
-    xml_set \$HBASE hbase.zookeeper.property.clientPort \${PP}181
-    xml_set \$HBASE hbase.rest.port \${PP}880
-
-    echo \"\$RS_NODES\" > \$REGIONSERVERS;
-    echo \${BACKUP_NODES} > \$BACKUP_MASTERS;
+    . support/hbase_conf.sh;
   "
 }
 
@@ -87,5 +61,6 @@ done
 touch logs/install_hbase_ok
 
 echo ">> OK"
+echo ">> \!\!\!Please Run: source ~/.bash_profile"
 cd $OLD_DIR
 

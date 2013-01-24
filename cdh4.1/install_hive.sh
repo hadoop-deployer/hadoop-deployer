@@ -79,5 +79,6 @@ done
 touch logs/install_hive_ok
 
 echo ">> OK"
+echo ">> \!\!\!Please Run: source ~/.bash_profile"
 cd $OLD_DIR
 

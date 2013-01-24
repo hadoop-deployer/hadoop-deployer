@@ -21,7 +21,7 @@ NS=($NODES)
 if [ -z "$MASTER_NODE" ]; then
   MASTER_NODE=${NS[@]:0:1} 
 fi
-if [ -z "BACKUP_NODES" ]; then
+if [ -z "$BACKUP_NODES" ]; then
   BACKUP_NODES=${NS[@]:1:2}
 fi
 if [ -z "$MASTER_NODES" ]; then
