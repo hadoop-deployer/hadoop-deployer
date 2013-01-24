@@ -16,4 +16,6 @@ done
 var_die STANDBY
 same_to platform31 $HOME/hadoop_name
 
+start-zk-all.sh
+sleep 3
 hdfs zkfc -formatZK
