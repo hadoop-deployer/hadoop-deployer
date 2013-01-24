@@ -34,8 +34,8 @@ main()
   show_head;
 
   for s in $ZK_NODES; do
+    [ ! -f "logs/install_zookeeper_ok_$s" ] && continue
     same_to $s $DIR
-    #[ ! -f "logs/install_zookeeper_ok_$s" ] && continue
     echo ">> undeploy $s"
     undeploy $s; 
     rm -f logs/install_zookeeper_ok_${s}

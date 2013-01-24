@@ -32,6 +32,7 @@ cd $D
 show_head;
 
 for s in $HIVE_NODES; do
+  [ -f "logs/install_hive_ok_${s}" ] && continue
   same_to $s $D
   undeploy $s; 
   rm -f "logs/install_hive_ok_${s}"

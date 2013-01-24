@@ -31,7 +31,7 @@ main()
 
   for s in $NODES; do
     same_to $s $DIR
-    #[ ! -f "logs/install_deployer_ok_$s" ] && continue
+    [ ! -f "logs/install_deployer_ok_$s" ] && continue
     echo ">> undeploy $s"
     undeploy $s
     rm -f "logs/install_deployer_ok_$s"

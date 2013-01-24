@@ -20,6 +20,10 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   else
     alias IS_32='false'
   fi
+  
+  if [ $0 != "bash" ]; then 
+    AP=`basename ${0%.sh}`; 
+  fi
 
   already_show_head="false";
   show_head()
@@ -28,8 +32,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
       return 0;
     fi
     echo "==========Hadoop Deployer 0.7=========="
-    if [ $0 != "bash" ]; then 
-      AP=`basename ${0%.sh}`; 
+    if [ ! -z "$AP" ]; then 
       echo "==$AP";
     fi
     already_show_head="true"

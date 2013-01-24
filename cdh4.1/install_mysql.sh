@@ -5,7 +5,7 @@
 
 OLD_DIR=`pwd`
 DIR=$(cd $(dirname $0); pwd)
-
+if [ -z "$DP_HOME" ]; then export DP_HOME=$DIR; fi
 . $DIR/support/PUB.sh
 
 #==========
@@ -23,7 +23,7 @@ cpu_cores=`cat /proc/cpuinfo|sed -n "1,20p"| grep "cpu cores"|sed -e "s/cpu core
 mkdir -p $HOME/download
 
 cd $HOME/download
-wget http://cdn.mysql.com/Downloads/MySQL-5.5/mysql-5.5.29.tar.gz 
+wget --no-check-certificate -c http://cdn.mysql.com/Downloads/MySQL-5.5/mysql-5.5.29.tar.gz 
 tar -xzvf mysql-5.5.29.tar.gz
 cd mysql-5.5.29
 ./configure \

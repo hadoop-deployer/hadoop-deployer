@@ -48,6 +48,7 @@ main()
   show_head;
 
   for s in $NODES; do
+    [ -f "logs/install_hadoop_ok_${s}" ] && continue
     same_to $s $DIR
     echo ">> undeploy $s"
     undeploy $s

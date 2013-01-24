@@ -43,7 +43,7 @@ for (i = 1; i <= NF; ++i)
   if (unique[\$i] != 1)
     {
       out = out sep \$i
-      sep = ":"
+      sep = \":\"
       unique[\$i] = 1
     }
     print out
