@@ -6,31 +6,27 @@
 OLD_DIR=`pwd`
 DIR=$(cd $(dirname $0); pwd)
 
-export DP_HOME=$DIR
 . $DIR/support/PUB.sh
-
-
-
-#必要工具的检查
-check_tools()
-{
-  check_tool bash 
-  check_tool ssh 
-  check_tool scp 
-  check_tool expect
-  check_tool rsync
-}
 
 #==========
 cd $DIR
 
-show_head;
-check_tools;
+file_die "logs/${AP}_ok" "python is installed"
+if [ ! -e logs/install_deployer_ok ]; then
+  ./install_deployer.sh
+  source ~/.bash_profile
+fi
+notfile_die logs/install_deployer_ok "need pre install deployer"
 
-file_die "logs/install_deployer_ok" "deployer is installed"
+show_head;
+
+check_tool gcc
+check_tool make
+
 cpu_cores=`cat /proc/cpuinfo|sed -n "1,20p"| grep "cpu cores"|sed -e "s/cpu cores[ \t]\+\:[ \t]//"`
 
-mkdir $HOME/download
+mkdir -p $HOME/download
+
 cd $HOME/download
 wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
 tar -xzvf Python-2.7.3.tgz
@@ -38,6 +34,13 @@ cd Python-2.7.3
 ./configure --prefix=$HOME/local/python
 make -j $cpu_cores
 make install
+source ~/.bash_profile
+
+cd $HOME/download
+wget http://peak.telecommunity.com/dist/ez_setup.py
+python ez_setup.py
+easy_install thrift
+
 cd $D
 
 for s in ${NODES[*]}; do
