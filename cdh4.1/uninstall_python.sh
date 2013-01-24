@@ -18,6 +18,7 @@ cd $DP_HOME
 show_head;
 
 for s in $NODES; do
+  [ ! -f "logs/install_python_ok_$s" ] && continue
   same_to $s $DP_HOME
   echo ">> undeploy $s"
   undeploy $s

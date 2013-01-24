@@ -9,7 +9,7 @@ if [ -z "$DP_HOME" ]; then export DP_HOME=$DIR; fi
 . $DIR/support/PUB.sh
 
 #==========
-cd $D
+cd $DP_HOME
 
 show_head;
 
@@ -40,7 +40,7 @@ cd mysql-5.5.29
 make -j $cpu_cores
 make install
 
-cd $D
+cd $DP_HOME
 touch logs/${AP}_ok
 
 echo ">> OK"
