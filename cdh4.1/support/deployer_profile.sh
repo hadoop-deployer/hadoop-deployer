@@ -29,6 +29,28 @@ export DEP_HOME=$DP_HOME
 
 export PATH=\$DP_HOME/bin:\$PATH
 
+for D in \`ls -d $HOME/local/*\`; do
+  if [ -d \$D/bin ]; then
+    PATH=\$D/bin:\$PATH
+  elif [ -d \$D/sbin ]; then
+    PATH=\$D/sbin:\$PATH
+  fi
+done
+
+PATH=\$( awk -F: '{
+sep = \"\"
+for (i = 1; i <= NF; ++i)
+  if (unique[\$i] != 1)
+    {
+      out = out sep \$i
+      sep = ":"
+      unique[\$i] = 1
+    }
+    print out
+  }' <<< \$PATH)
+
+export PATH
+
 alias ssh='ssh -p \$SSH_PORT'
 alias scp='scp -P \$SSH_PORT'
 alias ccdp='cd \$DP_HOME'
