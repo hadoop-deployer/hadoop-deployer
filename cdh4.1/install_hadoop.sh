@@ -4,6 +4,7 @@
 # Data:   2013-01
 
 DIR=$(cd $(dirname $0); pwd)
+if [ -z "$DP_HOME" ]; then export DP_HOME=$DIR; fi
 . $DIR/support/PUB.sh
 
 # $0 host
