@@ -61,6 +61,6 @@ done
 touch logs/install_deployer_ok
 
 echo ">> OK"
-#echo ">> \!\!\!Please Run: source ~/.bash_profile"
+echo ">> !!!Please Run: source ~/.bash_profile"
 
 cd $OLD_DIR

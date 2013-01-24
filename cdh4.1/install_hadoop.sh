@@ -87,5 +87,5 @@ done
 touch logs/install_hadoop_ok
 
 echo ">> OK"
-echo ">> \!\!\!Please Run: source ~/.bash_profile"
+echo ">> !!!Please Run: source ~/.bash_profile"
 cd $OLD_DIR
