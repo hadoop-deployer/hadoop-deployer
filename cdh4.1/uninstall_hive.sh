@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # coding=utf-8
 # Author: zhaigy@ucweb.com
-# Data:   2012-09
+# Data:   2013-01
 
 . $DP_HOME/support/PUB.sh
 
