@@ -59,6 +59,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   [ -f $D/config_zookeeper.sh ] && . $D/config_zookeeper.sh
   [ -f $D/config_hadoop.sh ] && . $D/config_hadoop.sh
   [ -f $D/config_hbase.sh ] && . $D/config_hbase.sh
+  [ -f $D/config_mysql.sh ] && . $D/config_mysql.sh
   [ -f $D/config_hive.sh ] && . $D/config_hive.sh
   
   [ -z "$SSH_PORT" ] || { alias ssh="ssh -p $SSH_PORT"; alias scp="scp -P $SSH_PORT"; }
