@@ -27,12 +27,12 @@ undeploy()
 }
 
 #============================
-cd $D
+cd $DP_HOME
 
 show_head;
 
 for s in $HIVE_NODES; do
-  [ -f "logs/install_hive_ok_${s}" ] && continue
+  [ ! -f "logs/install_hive_ok_${s}" ] && continue
   same_to $s $D
   undeploy $s; 
   rm -f "logs/install_hive_ok_${s}"

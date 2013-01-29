@@ -37,6 +37,7 @@ deploy()
       quorum_hive="$quorum_hive,$s:${ZK_PORT_PREFIX}181"
     fi
   done
+
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
@@ -47,7 +48,7 @@ deploy()
 
     HIVE=\"\$HIVE_CONF_DIR/hive-site.xml\";
 
-    xml_set \$HIVE javax.jdo.option.ConnectionURL jdbc:mysql://${MYSQL_FIRST_NODE}:${MYSQL_PORT_PREFIX}336/hive_metastore?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=latin1
+    xml_set \$HIVE javax.jdo.option.ConnectionURL \"jdbc:mysql://${MYSQL_FIRST_NODE}:${MYSQL_PORT_PREFIX}336/hive_metastore?createDatabaseIfNotExist=true\&amp;useUnicode=true\&amp;characterEncoding=latin1\"
     xml_set \$HIVE hive.zookeeper.quorum $quorum_hive 
     xml_set \$HIVE hive.zookeeper.client.port ${ZK_PORT_PREFIX}181
     xml_set \$HIVE hbase.zookeeper.quorum \"$quorum\"
@@ -75,6 +76,15 @@ same_to $s $DP_HOME
 ssh $USER@$MYSQL_FIRST_NODE "
   cd $D;
   . support/PUB.sh;
+  if [ ! -f $HOME/local/mysql/data/\${ME}.pid ]; then
+    cd $HOME/local/mysql;
+    sh start_mysql.sh;
+    sleep 10;
+    if [ ! -f $HOME/local/mysql/data/\${ME}.pid ]; then
+      echo \"mysql is not started!\";
+      exit -1;
+    fi;
+  fi;
   . support/hive_init_mysql.sh;
 "
 
