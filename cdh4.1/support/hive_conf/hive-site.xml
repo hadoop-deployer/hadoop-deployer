@@ -5,7 +5,7 @@
 
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://space1:53306/hive_metastore??createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=latin1</value>
+    <value>jdbc:mysql://space1:53306/hive_metastore?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=latin1</value>
   </property>
   
   <property>
@@ -25,6 +25,11 @@
 
   <property>
     <name>datanucleus.autoCreateSchema</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>datanucleus.autoCreateTables</name>
     <value>true</value>
   </property>
 

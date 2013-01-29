@@ -97,6 +97,12 @@ for s in $HIVE_NODES; do
   echo ">>"
 done
 
+if hdfs dfs -test -e /warehouse;then
+  :;
+else
+  hdfs dfs -mkdir /warehouse
+fi
+
 touch logs/install_hive_ok
 
 echo ">> OK"

@@ -59,3 +59,15 @@ Hadoop,HBase,Zookeeper,Hive
   3，对于HBase，必须先要启动Zookeeper和Hadoop
   如果你对默认值没有什么不满，可以不用修改，直接初始化启动
 
+
+hive 的扩展脚本
+hive 的log目录
+hive的脚本中的端口配置
+
+com.mysql.jdbc.Driver
+mysql-connector-java-5.1.16-bin.jar
+
+Specified key was too long; max key length is 767 bytes
+
+hdfs dfs -mkdir /warehouse
+

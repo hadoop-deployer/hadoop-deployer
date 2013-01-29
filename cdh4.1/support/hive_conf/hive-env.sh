@@ -22,8 +22,9 @@
 # The hive service being invoked (CLI/HWI etc.) is available via the environment
 # variable SERVICE
 
-shopt -s expand_aliases;
-. $HOME/.bash_profile
+#shopt -s expand_aliases;
+#. $HOME/.bash_profile
+. $DP_HOME/support/PUB.sh
 
 # Hive Client memory usage can be an issue if a large number of clients
 # are running at the same time. The flags below have been useful in 
@@ -54,3 +55,8 @@ shopt -s expand_aliases;
 
 # Folder containing extra ibraries required for hive compilation/execution can be controlled by:
 # export HIVE_AUX_JARS_PATH=
+
+export METASTORE_PORT=${HIVE_PORT_PREFIX}983
+export HIVE_PORT=${HIVE_PORT_PREFIX}100
+export HIVE_SERVER2_THRIFT_PORT=${HIVE_PORT_PREFIX}200
+
