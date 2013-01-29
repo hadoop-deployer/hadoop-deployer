@@ -20,5 +20,6 @@ NS=($NODES)
 if [ -z "$MYSQL_NODES" ]; then
   MYSQL_NODES=${NS[@]:0:2}
 fi
+MYSQL_FIRST_NODE=${NS[@]:0:1}
 unset NS
 #---------------------------------

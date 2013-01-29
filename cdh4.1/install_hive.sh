@@ -29,6 +29,14 @@ deploy()
   "
 
   quorum=`echo $ZK_NODES|sed "s/ /,/g"`;
+  quorum_hive="";
+  for s in $ZK_NODES; do
+    if [ "$quorum_hive" == "" ]; then
+      quorum_hive="$s:${ZK_PORT_PREFIX}"
+    else
+      quorum_hive="$quorum_hive,$s:${ZK_PORT_PREFIX}181"
+    fi
+  done
   ssh $USER@$1 "
     cd $D;
     . support/PUB.sh;
@@ -39,20 +47,12 @@ deploy()
 
     HIVE=\"\$HIVE_CONF_DIR/hive-site.xml\";
 
-    xml_set \$HIVE fs.default.name 'hdfs://mycluster' 
-    xml_set \$HIVE mapred.job.tracker \$MAPRED_JOB_TRACKER
-    xml_set \$HIVE hive.metastore.local true
-    xml_set \$HIVE javax.jdo.option.ConnectionURL \$JAVAX_JDO_OPTION_CONNECTIONURL
-    xml_set \$HIVE hive.metastore.warehouse.dir \$HIVE_METASTORE_WAREHOUSE_DIR
-    xml_set \$HIVE javax.jdo.option.ConnectionUserName \$MYSQL_USERNAME
-    xml_set \$HIVE javax.jdo.option.ConnectionPassword \$MYSQL_PASSWORD
-    xml_set \$HIVE hive.exec.compress.intermediate \$HIVE_EXEC_COMPRESS_INTERMEDIATE
-    xml_set \$HIVE mapred.compress.map.output \$MAPRED_COMPRESS_MAP_OUTPUT
-    xml_set \$HIVE mapred.output.compression.type \$MAPRED_OUTPUT_COMPRESSION_TYPE
-    xml_set \$HIVE hive.input.format \$HIVE_INPUT_FORMAT
-
+    xml_set \$HIVE javax.jdo.option.ConnectionURL jdbc:mysql://${MYSQL_FIRST_NODE}:${MYSQL_PORT_PREFIX}336/hive_metastore?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=latin1
+    xml_set \$HIVE hive.zookeeper.quorum $quorum_hive 
+    xml_set \$HIVE hive.zookeeper.client.port ${ZK_PORT_PREFIX}181
     xml_set \$HIVE hbase.zookeeper.quorum \"$quorum\"
-    xml_set \$HIVE hbase.zookeeper.property.clientPort \${PORT_PREFIX}181
+    xml_set \$HIVE hbase.zookeeper.property.clientPort ${ZK_PORT_PREFIX}181
+    xml_set \$HIVE hive.server2.thrift.port ${HIVE_PORT_PREFIX}200
   "
 }
 
@@ -68,6 +68,15 @@ fi
 notfile_die logs/install_hadoop_ok "must install hadoop first"
 
 show_head;
+
+cd $DP_HOME
+same_to $s $DP_HOME
+
+ssh $USER@$MYSQL_FIRST_NODE "
+  cd $D;
+  . support/PUB.sh;
+  . support/hive_init_mysql.sh;
+"
 
 for s in $HIVE_NODES; do
   same_to $s $DIR
