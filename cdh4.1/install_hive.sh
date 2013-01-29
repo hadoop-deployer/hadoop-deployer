@@ -84,6 +84,7 @@ ssh $USER@$MYSQL_FIRST_NODE "
       echo \"mysql is not started!\";
       exit -1;
     fi;
+    cd $D;
   fi;
   . support/hive_init_mysql.sh;
 "
