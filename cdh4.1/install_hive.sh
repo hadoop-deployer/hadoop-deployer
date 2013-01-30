@@ -19,6 +19,7 @@ deploy()
     var_die HIVE_TAR
     tar -xzf tars/\$HIVE_TAR -C $HOME;
     ln -sf ./\$HIVE_VERSION \$HOME/hive;
+    cp tars/mysql-connector-java-5.*.jar \$HOME/hive/lib ||:;
   "
 
   ssh $USER@$1 "
@@ -32,9 +33,9 @@ deploy()
   quorum_hive="";
   for s in $ZK_NODES; do
     if [ "$quorum_hive" == "" ]; then
-      quorum_hive="$s:${ZK_PORT_PREFIX}"
+      quorum_hive="$s"
     else
-      quorum_hive="$quorum_hive,$s:${ZK_PORT_PREFIX}181"
+      quorum_hive="$s:${ZK_PORT_PREFIX}181,$quorum_hive"
     fi
   done
 
