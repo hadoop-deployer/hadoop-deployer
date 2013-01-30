@@ -45,7 +45,8 @@ deploy()
     . support/hive_deploy_env.sh;
 
     echo \">> +-->conf hive\";
-    cp -f support/hive_conf/* \$HIVE_CONF_DIR;
+    cp -f support/hive_conf/conf/* \$HIVE_CONF_DIR;
+    cp -f support/hive_conf/bin/* \$HIVE_BIN;
 
     HIVE=\"\$HIVE_CONF_DIR/hive-site.xml\";
 

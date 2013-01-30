@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+
+. "$bin"/beeline -u "jdbc:hive2://cnode507.uc.local:50200" \
+                 -d org.apache.hive.jdbc.HiveDriver \
+                 --color=true \
+                 --showHeader=true \
+                 --fastConnect=true
+
+#!connect jdbc:hive2://localhost:50200 "" "" org.apache.hive.jdbc.HiveDriver

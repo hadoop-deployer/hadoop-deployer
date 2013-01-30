@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+bin=`dirname "$0"`
+bin=`cd "$bin"; pwd`
+. $DP_HOME/support/PUB.sh
+
+. "$bin"/hive -h localhost -p ${HIVE_PORT_PREFIX}100 "$@"
