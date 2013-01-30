@@ -73,6 +73,15 @@ show_head;
 cd $DP_HOME
 same_to $s $DP_HOME
 
+
+for s in $HIVE_NODES; do
+  same_to $s $DIR
+  [ -f "logs/install_hive_ok_${s}" ] && continue 
+  deploy $s; 
+  touch "logs/install_hive_ok_${s}"
+  echo ">>"
+done
+
 ssh $USER@$MYSQL_FIRST_NODE "
   cd $D;
   . support/PUB.sh;
@@ -89,19 +98,7 @@ ssh $USER@$MYSQL_FIRST_NODE "
   . support/hive_init_mysql.sh;
 "
 
-for s in $HIVE_NODES; do
-  same_to $s $DIR
-  [ -f "logs/install_hive_ok_${s}" ] && continue 
-  deploy $s; 
-  touch "logs/install_hive_ok_${s}"
-  echo ">>"
-done
-
-if hdfs dfs -test -e /warehouse;then
-  :;
-else
-  hdfs dfs -mkdir /warehouse
-fi
+hdfs dfs -mkdir /warehouse ||:;
 
 touch logs/install_hive_ok
 
