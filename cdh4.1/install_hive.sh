@@ -71,14 +71,12 @@ notfile_die logs/install_hadoop_ok "must install hadoop first"
 show_head;
 
 cd $DP_HOME
-same_to $s $DP_HOME
-
 
 for s in $HIVE_NODES; do
-  same_to $s $DIR
-  [ -f "logs/install_hive_ok_${s}" ] && continue 
+  same_to $s $DP_HOME
+  [ -f "logs/${AP}_ok_${s}" ] && continue 
   deploy $s; 
-  touch "logs/install_hive_ok_${s}"
+  touch "logs/${AP}_ok_${s}"
   echo ">>"
 done
 
@@ -100,7 +98,7 @@ ssh $USER@$MYSQL_FIRST_NODE "
 
 hdfs dfs -mkdir /warehouse ||:;
 
-touch logs/install_hive_ok
+touch logs/${AP}_ok
 
 echo ">> OK"
 echo ">> !!!Please Run: source ~/.bash_profile"
