@@ -76,9 +76,9 @@ cd $DP_HOME
 
 for s in $HIVE_NODES; do
   same_to $s $DP_HOME
-  [ -f "logs/${AP}_ok_${s}" ] && continue 
+  [ -f "logs/${AP}_ok_$s" ] && continue 
   deploy $s; 
-  touch "logs/${AP}_ok_${s}"
+  touch "logs/${AP}_ok_$s"
   echo ">>"
 done
 
@@ -98,7 +98,7 @@ ssh $USER@$MYSQL_FIRST_NODE "
   . support/hive_init_mysql.sh;
 "
 
-hdfs dfs -mkdir /warehouse ||:;
+#hdfs dfs -mkdir /warehouse ||:;
 
 touch logs/${AP}_ok
 
