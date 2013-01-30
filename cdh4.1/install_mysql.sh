@@ -11,7 +11,7 @@ if [ -z "$DP_HOME" ]; then export DP_HOME=$DIR; fi
 #==========
 cd $DP_HOME
 
-file_die "logs/${AP}_ok_${s}" "mysql is already installed"
+file_die "logs/${AP}_ok" "mysql is already installed"
 if [ ! -e logs/install_deployer_ok ]; then
   ./install_deployer.sh
   source ~/.bash_profile
