@@ -29,13 +29,15 @@ export DEP_HOME=$DP_HOME
 
 export PATH=\$DP_HOME/bin:\$PATH
 
-for D in \`ls -d $HOME/local/*\`; do
-  if [ -d \$D/bin ]; then
-    PATH=\$D/bin:\$PATH
-  elif [ -d \$D/sbin ]; then
-    PATH=\$D/sbin:\$PATH
-  fi
-done
+if [ -d $HOME/local ]; then
+  for D in \`ls -d $HOME/local/*\`; do
+    if [ -d \$D/bin ]; then
+      PATH=\$D/bin:\$PATH
+    elif [ -d \$D/sbin ]; then
+      PATH=\$D/sbin:\$PATH
+    fi
+  done
+fi
 
 PATH=\$( awk -F: '{
 sep = \"\"
