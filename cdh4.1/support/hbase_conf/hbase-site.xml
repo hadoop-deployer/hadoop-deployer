@@ -19,7 +19,7 @@
 
   <property>
     <name>hbase.tmp.dir</name>
-    <value>hbase.tmp.dir</value>
+    <value>${user.home}/hbase_temp</value>
   </property>
 
   <property>
@@ -194,8 +194,7 @@
   <property>
     <name>hbase.balancer.period</name>
     <value>300000</value>
-    <description>Period at which the region balancer runs in the Master.
-    </description>
+    <description>Period at which the region balancer runs in the Master.</description>
   </property>
 
   <property>
@@ -504,46 +503,6 @@
     </description>
   </property>
 
-  <!-- End of properties used to generate ZooKeeper host:port quorum list. -->
-
-  <!--
-  Beginning of properties that are directly mapped from ZooKeeper's zoo.cfg.
-  All properties with an "hbase.zookeeper.property." prefix are converted for
-  ZooKeeper's configuration. Hence, if you want to add an option from zoo.cfg,
-  e.g.  "initLimit=10" you would append the following to your configuration:
-  <property>
-    <name>hbase.zookeeper.property.initLimit</name>
-    <value>10</value>
-  </property>
-
-  -->
-  <!--
-  <property>
-    <name>hbase.zookeeper.property.initLimit</name>
-    <value>10</value>
-    <description>Property from ZooKeeper's config zoo.cfg.
-      The number of ticks that the initial synchronization phase can take.
-    </description>
-  </property>
-
-  <property>
-    <name>hbase.zookeeper.property.syncLimit</name>
-    <value>5</value>
-    <description>Property from ZooKeeper's config zoo.cfg.
-      The number of ticks that can pass between sending a request and getting an
-      acknowledgment.
-    </description>
-  </property>
-
-  <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>${hbase.tmp.dir}/zookeeper</value>
-    <description>Property from ZooKeeper's config zoo.cfg.
-      The directory where the snapshot is stored.
-    </description>
-  </property>
-  -->
-
   <property>
     <name>hbase.zookeeper.property.clientPort</name>
     <value>2181</value>
@@ -551,19 +510,6 @@
       The port at which the clients will connect.
     </description>
   </property>
-
-  <!--
-  <property>
-    <name>hbase.zookeeper.property.maxClientCnxns</name>
-    <value>2000</value>
-    <description>Property from ZooKeeper's config zoo.cfg.
-      Limit on number of concurrent connections (at the socket level) that a
-      single client, identified by IP address, may make to a single member of
-      the ZooKeeper ensemble. Set high to avoid zk connection issues running
-      standalone and pseudo-distributed.
-    </description>
-  </property>
-  -->
 
   <!-- End of properties that are directly mapped from ZooKeeper's zoo.cfg -->
   <property>

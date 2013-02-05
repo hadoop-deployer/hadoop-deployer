@@ -20,7 +20,7 @@ REGIONSERVERS="$HBASE_CONF_DIR/regionservers";
 BACKUP_MASTERS="$HBASE_CONF_DIR/backup-masters";
 
 PP=${HBASE_PORT_PREFIX};
-xml_set $HBASE hbase.tmp.dir $HOME/hbase_temp
+#xml_set $HBASE hbase.tmp.dir $HOME/hbase_temp
 xml_set $HBASE hbase.master.port ${PP}600
 xml_set $HBASE hbase.master.info.port ${PP}610
 xml_set $HBASE hbase.regionserver.port ${PP}620
@@ -37,3 +37,6 @@ xml_set $HBASE hbase.rest.port ${PP}880
 
 echo "$RS_NODES" > $REGIONSERVERS;
 echo ${BACKUP_NODES} > $BACKUP_MASTERS;
+
+mkdir -p $HOME/hbase_temp
+

@@ -31,6 +31,7 @@ deploy()
 
   quorum=`echo $ZK_NODES|sed "s/ /,/g"`;
   quorum_hive="";
+  local s;
   for s in $ZK_NODES; do
     if [ "$quorum_hive" == "" ]; then
       quorum_hive="$s"
