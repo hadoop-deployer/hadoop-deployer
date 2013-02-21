@@ -42,9 +42,9 @@ main()
 {
   DIR=`cd $(dirname $0);pwd`
   cd $DIR
-  . profile.sh
-  . PUB.sh
-  . deploy_env.sh
+  . ./profile.sh
+  . ./PUB.sh
+  . ./deploy_env.sh
   deploy_java;
   deploy_hadoop;
   cd $OLDDIR

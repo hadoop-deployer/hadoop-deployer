@@ -95,6 +95,7 @@ conf_hadoop()
   HDFS="$HADOOP_CONF_DIR/hdfs-site.xml"
   MAPRED="$HADOOP_CONF_DIR/mapred-site.xml"
 
+  mkdir -p $HADOOP_CONF_DIR;
   cp hadoopconf/* $HADOOP_CONF_DIR;
   
   sed -r "s#^export HADOOP_SSH_OPTS.*#export HADOOP_SSH_OPTS=\"-p $SSH_PORT\"#" -i $ENVSH;
