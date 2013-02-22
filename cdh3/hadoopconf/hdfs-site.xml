@@ -65,19 +65,4 @@
         <value>dfs.balance.bandwidthPerSec</value>
     </property>
 
-    <property>
-        <name>dfs.namenode.plugins</name>
-        <value>org.apache.hadoop.thriftfs.NamenodePlugin</value>
-    </property>
-
-    <property>
-        <name>dfs.datanode.plugins</name>
-        <value>org.apache.hadoop.thriftfs.DatanodePlugin</value>
-    </property>
-
-    <property>
-        <name>dfs.thrift.address</name>
-        <value>dfs.thrift.address</value>
-    </property>
-
 </configuration>
