@@ -17,7 +17,7 @@ do
   fi
 done
 var_die STANDBY
-same_to platform31 $HOME/hadoop_name
+same_to $STANDBY $HOME/hadoop_name
 
 start-zk-all.sh
 sleep 3
