@@ -35,7 +35,7 @@ cd $DIR
 show_head;
 
 for s in $HBASE_NODES; do
-  [ -f "logs/install_hbase_ok_${s}" ] && continue
+  [ ! -f "logs/install_hbase_ok_${s}" ] && continue
   same_to $s $DIR
   echo ">> undeploy $s"
   undeploy $s

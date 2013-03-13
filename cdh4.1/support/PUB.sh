@@ -106,6 +106,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   # $0 xmlfile name value
   xml_set() { sed -r "/<name>$2<\/name>/{ n; s#<value>.*</value>#<value>$3</value>#; }" -i $1; }
   find_tar() { find $D/tars -regex ".*/$1\(\.tar\)?\.gz" -printf "%f\n"; }
+  find_tgz() { find $D/tars -regex ".*/$1\.\(tar\.\|t\)gz" -printf "%f\n"; }
  
 
   PUB_HEAD_DEF="PUB_HEAD_DEF"

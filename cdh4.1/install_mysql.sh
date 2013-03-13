@@ -28,10 +28,17 @@ cpu_cores=`cat /proc/cpuinfo|sed -n "1,20p"| grep "cpu cores"|sed -e "s/cpu core
 
 mkdir -p $HOME/download
 
+MYSQL_TAR=`find_tar mysql-5.5.*`
 cd $HOME/download
-wget --no-check-certificate -c http://cdn.mysql.com/Downloads/MySQL-5.5/mysql-5.5.29.tar.gz 
-tar -xzvf mysql-5.5.29.tar.gz
-cd mysql-5.5.29
+if [ -z $MYSQL_TAR ]; then
+  wget --no-check-certificate -c http://cdn.mysql.com/Downloads/MySQL-5.5/mysql-5.5.29.tar.gz 
+  MYSQL_TAR='mysql-5.5.29.tar.gz'
+else
+  cp "$D/tars/$MYSQL_TAR" $HOME/download
+fi
+tar -xzvf $MYSQL_TAR
+MYSQL_VERSION=${MYSQL_TAR%.tar.gz}
+cd $MYSQL_VERSION
 
 MYSQL_HOME=$HOME/local/mysql
 cmake \

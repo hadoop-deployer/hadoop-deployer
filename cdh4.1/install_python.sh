@@ -29,10 +29,21 @@ cpu_cores=`cat /proc/cpuinfo|sed -n "1,20p"| grep "cpu cores"|sed -e "s/cpu core
 mkdir -p $HOME/download
 
 cd $HOME/download
-wget --no-check-certificate -c http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
+
+PYTHON_TAR=`find_tgz Python.*`
+cd $HOME/download
+if [ -z $PYTHON_TAR ]; then
+  wget --no-check-certificate -c http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
+  PYTHON_TAR='Python-2.7.3.tgz'
+else
+  cp "$D/tars/$PYTHON_TAR" $HOME/download
+fi
+PYTHON_VERSION=${PYTHON_TAR%.tar.gz}
+PYTHON_VERSION=${PYTHON_VERSION%.tgz}
+
 rm -rf Python-2.7.3
-tar -xzvf Python-2.7.3.tgz
-cd Python-2.7.3
+tar -xzvf $PYTHON_TAR
+cd $PYTHON_VERSION
 ./configure --prefix=$HOME/local/python
 make -j $cpu_cores
 make install

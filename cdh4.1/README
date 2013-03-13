@@ -1,5 +1,5 @@
 Hadoop cdh4.1 快速安装
-作者：zhaigy@ucweb.com
+作者：zhaigy#ucweb.com
 日期：2013-01
 
 支持:
@@ -13,6 +13,9 @@ Hadoop,HBase,Zookeeper,Hive
 安装方法：
   0. 自行下载cdh4.1的安装包（tar.gz文件）,放置到本项目的tars目录
      另外，你需要提供JDK，tar.gz类型的，放置到tars目录。
+     特别的:如果你安装Hive，需要额外下载 mysql-connector-java-5.*.jar到tars目录
+     我测试时用的时是 mysql-connector-java-5.1.16-bin.jar
+     默认配置使用Mysql，安装时没有这个文件不会抱错，但Hive不能正常运行，你需要自己修改配置
   1. 配置 config_*****.sh
      最简单的：你可以只配置config_deployer.sh，其它的配置文件都可以使用默认值
   2. 执行 install_******.sh 完成安装和配置
@@ -36,8 +39,7 @@ Hadoop,HBase,Zookeeper,Hive
 初始化：
   默认配置参数已经可以使用
   但是，你还可以按需要修改配置，例如修改数据存储磁盘目录等设定
-  修改完成后，
-  运行init_hadoop.sh进行初始化工作
+  修改完成后，运行init_hadoop.sh进行初始化工作
 
 启动：
   start-zk-all.sh
@@ -58,16 +60,4 @@ Hadoop,HBase,Zookeeper,Hive
       置只是通用项
   3，对于HBase，必须先要启动Zookeeper和Hadoop
   如果你对默认值没有什么不满，可以不用修改，直接初始化启动
-
-
-hive 的扩展脚本
-hive 的log目录
-hive的脚本中的端口配置
-
-com.mysql.jdbc.Driver
-mysql-connector-java-5.1.16-bin.jar
-
-Specified key was too long; max key length is 767 bytes
-
-hdfs dfs -mkdir /warehouse
 
