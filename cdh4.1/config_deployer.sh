@@ -6,15 +6,15 @@
 
 #用户密码
 #PASS=$USER
-PASS="darkwood"
-SSH_PORT=9922
+PASS="user pass word"
+SSH_PORT=22
 
 NODES="
-platform30
-platform31
-platform32
-platform33
-platform34
+node1
+node2
+node3
+node4
+node5
 "
 
 # 其它应用的众多服务端口前缀
