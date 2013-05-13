@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+
+  <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>cnode507.uc.local:50120</value>
+  </property>
+
+  <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>cnode507.uc.local:50888</value>
+  </property>
+ 
+  <property>
+    <name>mapreduce.jobhistory.intermediate-done-dir</name>
+    <value>${user.home}/yarn_nm/jobhistory/intermediate-done-dir</value>
+  </property>
+ 
+  <property>
+    <name>mapreduce.jobhistory.done-dir</name>
+    <value>${user.home}/yarn_nm/jobhistory/done</value>
+  </property>
+
+  <property>
+    <name>mapred.child.java.opts</name>
+    <value>-Xmx400m</value>
+  </property>
+
+  <property>
+    <name>mapreduce.shuffle.port</name>
+    <value>50880</value>
+  </property>
+
+  <property>
+    <name>mapreduce.client.submit.file.replication</name>
+    <value>3</value>
+  </property>
+
+  <property>
+    <name>mapreduce.map.speculative</name>
+    <value>false</value>
+  </property>
+  
+  <property>
+    <name>mapreduce.reduce.speculative</name>
+    <value>false</value>
+  </property>
+
+</configuration>

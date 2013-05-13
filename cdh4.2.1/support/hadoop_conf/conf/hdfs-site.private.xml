@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home1/hadoop/hadoop_data,file:///home2/hadoop/hadoop_data</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>dfs.datanode.failed.volumes.tolerated</name> 
+    <value>0</value>
+    <final>true</final>
+  </property>
+
+</configuration>

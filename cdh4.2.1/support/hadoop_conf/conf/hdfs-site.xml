@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration xmlns:xi="http://www.w3.org/2001/XInclude">
+  
+  <xi:include href="hdfs-site.private.xml"/>
+  
+  <property>
+    <name>dfs.nameservices</name>
+    <value>mycluster</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.namenodes.mycluster</name>
+    <value>nn1,nn2</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.rpc-address.mycluster.nn1</name>
+    <value>platform30:41900</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.rpc-address.mycluster.nn2</name>
+    <value>platform31:41900</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.http-address.mycluster.nn1</name>
+    <value>platform30:41070</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.http-address.mycluster.nn2</name>
+    <value>platform31:41070</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.https-address.mycluster.nn1</name>
+    <value>platform30:41470</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.https-address.mycluster.nn2</name>
+    <value>platform31:41470</value>
+  </property>
+  
+  <property>
+    <name>dfs.datanode.address</name>
+    <value>0.0.0.0:41010</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.ipc.address</name>
+    <value>0.0.0.0:41020</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.http.address</name>
+    <value>0.0.0.0:41075</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>0.0.0.0:50090</value>
+  </property>
+  
+  <property>
+    <name>dfs.namenode.shared.edits.dir</name>
+    <value>qjournal://cnode507.uc.local:50485;cnode508.uc.local:50485;cnode509.uc.local:50485;cnode510.uc.local:50485;space1:50485/mycluster</value>
+  </property>
+ 
+  <!-- journal , QJM -->
+  <property>
+    <name>dfs.namenode.edits.journal-plugin.qjournal</name>
+    <value>org.apache.hadoop.hdfs.qjournal.client.QuorumJournalManager</value>
+  </property>
+  
+  <property>
+    <name>dfs.journalnode.edits.dir</name>
+    <value>${user.home}/hadoop_journal/edits</value>
+  </property>
+
+  <property>
+    <name>dfs.journalnode.rpc-address</name>
+    <value>0.0.0.0:50485</value>
+  </property>
+
+  <property>
+    <name>dfs.journalnode.http-address</name>
+    <value>0.0.0.0:50480</value>
+  </property>
+
+  <property>
+    <name>dfs.client.failover.proxy.provider.mycluster</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.fencing.methods</name>
+    <value>sshfence(ztest:9922)</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.fencing.ssh.private-key-files</name>
+    <value>/home/ztest/.ssh/id_rsa</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.automatic-failover.enabled</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/hadoop/hadoop_name/name,file:///home/hadoop/hadoop_nfs/name</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.safemode.threshold-pct</name>
+    <value>1.0f</value>
+  </property>
+  
+  <property>
+    <name>dfs.umaskmode</name>
+    <value>077</value>
+  </property>
+  
+  <property>
+    <name>dfs.block.size</name>
+    <value>134217728</value>
+  </property>
+  
+  <property>
+    <name>dfs.block.access.token.enable</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.data.dir.perm</name>
+    <value>700</value>
+  </property>
+
+  <property>
+    <name>dfs.cluster.administrators</name>
+    <value>ztest</value>
+  </property>
+
+  <property>
+    <name>dfs.permissions.superusergroup</name>
+    <value>ztest</value>
+  </property>
+
+  <property>
+    <name>dfs.hosts</name>
+    <value>/home/ztest/hadoop/etc/hadoop/dfs.include</value>
+  </property>
+
+  <property>
+    <name>dfs.hosts.exclude</name>
+    <value>/home/ztest/hadoop/etc/hadoop/dfs.exclude</value>
+  </property>
+  
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.support.append</name>
+    <value>true</value>
+  </property>
+  
+  <property>
+    <name>dfs.datanode.max.xcievers</name>
+    <value>4096</value>
+  </property>
+
+  <property>
+    <name>dfs.balance.bandwidthPerSec</name>
+    <value>20000000</value>
+  </property>
+
+  <property>
+    <name>dfs.ha.zkfc.port</name>
+    <value>41819</value>
+  </property>
+
+  <property>
+    <name>dfs.namenode.num.extra.edits.retained</name>
+    <value>2200</value>
+  </property>
+ 
+  <property>
+    <name>dfs.datanode.du.reserved</name>
+    <value>1024000000</value>
+  </property>
+
+</configuration>

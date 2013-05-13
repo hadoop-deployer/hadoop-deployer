@@ -1,0 +1,73 @@
+Hadoop cdh4.1 快速安装
+作者：zhaigy@ucweb.com
+日期：2013-01
+
+支持:
+Hadoop,HBase,Zookeeper,Hive
+
+安装文件分为3类：
+  1. config_*****.sh
+  2. install_*****.sh
+  3. uninstall_*****.sh
+
+安装方法：
+  0. 自行下载cdh4.1的安装包（tar.gz文件）,放置到本项目的tars目录
+     另外，你需要提供JDK，tar.gz类型的，放置到tars目录。
+  1. 配置 config_*****.sh
+     最简单的：你可以只配置config_deployer.sh，其它的配置文件都可以使用默认值
+  2. 执行 install_******.sh 完成安装和配置
+     最简单的：执行install_all.sh
+  3. 如果要卸载，执行 uninstall_*****.sh
+     最简单的：执行uninstall_all.sh
+
+安装具有依赖性:
+  1. Zookeeper -> deployer
+  2. Hadoop -> Zookeeper -> deployer
+  3. HBase -> Hadoop -> Zookeeper -> deployer
+  因此，deployer 是所有安装的依赖，必须首先安装；程序可以直接先安装安装依赖
+
+以安装Hadoop为例：
+   Hadoop依赖ZK,依赖deployer，所以
+   1. 修改:config_deployer.sh
+   2. 选择修改:config_zookeeper.sh
+   3. 选择修改:config_hadoop.sh
+   4. 运行:sh install_hadoop.sh
+
+初始化：
+  默认配置参数已经可以使用
+  但是，你还可以按需要修改配置，例如修改数据存储磁盘目录等设定
+  修改完成后，
+  运行init_hadoop.sh进行初始化工作
+
+启动：
+  start-zk-all.sh
+  start-dfs.sh
+  start-yarn.sh
+  start-hbase.sh
+
+安装完成后：
+  1. 对于Zookeeper，可以直接启动使用
+     注意：启动zookeeper可能需要你登陆每个zoookeeper机器启动它，
+     它没有start-all之类的脚本。
+     注意：你不需要运行它的初始化initial.sh脚本。
+  2，对于Hadoop，需要
+    2.1，配置NFS，这个磁盘应该挂载到$HOME/hadoop_nfs目录上，用于存储FSIMG，
+    2.2，格式化
+    然后你就可以启动了。
+    注意：你很可能需要根据自己的机器情况配置，一些默认配
+      置只是通用项
+  3，对于HBase，必须先要启动Zookeeper和Hadoop
+  如果你对默认值没有什么不满，可以不用修改，直接初始化启动
+
+
+hive 的扩展脚本
+hive 的log目录
+hive的脚本中的端口配置
+
+com.mysql.jdbc.Driver
+mysql-connector-java-5.1.16-bin.jar
+
+Specified key was too long; max key length is 767 bytes
+
+hdfs dfs -mkdir /warehouse
+

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!-- mem scheduler -->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>10240</value>
+    </property>
+
+</configuration>

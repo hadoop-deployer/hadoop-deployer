@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Author: zhenghh@ucweb.com
+
+if [ $# != 1 ]; then
+  echo "USAGE: $0 SERVER_NAME";
+  echo "eg: $0 kpi11";
+  exit 1;
+fi
+
+[ -z $DP_HOME ] && echo "deployer hasn't install or install fail" && exit 1;
+. $DP_HOME/support/PUB.sh;
+
+ssh $1
