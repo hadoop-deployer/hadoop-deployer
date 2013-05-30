@@ -24,9 +24,9 @@ deploy()
   echo '
     set -e;
     cd $DIR;
-    . PUB.sh;
-    . profile_hbase.sh;
-    . deploy_env.sh;
+    . ./PUB.sh;
+    . ./profile_hbase.sh;
+    . ./deploy_env.sh;
     tar -xzf tars/$HBASE_TAR -C $HOME;
     cd ..;
     ln -s ./$HBASE_VERSION $HBASE_HOME;
@@ -45,6 +45,7 @@ conf_hbase()
   F2="\/value>/<value"
   F3="\/value>/"
 
+  mkdir -p $HBASE_CONF_DIR
   cp hbaseconf/hbase-env.sh $HBASE_CONF_DIR;
   cp hbaseconf/hbase-site.xml $HBASE_CONF_DIR;
 

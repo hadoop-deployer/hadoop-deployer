@@ -13,7 +13,7 @@ undeploy()
   echo '
   set -e;
   cd $DIR;
-  . deploy_env.sh;
+  . ./deploy_env.sh;
   [ -f ~/.bash_profile ] && . ~/.bash_profile;
   if [ "$HOME" != "" -a "$HBASE_VERSION" != "" ]; then
     echo ">> delete $HBASE_VERSION";
