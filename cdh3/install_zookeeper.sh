@@ -42,6 +42,7 @@ config_it()
   echo ">> config zookeeper ..."
   
   CONF_TMP="./"
+  . ~/.bash_profile
   ZOO_CFG_TMP="$CONF_TMP/zoo.cfg"
 
   :> $ZOO_CFG_TMP;
