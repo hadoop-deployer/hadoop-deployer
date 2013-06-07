@@ -27,7 +27,7 @@ export JAVA_HOME=\$HOME/java/jdk
 # export MAVEN_HOME=\$HOME/java/maven
 
 # export CLASSPATH=.:\$JAVA_HOME/lib:\$JRE_HOME/lib:\$ANT_HOME/lib:\$MAVEN_HOME/lib
-export CLASSPATH=.:\$JAVA_HOME/lib/tools.jar
+export CLASSPATH=.:$CLASSPATH:\$JAVA_HOME/lib/tools.jar
 
 export HADOOP_HOME=\$HOME/hadoop
 export HADOOP_BIN=\$HADOOP_HOME/bin
