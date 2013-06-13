@@ -30,7 +30,8 @@ export DEP_HOME=$DP_HOME
 export PATH=\$DP_HOME/bin:\$PATH
 
 if [ -d $HOME/local ]; then
-  for D in \`ls -d $HOME/local/*\`; do
+  for D in \`ls $HOME/local\`; do
+    D=$HOME/local/$D
     if [ -d \$D/bin ]; then
       PATH=\$D/bin:\$PATH
     elif [ -d \$D/sbin ]; then

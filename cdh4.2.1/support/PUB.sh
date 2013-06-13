@@ -94,6 +94,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
     # 如果rsync自己会报错
     [ "$ME" == "$1" ] && return
     ssh -p $SSH_PORT $1 "mkdir -p $3";
+    echo "rsync -a --exclude=.svn --exclude=.git --exclude=logs $2 -e \"ssh -p $SSH_PORT\" $1:$3;"
     rsync -a --exclude=.svn --exclude=.git --exclude=logs $2 -e "ssh -p $SSH_PORT" $1:$3;
   }
  

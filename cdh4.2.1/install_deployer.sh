@@ -41,9 +41,6 @@ show_head;
 mkdir -p logs
 mkdir -p tars
 
-echo "debug"
-pwd
-
 file_die "logs/install_deployer_ok" "deployer is installed"
 check_tools;
 chmod +x bin/*;
@@ -55,9 +52,6 @@ if [ ! -e logs/autossh_ok ]; then
     fi
   touch ./logs/autossh_ok;
 fi
-#debug
-echo $NODES
-echo "nodes is "
 
 for s in ${NODES[*]}; do
   same_to $s $DIR
