@@ -5,7 +5,7 @@
 
 #用户密码
 #PASS=$USER
-PASS="darkwood"
+PASS="password"
 SSH_PORT=9922
 AUTOSSH="false"
 
