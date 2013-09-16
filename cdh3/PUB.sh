@@ -76,7 +76,7 @@ if [ "$PUB_HEAD_DEF" != "PUB_HEAD_DEF" ]; then
   nodes()
   {
     if [ -z "$DN" ]; then
-      return true; #return true for not stop
+      return 0; #return true for not stop
     fi
     if [ -z "$NODE_HOSTS" ]; then
       local TMP_F="tmp_uniq_nodes.txt.tmp";
